@@ -1,25 +1,25 @@
-# When to Mock
+# モックを使うタイミング (When to Mock)
 
-Mock at **system boundaries** only:
+**system boundaries** でのみモックする:
 
-- External APIs (payment, email, etc.)
-- Databases (sometimes - prefer test DB)
+- External APIs（payment、email など）
+- Databases（場合による — test DB を優先）
 - Time/randomness
-- File system (sometimes)
+- File system（場合による）
 
-Don't mock:
+モックしない:
 
-- Your own classes/modules
+- 自分の classes/modules
 - Internal collaborators
-- Anything you control
+- 自分が制御できるもの
 
-## Designing for Mockability
+## モック可能な設計 (Designing for Mockability)
 
-At system boundaries, design interfaces that are easy to mock:
+system boundaries では、モックしやすい interface を設計する:
 
-**1. Use dependency injection**
+**1. dependency injection を使う**
 
-Pass external dependencies in rather than creating them internally:
+外部依存を内部で生成せず、引数で渡す:
 
 ```typescript
 // Easy to mock
@@ -34,9 +34,9 @@ function processPayment(order) {
 }
 ```
 
-**2. Prefer SDK-style interfaces over generic fetchers**
+**2. 汎用 fetcher より SDK スタイルの interface を優先**
 
-Create specific functions for each external operation instead of one generic function with conditional logic:
+条件分岐を持つ 1 つの汎用関数ではなく、各外部操作ごとに専用関数を作る:
 
 ```typescript
 // GOOD: Each function is independently mockable
@@ -52,8 +52,9 @@ const api = {
 };
 ```
 
-The SDK approach means:
-- Each mock returns one specific shape
-- No conditional logic in test setup
-- Easier to see which endpoints a test exercises
-- Type safety per endpoint
+SDK アプローチの利点:
+
+- 各 mock が 1 つの特定 shape を返す
+- test setup に条件分岐が不要
+- テストがどの endpoint を使うか把握しやすい
+- endpoint ごとの type safety

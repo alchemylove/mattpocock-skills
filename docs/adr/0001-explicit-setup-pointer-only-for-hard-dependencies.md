@@ -1,10 +1,10 @@
-# Explicit `/setup-matt-pocock-skills` pointer only for hard dependencies
+# hard dependencies にのみ明示的 `/setup-matt-pocock-skills` pointer (Explicit `/setup-matt-pocock-skills` pointer only for hard dependencies)
 
-Engineering skills depend on per-repo config (issue tracker, triage label vocabulary, domain doc layout) seeded by `/setup-matt-pocock-skills`. Some skills cannot meaningfully function without that config — they have to publish to a specific issue tracker or apply a specific label string. Others only use it to sharpen output (vocabulary, ADR awareness) and degrade gracefully without it.
+Engineering skills は `/setup-matt-pocock-skills` が seed する per-repo config（issue tracker、triage label vocabulary、domain doc layout）に依存します。一部の skills はその config なしでは意味fully 機能できません — 特定の issue tracker へ publish したり、特定の label string を apply する必要があります。他は output を sharpen する（vocabulary、ADR awareness）用途のみで、なければ gracefully に degrade します。
 
-We split these into **hard-dependency** and **soft-dependency** skills:
+これらを **hard-dependency** と **soft-dependency** skills に分けます:
 
-- **Hard dependency** (`to-issues`, `to-prd`, `triage`) — include an explicit one-liner: _"… should have been provided to you — run `/setup-matt-pocock-skills` if not."_ Without the mapping, output is wrong, not just fuzzy.
-- **Soft dependency** (`diagnose`, `tdd`, `improve-codebase-architecture`, `zoom-out`) — reference "the project's domain glossary" and "ADRs in the area you're touching" in vague prose only. If the docs aren't there, the skill still works; output is just less sharp.
+- **Hard dependency**（`to-issues`、`to-prd`、`triage`）— 明示的 one-liner を含める: _"… should have been provided to you — run `/setup-matt-pocock-skills` if not."_ mapping がなければ output は fuzzy ではなく wrong になる。
+- **Soft dependency**（`diagnose`、`tdd`、`improve-codebase-architecture`、`zoom-out`）— "the project's domain glossary" と "ADRs in the area you're touching" を vague prose のみで参照。docs がなけても skill は動く；output は just less sharp。
 
-The split keeps soft-dependency skills token-light and avoids cargo-culting the setup pointer into places where it isn't load-bearing.
+この split により soft-dependency skills は token-light のまま、load-bearing でない場所への setup pointer の cargo-culting を避けます。

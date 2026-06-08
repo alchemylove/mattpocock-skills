@@ -5,23 +5,23 @@ description: Grilling session that challenges your plan against the existing dom
 
 <what-to-do>
 
-Interview me relentlessly about every aspect of this plan until we reach a shared understanding. Walk down each branch of the design tree, resolving dependencies between decisions one-by-one. For each question, provide your recommended answer.
+このプランのあらゆる側面について、共有理解に到達するまで容赦なくインタビューすること。設計ツリーの各ブランチを辿り、意思決定間の依存を一つずつ解決する。各質問について、推奨回答を提示すること。
 
-Ask the questions one at a time, waiting for feedback on each question before continuing.
+質問は一度に一つずつ行い、各質問へのフィードバックを待ってから続けること。
 
-If a question can be answered by exploring the codebase, explore the codebase instead.
+質問がコードベースの探索で答えられる場合は、代わりにコードベースを探索すること。
 
 </what-to-do>
 
 <supporting-info>
 
-## Domain awareness
+## ドメイン認識 (Domain awareness)
 
-During codebase exploration, also look for existing documentation:
+コードベース探索中、既存ドキュメントも探すこと:
 
-### File structure
+### ファイル構造 (File structure)
 
-Most repos have a single context:
+ほとんどの repo は単一 context を持つ:
 
 ```
 /
@@ -33,7 +33,7 @@ Most repos have a single context:
 └── src/
 ```
 
-If a `CONTEXT-MAP.md` exists at the root, the repo has multiple contexts. The map points to where each one lives:
+ルートに `CONTEXT-MAP.md` がある場合、repo は複数 context を持つ。map は各 context の場所を示す:
 
 ```
 /
@@ -49,40 +49,40 @@ If a `CONTEXT-MAP.md` exists at the root, the repo has multiple contexts. The ma
 │       └── docs/adr/
 ```
 
-Create files lazily — only when you have something to write. If no `CONTEXT.md` exists, create one when the first term is resolved. If no `docs/adr/` exists, create it when the first ADR is needed.
+ファイルは lazy に作成する — 書く内容があるときだけ。`CONTEXT.md` がなければ、最初の term が解決されたときに作成する。`docs/adr/` がなければ、最初の ADR が必要になったときに作成する。
 
-## During the session
+## セッション中 (During the session)
 
-### Challenge against the glossary
+### 用語集に照らして挑戦する (Challenge against the glossary)
 
-When the user uses a term that conflicts with the existing language in `CONTEXT.md`, call it out immediately. "Your glossary defines 'cancellation' as X, but you seem to mean Y — which is it?"
+ユーザーが `CONTEXT.md` の既存言語と矛盾する term を使ったら、即座に指摘する。「用語集では 'cancellation' を X と定義しているが、Y の意味に見える — どちらか？」
 
-### Sharpen fuzzy language
+### 曖昧な言語を鋭くする (Sharpen fuzzy language)
 
-When the user uses vague or overloaded terms, propose a precise canonical term. "You're saying 'account' — do you mean the Customer or the User? Those are different things."
+ユーザーが vague または overloaded な term を使ったら、正確な canonical term を提案する。「'account' と言っている — Customer と User のどちらか？ それらは別物だ。」
 
-### Discuss concrete scenarios
+### 具体シナリオを議論する (Discuss concrete scenarios)
 
-When domain relationships are being discussed, stress-test them with specific scenarios. Invent scenarios that probe edge cases and force the user to be precise about the boundaries between concepts.
+domain の関係を議論するとき、具体シナリオで stress-test する。edge case を探るシナリオを考案し、概念間の境界についてユーザーに正確さを求める。
 
-### Cross-reference with code
+### コードと照合する (Cross-reference with code)
 
-When the user states how something works, check whether the code agrees. If you find a contradiction, surface it: "Your code cancels entire Orders, but you just said partial cancellation is possible — which is right?"
+ユーザーが動作の説明をしたら、コードが一致するか確認する。矛盾があれば surface する:「コードは Order 全体を cancel するが、さきほど partial cancellation が可能と言った — どちらが正しいか？」
 
-### Update CONTEXT.md inline
+### CONTEXT.md をインラインで更新する (Update CONTEXT.md inline)
 
-When a term is resolved, update `CONTEXT.md` right there. Don't batch these up — capture them as they happen. Use the format in [CONTEXT-FORMAT.md](./CONTEXT-FORMAT.md).
+term が解決したら、その場で `CONTEXT.md` を更新する。まとめて batch しない — 起きた瞬間に capture する。[CONTEXT-FORMAT.md](./CONTEXT-FORMAT.md) の形式を使う。
 
-`CONTEXT.md` should be totally devoid of implementation details. Do not treat `CONTEXT.md` as a spec, a scratch pad, or a repository for implementation decisions. It is a glossary and nothing else.
+`CONTEXT.md` は implementation details を一切含めてはならない。`CONTEXT.md` を spec、scratch pad、implementation decisions の置き場として扱わない。用語集であり、それ以外ではない。
 
-### Offer ADRs sparingly
+### ADR は控えめに提案する (Offer ADRs sparingly)
 
-Only offer to create an ADR when all three are true:
+次の 3 つすべてが真のときだけ ADR 作成を提案する:
 
-1. **Hard to reverse** — the cost of changing your mind later is meaningful
-2. **Surprising without context** — a future reader will wonder "why did they do it this way?"
-3. **The result of a real trade-off** — there were genuine alternatives and you picked one for specific reasons
+1. **Hard to reverse** — 後から考えを変えるコストが meaningful である
+2. **Surprising without context** — 将来の読者が「なぜこうしたのか？」と思う
+3. **The result of a real trade-off** — 本物の代替案があり、特定の理由で 1 つを選んだ
 
-If any of the three is missing, skip the ADR. Use the format in [ADR-FORMAT.md](./ADR-FORMAT.md).
+3 つのいずれかが欠けていれば ADR を skip する。[ADR-FORMAT.md](./ADR-FORMAT.md) の形式を使う。
 
 </supporting-info>

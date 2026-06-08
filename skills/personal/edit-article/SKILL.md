@@ -3,12 +3,12 @@ name: edit-article
 description: Edit and improve articles by restructuring sections, improving clarity, and tightening prose. Use when user wants to edit, revise, or improve an article draft.
 ---
 
-1. First, divide the article into sections based on its headings. Think about the main points you want to make during those sections.
+1. まず、見出しに基づいて記事を section に分割する。各 section で伝えたい主要なポイントを考える。
 
-Consider that information is a directed acyclic graph, and that pieces of information can depend on other pieces of information. Make sure that the order of the sections and their contents respects these dependencies.
+情報は有向非巡回グラフであり、情報の断片は他の断片に依存しうる。section の順序と内容がこれらの依存関係を尊重していることを確認する。
 
-Confirm the sections with the user.
+section をユーザーに確認する。
 
-2. For each section:
+2. 各 section について:
 
-2a. Rewrite the section to improve clarity, coherence, and flow. Use maximum 240 characters per paragraph.
+2a. 明瞭さ、一貫性、流れを改善するために section を書き直す。段落は最大 240 文字。

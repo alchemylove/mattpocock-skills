@@ -1,8 +1,8 @@
-# Deprecated
+# 非推奨 (Deprecated)
 
-Skills I no longer use.
+もう使わない skills。
 
-- **[design-an-interface](./design-an-interface/SKILL.md)** — Generate multiple radically different interface designs for a module using parallel sub-agents.
-- **[qa](./qa/SKILL.md)** — Interactive QA session where user reports bugs conversationally and the agent files GitHub issues.
-- **[request-refactor-plan](./request-refactor-plan/SKILL.md)** — Create a detailed refactor plan with tiny commits via user interview, then file it as a GitHub issue.
-- **[ubiquitous-language](./ubiquitous-language/SKILL.md)** — Extract a DDD-style ubiquitous language glossary from the current conversation.
+- **[design-an-interface](./design-an-interface/SKILL.md)** — parallel sub-agents を使い、module 向けに radically different interface designs を複数 generate する。
+- **[qa](./qa/SKILL.md)** — user が conversational に bug を report し、agent が GitHub issues を file する interactive QA session。
+- **[request-refactor-plan](./request-refactor-plan/SKILL.md)** — user interview 経由で tiny commits 付きの detailed refactor plan を create し、GitHub issue として file する。
+- **[ubiquitous-language](./ubiquitous-language/SKILL.md)** — 現在の conversation から DDD-style ubiquitous language glossary を extract する。

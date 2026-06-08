@@ -1,15 +1,15 @@
-# Verify/Check Mode for `setup-matt-pocock-skills`
+# `setup-matt-pocock-skills` の Verify/Check Mode
 
-This project will not add a dedicated verify/check mode (or a separate verify skill) for `setup-matt-pocock-skills`.
+この project は `setup-matt-pocock-skills` 向け dedicated verify/check mode（または separate verify skill）を add しません。
 
-## Why this is out of scope
+## out of scope である理由 (Why this is out of scope)
 
-A second skill — or a `--verify` flag — for checking whether `docs/agents/*.md` artifacts still match the seed-template schema would duplicate work the existing setup skill already handles in conversation.
+`docs/agents/*.md` artifacts が seed-template schema と still match するか check する second skill — または `--verify` flag — は、existing setup skill が conversation で既に handle する work を duplicate します。
 
-The intended workflow is: **run `/setup-matt-pocock-skills` and tell it to verify your current setup.** The skill is prompt-driven, so the maintainer can scope it to a verification pass ("don't rewrite anything, just check my existing files against the current seed templates and report drift") without needing a separate code path. Adding a flag or a sibling skill would split the surface area of a feature that's already expressible through the natural-language entry point.
+intended workflow: **`/setup-matt-pocock-skills` を run し、current setup を verify するよう指示する。** skill は prompt-driven なので maintainer は verification pass に scope できる（"don't rewrite anything, just check my existing files against the current seed templates and report drift"）— separate code path 不要。flag や sibling skill を add すると、natural-language entry point で既に expressible な feature の surface area が split される。
 
-Keeping configuration management to a single skill also avoids the maintenance cost of two skills drifting from each other when seed templates evolve.
+configuration management を single skill に keep することで、seed templates が evolve した際に 2 skills が互いに drift する maintenance cost も避けられる。
 
-## Prior requests
+## 過去の要求 (Prior requests)
 
 - #106 — Feature request: verify/check mode for setup-matt-pocock-skills

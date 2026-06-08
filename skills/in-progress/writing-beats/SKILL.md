@@ -5,48 +5,48 @@ description: Shape an article as a journey of beats, choose-your-own-adventure s
 
 <what-to-do>
 
-The user has passed (or will pass) a markdown file of raw material.
+ユーザーが raw material の markdown file を渡す (または渡す予定)。
 
-If the user did not say where to save the article, ask once and remember the path.
+記事の保存先をユーザーが指定していなければ、一度だけ確認し、path を記憶する。
 
-Then run a beat-by-beat journey:
+次に beat ごとの journey を実行:
 
-1. Write 2–3 candidate **starting beats**, drawn from the raw material. Each is a different entry point into the article. Show the user the beats before writing it to the article file. The user picks one. Preview what beats that might lead to once written - as if the user is seeing a little way down the path.
-2. Once the user picks a starting beat, write **only that beat** to the article file. A beat may be one sentence or several paragraphs — whatever that beat naturally is. Stop there.
-3. Re-read the article file from disk. Then offer 2–3 candidate **next beats** — different directions the journey could pivot to from where the article now stands.
-4. Loop steps 2–4 until the article reaches a natural end.
+1. raw material から 2–3 個の候補 **starting beat** を書く。それぞれ記事への異なる入口。article file に書く前にユーザーに beat を見せる。ユーザーが 1 つ選ぶ。書いた後にどの beat に続くかを少し先まで preview する — ユーザーが道の先を少し見ているかのように。
+2. ユーザーが starting beat を選んだら、**その beat のみ**を article file に書く。beat は 1 文でも複数段落でもよい — beat が自然に必要とする長さ。そこで止める。
+3. article file を disk から再読み込み。次に 2–3 個の候補 **next beat** を提示 — 記事の現在地から journey が pivot しうる異なる方向。
+4. 記事が自然な終わりに達するまで step 2–4 をループ。
 
 </what-to-do>
 
 <supporting-info>
 
-## What is a beat
+## beat とは (What is a beat)
 
-A beat is one move in the journey. It does one thing — sets a scene, lands a point, asks a question, drops an aside, twists the angle. Then it stops, leaving the reader at a place where the next beat can pivot.
+beat は journey の 1 手。1 つのことをする — 場面を設定、ポイントを着地、質問を投げ、余談を挟む、角度を捻る。そして止まり、次の beat が pivot できる地点に読者を残す。
 
-A beat is sized by what it needs:
+beat のサイズは必要な分だけ:
 
-- A single sentence if that's all the move is ("And then nothing happened for three weeks.").
-- A short paragraph if the move needs setup.
-- Multiple paragraphs if the beat is a self-contained vignette, argument, or example.
+- 1 手がそれだけなら 1 文 ("And then nothing happened for three weeks.").
+- 手に setup が必要なら短い段落。
+- beat が自己完結の vignette、argument、example なら複数段落。
 
-If a "beat" needs five paragraphs and three subheadings, it's not a beat — it's two beats glued together. Split it.
+"beat" に 5 段落と 3 つの subheading が必要なら、それは beat ではない — 2 つの beat がくっついている。分割する。
 
-## Writing one beat
+## 1 beat の書き方 (Writing one beat)
 
-Once a beat is picked, write _that beat only_ to the article file. Do not write the next beat.
+beat が選ばれたら、**その beat のみ**を article file に書く。次の beat は書かない。
 
-Pull material from the raw pile to populate the beat. You can paraphrase, split, recombine, or quote. The pile is a quarry.
+raw pile から material を引いて beat を埋める。paraphrase、分割、再結合、引用ができる。pile は採石場。
 
-## Ending the journey
+## journey の終わり (Ending the journey)
 
-The article ends when the journey is complete — not when the pile is empty. Most piles will have leftover fragments that don't make it in. That is fine; that is the point of having more raw material than you need.
+記事は journey が完了したときに終わる — pile が空になったときではない。ほとんどの pile には入らなかった fragment が残る。それでよい; raw material を必要以上に持つことが目的。
 
-## Writing rhythm
+## 執筆リズム (Writing rhythm)
 
-- Append one beat at a time. Never write ahead.
-- Re-read the article file from disk before every write. Preserve user edits absolutely.
-- If the user edits a previous beat substantially, let it change what comes next.
-- If the user says "rewrite that beat" or "go back and try a different beat 3", do it — edit in place, leave the rest alone.
+- 1 beat ずつ append。先走って書かない。
+- 書く前に毎回 article file を disk から再読み込み。ユーザーの編集は絶対に保持。
+- ユーザーが前の beat を大幅に編集したら、それに応じて続きを変える。
+- ユーザーが "rewrite that beat" や "go back and try a different beat 3" と言ったら実行 — その場で編集し、残りはそのまま。
 
 </supporting-info>

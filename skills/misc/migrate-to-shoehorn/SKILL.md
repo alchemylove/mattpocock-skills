@@ -3,29 +3,29 @@ name: migrate-to-shoehorn
 description: Migrate test files from `as` type assertions to @total-typescript/shoehorn. Use when user mentions shoehorn, wants to replace `as` in tests, or needs partial test data.
 ---
 
-# Migrate to Shoehorn
+# Shoehorn への移行 (Migrate to Shoehorn)
 
-## Why shoehorn?
+## なぜ shoehorn か? (Why shoehorn?)
 
-`shoehorn` lets you pass partial data in tests while keeping TypeScript happy. It replaces `as` assertions with type-safe alternatives.
+`shoehorn` は test で partial data を渡しつつ TypeScript を満足させられる。`as` assertion を型安全な代替に置き換える。
 
-**Test code only.** Never use shoehorn in production code.
+**test code のみ。** production code では shoehorn を使わない。
 
-Problems with `as` in tests:
+test での `as` の問題:
 
-- Trained not to use it
-- Must manually specify target type
-- Double-as (`as unknown as Type`) for intentionally wrong data
+- 使わないよう訓練されている
+- target type を手動で指定する必要がある
+- 意図的に誤った data には double-as (`as unknown as Type`) が必要
 
-## Install
+## インストール (Install)
 
 ```bash
 npm i @total-typescript/shoehorn
 ```
 
-## Migration patterns
+## 移行パターン (Migration patterns)
 
-### Large objects with few needed properties
+### 必要な property が少ない大きな object
 
 Before:
 
@@ -94,7 +94,7 @@ import { fromAny } from "@total-typescript/shoehorn";
 getUser(fromAny({ body: { id: 123 } }));
 ```
 
-## When to use each
+## それぞれを使うタイミング (When to use each)
 
 | Function        | Use case                                           |
 | --------------- | -------------------------------------------------- |
@@ -102,17 +102,17 @@ getUser(fromAny({ body: { id: 123 } }));
 | `fromAny()`     | Pass intentionally wrong data (keeps autocomplete) |
 | `fromExact()`   | Force full object (swap with fromPartial later)    |
 
-## Workflow
+## ワークフロー (Workflow)
 
-1. **Gather requirements** - ask user:
-   - What test files have `as` assertions causing problems?
-   - Are they dealing with large objects where only some properties matter?
-   - Do they need to pass intentionally wrong data for error testing?
+1. **要件の収集 (Gather requirements)** — ユーザーに確認:
+   - どの test file の `as` assertion が問題になっているか?
+   - 一部の property しか重要でない大きな object を扱っているか?
+   - error testing のために意図的に誤った data を渡す必要があるか?
 
-2. **Install and migrate**:
-   - [ ] Install: `npm i @total-typescript/shoehorn`
-   - [ ] Find test files with `as` assertions: `grep -r " as [A-Z]" --include="*.test.ts" --include="*.spec.ts"`
-   - [ ] Replace `as Type` with `fromPartial()`
-   - [ ] Replace `as unknown as Type` with `fromAny()`
-   - [ ] Add imports from `@total-typescript/shoehorn`
-   - [ ] Run type check to verify
+2. **インストールと移行 (Install and migrate)**:
+   - [ ] インストール: `npm i @total-typescript/shoehorn`
+   - [ ] `as` assertion がある test file を検索: `grep -r " as [A-Z]" --include="*.test.ts" --include="*.spec.ts"`
+   - [ ] `as Type` を `fromPartial()` に置換
+   - [ ] `as unknown as Type` を `fromAny()` に置換
+   - [ ] `@total-typescript/shoehorn` から import を追加
+   - [ ] type check を実行して検証

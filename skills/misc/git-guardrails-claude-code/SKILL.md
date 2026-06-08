@@ -3,40 +3,40 @@ name: git-guardrails-claude-code
 description: Set up Claude Code hooks to block dangerous git commands (push, reset --hard, clean, branch -D, etc.) before they execute. Use when user wants to prevent destructive git operations, add git safety hooks, or block git push/reset in Claude Code.
 ---
 
-# Setup Git Guardrails
+# Git Guardrails のセットアップ (Setup Git Guardrails)
 
-Sets up a PreToolUse hook that intercepts and blocks dangerous git commands before Claude executes them.
+Claude が実行する前に危険な git コマンドを intercept して block する PreToolUse hook をセットアップする。
 
-## What Gets Blocked
+## block されるもの (What Gets Blocked)
 
-- `git push` (all variants including `--force`)
+- `git push` (すべての variant、`--force` を含む)
 - `git reset --hard`
 - `git clean -f` / `git clean -fd`
 - `git branch -D`
 - `git checkout .` / `git restore .`
 
-When blocked, Claude sees a message telling it that it does not have authority to access these commands.
+block された場合、Claude にはこれらのコマンドにアクセスする権限がない旨のメッセージが表示される。
 
-## Steps
+## 手順 (Steps)
 
-### 1. Ask scope
+### 1. スコープの確認 (Ask scope)
 
-Ask the user: install for **this project only** (`.claude/settings.json`) or **all projects** (`~/.claude/settings.json`)?
+ユーザーに確認: **この project のみ** (`.claude/settings.json`) か、**すべての project** (`~/.claude/settings.json`) か?
 
-### 2. Copy the hook script
+### 2. hook script のコピー (Copy the hook script)
 
-The bundled script is at: [scripts/block-dangerous-git.sh](scripts/block-dangerous-git.sh)
+同梱の script は: [scripts/block-dangerous-git.sh](scripts/block-dangerous-git.sh)
 
-Copy it to the target location based on scope:
+スコープに応じてターゲットの場所へコピー:
 
 - **Project**: `.claude/hooks/block-dangerous-git.sh`
 - **Global**: `~/.claude/hooks/block-dangerous-git.sh`
 
-Make it executable with `chmod +x`.
+`chmod +x` で実行可能にする。
 
-### 3. Add hook to settings
+### 3. settings に hook を追加 (Add hook to settings)
 
-Add to the appropriate settings file:
+適切な settings ファイルに追加:
 
 **Project** (`.claude/settings.json`):
 
@@ -78,18 +78,18 @@ Add to the appropriate settings file:
 }
 ```
 
-If the settings file already exists, merge the hook into existing `hooks.PreToolUse` array — don't overwrite other settings.
+settings ファイルが既に存在する場合、既存の `hooks.PreToolUse` 配列に hook を merge する — 他の settings を上書きしない。
 
-### 4. Ask about customization
+### 4. カスタマイズの確認 (Ask about customization)
 
-Ask if user wants to add or remove any patterns from the blocked list. Edit the copied script accordingly.
+block リストに pattern を追加/削除したいかユーザーに確認。コピーした script をそれに応じて編集する。
 
-### 5. Verify
+### 5. 検証 (Verify)
 
-Run a quick test:
+簡単なテストを実行:
 
 ```bash
 echo '{"tool_input":{"command":"git push origin main"}}' | <path-to-script>
 ```
 
-Should exit with code 2 and print a BLOCKED message to stderr.
+exit code 2 で終了し、stderr に BLOCKED メッセージが出力されること。

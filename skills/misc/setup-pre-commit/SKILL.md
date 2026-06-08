@@ -3,40 +3,40 @@ name: setup-pre-commit
 description: Set up Husky pre-commit hooks with lint-staged (Prettier), type checking, and tests in the current repo. Use when user wants to add pre-commit hooks, set up Husky, configure lint-staged, or add commit-time formatting/typechecking/testing.
 ---
 
-# Setup Pre-Commit Hooks
+# Pre-Commit Hook のセットアップ (Setup Pre-Commit Hooks)
 
-## What This Sets Up
+## セットアップ内容 (What This Sets Up)
 
 - **Husky** pre-commit hook
-- **lint-staged** running Prettier on all staged files
-- **Prettier** config (if missing)
-- **typecheck** and **test** scripts in the pre-commit hook
+- **lint-staged** ですべての staged file に Prettier を実行
+- **Prettier** config (ない場合)
+- pre-commit hook 内の **typecheck** と **test** script
 
-## Steps
+## 手順 (Steps)
 
-### 1. Detect package manager
+### 1. package manager の検出 (Detect package manager)
 
-Check for `package-lock.json` (npm), `pnpm-lock.yaml` (pnpm), `yarn.lock` (yarn), `bun.lockb` (bun). Use whichever is present. Default to npm if unclear.
+`package-lock.json` (npm)、`pnpm-lock.yaml` (pnpm)、`yarn.lock` (yarn)、`bun.lockb` (bun) を確認。存在するものを使用。不明な場合は npm をデフォルト。
 
-### 2. Install dependencies
+### 2. 依存関係のインストール (Install dependencies)
 
-Install as devDependencies:
+devDependencies としてインストール:
 
 ```
 husky lint-staged prettier
 ```
 
-### 3. Initialize Husky
+### 3. Husky の初期化 (Initialize Husky)
 
 ```bash
 npx husky init
 ```
 
-This creates `.husky/` dir and adds `prepare: "husky"` to package.json.
+`.husky/` ディレクトリを作成し、package.json に `prepare: "husky"` を追加する。
 
-### 4. Create `.husky/pre-commit`
+### 4. `.husky/pre-commit` の作成 (Create `.husky/pre-commit`)
 
-Write this file (no shebang needed for Husky v9+):
+このファイルを書き込む (Husky v9+ では shebang 不要):
 
 ```
 npx lint-staged
@@ -44,9 +44,9 @@ npm run typecheck
 npm run test
 ```
 
-**Adapt**: Replace `npm` with detected package manager. If repo has no `typecheck` or `test` script in package.json, omit those lines and tell the user.
+**Adapt**: `npm` を検出した package manager に置き換える。repo に `typecheck` または `test` script がなければ、その行を省略しユーザーに伝える。
 
-### 5. Create `.lintstagedrc`
+### 5. `.lintstagedrc` の作成 (Create `.lintstagedrc`)
 
 ```json
 {
@@ -54,9 +54,9 @@ npm run test
 }
 ```
 
-### 6. Create `.prettierrc` (if missing)
+### 6. `.prettierrc` の作成 (Create `.prettierrc`) (ない場合)
 
-Only create if no Prettier config exists. Use these defaults:
+Prettier config が存在しない場合のみ作成。デフォルト:
 
 ```json
 {
@@ -70,22 +70,22 @@ Only create if no Prettier config exists. Use these defaults:
 }
 ```
 
-### 7. Verify
+### 7. 検証 (Verify)
 
-- [ ] `.husky/pre-commit` exists and is executable
-- [ ] `.lintstagedrc` exists
-- [ ] `prepare` script in package.json is `"husky"`
-- [ ] `prettier` config exists
-- [ ] Run `npx lint-staged` to verify it works
+- [ ] `.husky/pre-commit` が存在し実行可能
+- [ ] `.lintstagedrc` が存在する
+- [ ] package.json の `prepare` script が `"husky"`
+- [ ] `prettier` config が存在する
+- [ ] `npx lint-staged` を実行して動作確認
 
-### 8. Commit
+### 8. commit (Commit)
 
-Stage all changed/created files and commit with message: `Add pre-commit hooks (husky + lint-staged + prettier)`
+変更/作成したすべての file を stage し、次のメッセージで commit: `Add pre-commit hooks (husky + lint-staged + prettier)`
 
-This will run through the new pre-commit hooks — a good smoke test that everything works.
+新しい pre-commit hook を通過する — すべてが動作するかの smoke test になる。
 
-## Notes
+## 注意事項 (Notes)
 
-- Husky v9+ doesn't need shebangs in hook files
-- `prettier --ignore-unknown` skips files Prettier can't parse (images, etc.)
-- The pre-commit runs lint-staged first (fast, staged-only), then full typecheck and tests
+- Husky v9+ では hook file に shebang は不要
+- `prettier --ignore-unknown` は Prettier が parse できない file (画像など) をスキップ
+- pre-commit はまず lint-staged (高速、staged のみ)、次に full typecheck と test を実行

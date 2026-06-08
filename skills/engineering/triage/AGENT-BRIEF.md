@@ -1,40 +1,40 @@
-# Writing Agent Briefs
+# Agent Brief の書き方 (Writing Agent Briefs)
 
-An agent brief is a structured comment posted on a GitHub issue when it moves to `ready-for-agent`. It is the authoritative specification that an AFK agent will work from. The original issue body and discussion are context — the agent brief is the contract.
+agent brief は、issue が `ready-for-agent` に移ったときに GitHub issue に投稿する構造化コメント。AFK agent が作業する際の authoritative specification である。元の issue body と discussion は context — agent brief が contract。
 
-## Principles
+## 原則 (Principles)
 
-### Durability over precision
+### 精度より耐久性 (Durability over precision)
 
-The issue may sit in `ready-for-agent` for days or weeks. The codebase will change in the meantime. Write the brief so it stays useful even as files are renamed, moved, or refactored.
+issue は `ready-for-agent` に数日〜数週間置かれることがある。その間 codebase は変わる。ファイルが rename、移動、refactor されても brief が有用なままになるよう書く。
 
-- **Do** describe interfaces, types, and behavioral contracts
-- **Do** name specific types, function signatures, or config shapes that the agent should look for or modify
-- **Don't** reference file paths — they go stale
-- **Don't** reference line numbers
-- **Don't** assume the current implementation structure will remain the same
+- **Do** interfaces、types、behavioral contracts を記述する
+- **Do** agent が探す・変更すべき具体的な types、function signatures、config shapes を名指しする
+- **Don't** file paths を参照する — すぐ古くなる
+- **Don't** line numbers を参照する
+- **Don't** 現在の implementation 構造が同じままであると仮定する
 
-### Behavioral, not procedural
+### 手順ではなく振る舞い (Behavioral, not procedural)
 
-Describe **what** the system should do, not **how** to implement it. The agent will explore the codebase fresh and make its own implementation decisions.
+システムが **what** すべきかを記述し、**how** を実装する方法は書かない。agent は codebase を新鮮に探索し、自分で implementation 判断をする。
 
-- **Good:** "The `SkillConfig` type should accept an optional `schedule` field of type `CronExpression`"
-- **Bad:** "Open src/types/skill.ts and add a schedule field on line 42"
-- **Good:** "When a user runs `/triage` with no arguments, they should see a summary of issues needing attention"
-- **Bad:** "Add a switch statement in the main handler function"
+- **Good:** "`SkillConfig` type は optional な `schedule` field（type `CronExpression`）を受け付けるべき"
+- **Bad:** "`src/types/skill.ts` を開き、42 行目に schedule field を追加"
+- **Good:** "ユーザーが引数なしで `/triage` を実行したとき、注意が必要な issues の summary が見えるべき"
+- **Bad:** "main handler function に switch statement を追加"
 
-### Complete acceptance criteria
+### 完全な acceptance criteria
 
-The agent needs to know when it's done. Every agent brief must have concrete, testable acceptance criteria. Each criterion should be independently verifiable.
+agent は完了条件を知る必要がある。すべての agent brief に具体的でテスト可能な acceptance criteria を含める。各 criterion は独立して検証可能であること。
 
-- **Good:** "Running `gh issue list --label needs-triage` returns issues that have been through initial classification"
-- **Bad:** "Triage should work correctly"
+- **Good:** "`gh issue list --label needs-triage` を実行すると、初期分類を経た issues が返る"
+- **Bad:** "Triage が正しく動くべき"
 
-### Explicit scope boundaries
+### 明示的な scope 境界
 
-State what is out of scope. This prevents the agent from gold-plating or making assumptions about adjacent features.
+out of scope を明記する。agent が gold-plating したり、隣接 feature について勝手に仮定するのを防ぐ。
 
-## Template
+## テンプレート (Template)
 
 ```markdown
 ## Agent Brief
@@ -65,9 +65,9 @@ Be specific about edge cases and error conditions.
 - Adjacent feature that might seem related but is separate
 ```
 
-## Examples
+## 例 (Examples)
 
-### Good agent brief (bug)
+### 良い agent brief（bug）
 
 ```markdown
 ## Agent Brief
@@ -102,7 +102,7 @@ and append "..." to indicate truncation.
 - Multi-line description support
 ```
 
-### Good agent brief (enhancement)
+### 良い agent brief（enhancement）
 
 ```markdown
 ## Agent Brief
@@ -143,7 +143,7 @@ checked for matches.
 - Bug reports (only enhancement rejections go to `.out-of-scope/`)
 ```
 
-### Bad agent brief
+### 悪い agent brief
 
 ```markdown
 ## Agent Brief
@@ -159,10 +159,11 @@ The function around line 150 has the issue.
 - src/types.ts (line 42)
 ```
 
-This is bad because:
-- No category
-- Vague description ("the triage thing is broken")
-- References file paths and line numbers that will go stale
-- No acceptance criteria
-- No scope boundaries
-- No description of current vs desired behavior
+これが悪い理由:
+
+- category がない
+- 曖昧な記述（"the triage thing is broken"）
+- すぐ古くなる file paths と line numbers を参照している
+- acceptance criteria がない
+- scope 境界がない
+- current vs desired behavior の記述がない

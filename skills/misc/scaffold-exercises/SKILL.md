@@ -3,35 +3,35 @@ name: scaffold-exercises
 description: Create exercise directory structures with sections, problems, solutions, and explainers that pass linting. Use when user wants to scaffold exercises, create exercise stubs, or set up a new course section.
 ---
 
-# Scaffold Exercises
+# Exercise の scaffold (Scaffold Exercises)
 
-Create exercise directory structures that pass `pnpm ai-hero-cli internal lint`, then commit with `git commit`.
+`pnpm ai-hero-cli internal lint` を通過する exercise ディレクトリ構造を作成し、`git commit` で commit する。
 
-## Directory naming
+## ディレクトリ命名 (Directory naming)
 
-- **Sections**: `XX-section-name/` inside `exercises/` (e.g., `01-retrieval-skill-building`)
-- **Exercises**: `XX.YY-exercise-name/` inside a section (e.g., `01.03-retrieval-with-bm25`)
-- Section number = `XX`, exercise number = `XX.YY`
-- Names are dash-case (lowercase, hyphens)
+- **Sections**: `exercises/` 内の `XX-section-name/` (例: `01-retrieval-skill-building`)
+- **Exercises**: section 内の `XX.YY-exercise-name/` (例: `01.03-retrieval-with-bm25`)
+- section 番号 = `XX`、exercise 番号 = `XX.YY`
+- 名前は dash-case (小文字、ハイフン)
 
-## Exercise variants
+## Exercise の variant (Exercise variants)
 
-Each exercise needs at least one of these subfolders:
+各 exercise には少なくとも次のいずれかの subfolder が必要:
 
-- `problem/` - student workspace with TODOs
-- `solution/` - reference implementation
-- `explainer/` - conceptual material, no TODOs
+- `problem/` — TODO 付きの学生 workspace
+- `solution/` — 参照実装
+- `explainer/` — 概念的な資料、TODO なし
 
-When stubbing, default to `explainer/` unless the plan specifies otherwise.
+stub 作成時は、plan で指定がなければデフォルトで `explainer/`。
 
-## Required files
+## 必須ファイル (Required files)
 
-Each subfolder (`problem/`, `solution/`, `explainer/`) needs a `readme.md` that:
+各 subfolder (`problem/`、`solution/`、`explainer/`) には `readme.md` が必要:
 
-- Is **not empty** (must have real content, even a single title line works)
-- Has no broken links
+- **空でない**こと (タイトル行 1 行でも実質的な内容があればよい)
+- 壊れた link がないこと
 
-When stubbing, create a minimal readme with a title and a description:
+stub 作成時は、タイトルと description を含む最小限の readme を作成:
 
 ```md
 # Exercise Title
@@ -39,46 +39,46 @@ When stubbing, create a minimal readme with a title and a description:
 Description here
 ```
 
-If the subfolder has code, it also needs a `main.ts` (>1 line). But for stubs, a readme-only exercise is fine.
+subfolder に code がある場合は `main.ts` も必要 (>1 行)。stub の場合は readme のみの exercise でもよい。
 
-## Workflow
+## ワークフロー (Workflow)
 
-1. **Parse the plan** - extract section names, exercise names, and variant types
-2. **Create directories** - `mkdir -p` for each path
-3. **Create stub readmes** - one `readme.md` per variant folder with a title
-4. **Run lint** - `pnpm ai-hero-cli internal lint` to validate
-5. **Fix any errors** - iterate until lint passes
+1. **plan の解析 (Parse the plan)** — section 名、exercise 名、variant タイプを抽出
+2. **ディレクトリの作成 (Create directories)** — 各 path に `mkdir -p`
+3. **stub readme の作成 (Create stub readmes)** — variant folder ごとにタイトル付き `readme.md` を 1 つ
+4. **lint の実行 (Run lint)** — `pnpm ai-hero-cli internal lint` で検証
+5. **エラーの修正 (Fix any errors)** — lint が通るまで繰り返す
 
-## Lint rules summary
+## lint ルール概要 (Lint rules summary)
 
-The linter (`pnpm ai-hero-cli internal lint`) checks:
+linter (`pnpm ai-hero-cli internal lint`) のチェック内容:
 
-- Each exercise has subfolders (`problem/`, `solution/`, `explainer/`)
-- At least one of `problem/`, `explainer/`, or `explainer.1/` exists
-- `readme.md` exists and is non-empty in the primary subfolder
-- No `.gitkeep` files
-- No `speaker-notes.md` files
-- No broken links in readmes
-- No `pnpm run exercise` commands in readmes
-- `main.ts` required per subfolder unless it's readme-only
+- 各 exercise に subfolder (`problem/`、`solution/`、`explainer/`) がある
+- `problem/`、`explainer/`、または `explainer.1/` のいずれかが存在する
+- 主要 subfolder に非空の `readme.md` がある
+- `.gitkeep` ファイルがない
+- `speaker-notes.md` ファイルがない
+- readme に壊れた link がない
+- readme に `pnpm run exercise` コマンドがない
+- readme のみでない限り、subfolder ごとに `main.ts` が必要
 
-## Moving/renaming exercises
+## exercise の移動/リネーム (Moving/renaming exercises)
 
-When renumbering or moving exercises:
+番号付け直しや移動時:
 
-1. Use `git mv` (not `mv`) to rename directories - preserves git history
-2. Update the numeric prefix to maintain order
-3. Re-run lint after moves
+1. ディレクトリのリネームは `mv` ではなく `git mv` を使う — git history を保持
+2. 順序を維持するため数値 prefix を更新
+3. 移動後に lint を再実行
 
-Example:
+例:
 
 ```bash
 git mv exercises/01-retrieval/01.03-embeddings exercises/01-retrieval/01.04-embeddings
 ```
 
-## Example: stubbing from a plan
+## 例: plan からの stub 作成 (Example: stubbing from a plan)
 
-Given a plan like:
+次のような plan が与えられた場合:
 
 ```
 Section 05: Memory Skill Building
@@ -87,7 +87,7 @@ Section 05: Memory Skill Building
 - 05.03 Long-term Memory
 ```
 
-Create:
+作成:
 
 ```bash
 mkdir -p exercises/05-memory-skill-building/05.01-introduction-to-memory/explainer
@@ -95,7 +95,7 @@ mkdir -p exercises/05-memory-skill-building/05.02-short-term-memory/{explainer,p
 mkdir -p exercises/05-memory-skill-building/05.03-long-term-memory/explainer
 ```
 
-Then create readme stubs:
+次に readme stub を作成:
 
 ```
 exercises/05-memory-skill-building/05.01-introduction-to-memory/explainer/readme.md -> "# Introduction to Memory"

@@ -4,24 +4,24 @@ description: Extract a DDD-style ubiquitous language glossary from the current c
 disable-model-invocation: true
 ---
 
-# Ubiquitous Language
+# ユビキタス言語 (Ubiquitous Language)
 
-Extract and formalize domain terminology from the current conversation into a consistent glossary, saved to a local file.
+現在の会話からドメイン用語を抽出し、一貫した glossary に形式化してローカル file に保存する。
 
-## Process
+## 手順 (Process)
 
-1. **Scan the conversation** for domain-relevant nouns, verbs, and concepts
-2. **Identify problems**:
-   - Same word used for different concepts (ambiguity)
-   - Different words used for the same concept (synonyms)
-   - Vague or overloaded terms
-3. **Propose a canonical glossary** with opinionated term choices
-4. **Write to `UBIQUITOUS_LANGUAGE.md`** in the working directory using the format below
-5. **Output a summary** inline in the conversation
+1. **会話をスキャン**し、ドメイン関連の名詞、動詞、概念を抽出
+2. **問題を特定**:
+   - 同じ語が異なる概念に使われている (ambiguity)
+   - 同じ概念に異なる語が使われている (synonyms)
+   - 曖昧または過負荷の用語
+3. **意見を持った canonical glossary を提案**
+4. **作業ディレクトリに `UBIQUITOUS_LANGUAGE.md` を書き込む** (下記フォーマット)
+5. **会話内に要約を出力**
 
-## Output Format
+## 出力フォーマット (Output Format)
 
-Write a `UBIQUITOUS_LANGUAGE.md` file with this structure:
+次の構造で `UBIQUITOUS_LANGUAGE.md` を書く:
 
 ```md
 # Ubiquitous Language
@@ -57,16 +57,16 @@ Write a `UBIQUITOUS_LANGUAGE.md` file with this structure:
 - "account" was used to mean both **Customer** and **User** — these are distinct concepts: a **Customer** places orders, while a **User** is an authentication identity that may or may not represent a **Customer**.
 ```
 
-## Rules
+## ルール (Rules)
 
-- **Be opinionated.** When multiple words exist for the same concept, pick the best one and list the others as aliases to avoid.
-- **Flag conflicts explicitly.** If a term is used ambiguously in the conversation, call it out in the "Flagged ambiguities" section with a clear recommendation.
-- **Only include terms relevant for domain experts.** Skip the names of modules or classes unless they have meaning in the domain language.
-- **Keep definitions tight.** One sentence max. Define what it IS, not what it does.
-- **Show relationships.** Use bold term names and express cardinality where obvious.
-- **Only include domain terms.** Skip generic programming concepts (array, function, endpoint) unless they have domain-specific meaning.
-- **Group terms into multiple tables** when natural clusters emerge (e.g. by subdomain, lifecycle, or actor). Each group gets its own heading and table. If all terms belong to a single cohesive domain, one table is fine — don't force groupings.
-- **Write an example dialogue.** A short conversation (3-5 exchanges) between a dev and a domain expert that demonstrates how the terms interact naturally. The dialogue should clarify boundaries between related concepts and show terms being used precisely.
+- **意見を持つ。** 同じ概念に複数の語がある場合、最良のものを選び、他を避けるべき alias として列挙する。
+- **衝突を明示的に flag する。** 会話で用語が曖昧に使われている場合、"Flagged ambiguities" セクションで明確な推奨とともに指摘する。
+- **domain expert に関連する用語のみ含める。** module や class の名前は、ドメイン言語に意味がある場合を除きスキップする。
+- **定義は簡潔に。** 最大 1 文。何をするかではなく、何であるかを定義する。
+- **関係を示す。** bold の用語名を使い、明らかな場合は cardinality を表現する。
+- **ドメイン用語のみ含める。** 一般的な programming 概念 (array、function、endpoint) は、ドメイン固有の意味がない限りスキップする。
+- **自然なクラスタが現れたら複数テーブルにグループ化** (例: subdomain、lifecycle、actor ごと)。各グループに見出しとテーブル。すべてが単一のまとまったドメインなら 1 テーブルでよい — 無理にグループ化しない。
+- **example dialogue を書く。** dev と domain expert の短い会話 (3–5 往復) で、用語が自然にどう相互作用するかを示す。関連概念間の境界を明確にし、用語を正確に使う様子を示す。
 
 <example>
 
@@ -82,12 +82,12 @@ Write a `UBIQUITOUS_LANGUAGE.md` file with this structure:
 
 </example>
 
-## Re-running
+## 再実行 (Re-running)
 
-When invoked again in the same conversation:
+同じ会話で再度呼び出された場合:
 
-1. Read the existing `UBIQUITOUS_LANGUAGE.md`
-2. Incorporate any new terms from subsequent discussion
-3. Update definitions if understanding has evolved
-4. Re-flag any new ambiguities
-5. Rewrite the example dialogue to incorporate new terms
+1. 既存の `UBIQUITOUS_LANGUAGE.md` を読む
+2. その後の議論から新しい用語を取り込む
+3. 理解が進化していれば定義を更新
+4. 新しい ambiguity を再 flag
+5. example dialogue を書き直して新しい用語を取り込む

@@ -5,37 +5,37 @@ description: Grilling session that mines the user for fragments — heterogeneou
 
 <what-to-do>
 
-Run a grilling session that produces fragments. Interview the user relentlessly about whatever they want to write about. Do not impose phases, outlines, or structure — that is explicitly out of scope.
+fragment を生成する grilling session を実行する。ユーザーが書きたいことについて徹底的にインタビューする。phase、outline、structure を課さない — それは明示的にスコープ外。
 
-As fragments emerge from either side of the conversation, append them to a single markdown file. The user will be editing this file during the session; always re-read it before writing so their edits are preserved.
+会話のどちら側からでも fragment が現れたら、1 つの markdown file に append する。ユーザーはセッション中にこの file を編集する; 書く前に常に再読み込みして編集を保持する。
 
-If the user did not pass a path, ask once where to save the document, then remember it for the rest of the session.
+path をユーザーが渡していなければ、一度だけ保存先を確認し、セッション中は記憶する。
 
-Capture fragments from the very first thing the user says, including the initial prompt.
+最初の発言から fragment を捕捉する。初期 prompt を含む。
 
-On first write, put a single H1 at the top with a working title (it can change later) and nothing else — no metadata, no TOC, no date.
+初回書き込み時、working title を含む H1 を 1 つだけ先頭に置く (後で変えてよい) — metadata、TOC、date はなし。
 
 </what-to-do>
 
 <supporting-info>
 
-## What is a fragment
+## fragment とは (What is a fragment)
 
-A fragment is any piece of text that might survive into the final article. It must be _readable by the author_ — the author can tell what it means — but it does not need to define its terms or be comprehensible to a cold reader. The bar is "is this a piece of good writing?", not "is this a self-contained argument?"
+fragment は最終記事に残りうるテキストの断片。作者が読めば意味が分かること — 作者が何を指しているか分かる — が、用語を定義したり冷たい読者に理解可能である必要はない。基準は "is this a piece of good writing?" であり、"is this a self-contained argument?" ではない。
 
-Fragments are deliberately heterogeneous. Examples of what could be a fragment:
+fragment は意図的に heterogeneous。fragment になりうる例:
 
-- A sharp sentence you'd want to deploy somewhere but don't yet know where.
-- A claim with a one-line justification.
-- A vignette: a thing that happened, a code snippet, a scenario, an analogy.
-- A half-thought: "something about how X feels like Y, work this out later."
-- A quote, a piece of dialogue, an overheard line.
-- A list of related observations that hang together by feel.
-- A complaint, a confession, a punchline.
+- どこかに使いたい鋭い 1 文だが、まだ場所が分からない。
+- 1 行の justification 付き claim。
+- vignette: 起きたこと、code snippet、scenario、analogy。
+- half-thought: "something about how X feels like Y, work this out later."
+- quote、dialogue、聞き逃した 1 行。
+- 感覚でまとまる関連 observation の list。
+- complaint、confession、punchline。
 
-The novelist's diary is the model: years of unstructured noticings that later get mined for raw material. Fragments are noticings.
+小説家の日記がモデル: 後で raw material として掘られる、何年も続く構造化されていない noticing。fragment は noticing。
 
-## File format
+## ファイルフォーマット (File format)
 
 ```markdown
 # Working title
@@ -62,14 +62,14 @@ A reaction to it.
 - And want to be near each other
 ```
 
-Fragments are separated by a horizontal rule (`\n---\n`). No headings inside the body. No tags. No order beyond the order they were added.
+fragment は水平線 (`\n---\n`) で区切る。body 内に heading なし。tag なし。追加順以外の順序なし。
 
-## Writing rhythm
+## 執筆リズム (Writing rhythm)
 
-Append silently. Don't ask permission for each fragment. Mention what you added in passing ("adding that"), but don't interrupt the conversation with save dialogs.
+黙って append。各 fragment ごとに許可を求めない。追加したことは軽く触れる ("adding that") が、save dialog で会話を中断しない。
 
-Before every write: re-read the file from disk. The user may have edited, reordered, or deleted fragments between turns — preserve their changes. Never overwrite the file; only append (or, if the user asks, edit a specific fragment in place).
+書く前に毎回: file を disk から再読み込み。ユーザーがターン間に fragment を編集、並べ替え、削除している可能性 — 変更を保持。file を上書きしない; append のみ (またはユーザーが求めた場合、特定 fragment を in place で編集)。
 
-The user can say "cut the last one", "rewrite that one sharper", "merge those two" at any time. Treat those as first-class instructions.
+ユーザーはいつでも "cut the last one"、"rewrite that one sharper"、"merge those two" と言える。それらを第一級の指示として扱う。
 
 </supporting-info>

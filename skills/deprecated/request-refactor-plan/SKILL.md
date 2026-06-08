@@ -3,23 +3,23 @@ name: request-refactor-plan
 description: Create a detailed refactor plan with tiny commits via user interview, then file it as a GitHub issue. Use when user wants to plan a refactor, create a refactoring RFC, or break a refactor into safe incremental steps.
 ---
 
-This skill will be invoked when the user wants to create a refactor request. You should go through the steps below. You may skip steps if you don't consider them necessary.
+この skill はユーザーが refactor request を作成したいときに呼び出される。以下の手順を進める。不要と判断した手順はスキップしてよい。
 
-1. Ask the user for a long, detailed description of the problem they want to solve and any potential ideas for solutions.
+1. 解決したい問題と、考えうる解決策について、ユーザーに長く詳細な説明を求める。
 
-2. Explore the repo to verify their assertions and understand the current state of the codebase.
+2. repo を調査し、ユーザーの主張を検証し、codebase の現状を理解する。
 
-3. Ask whether they have considered other options, and present other options to them.
+3. 他の選択肢を検討したか確認し、他の選択肢を提示する。
 
-4. Interview the user about the implementation. Be extremely detailed and thorough.
+4. 実装についてユーザーにインタビューする。極めて詳細かつ徹底的に。
 
-5. Hammer out the exact scope of the implementation. Work out what you plan to change and what you plan not to change.
+5. 実装の正確なスコープを固める。変更するものと変更しないものを明確にする。
 
-6. Look in the codebase to check for test coverage of this area of the codebase. If there is insufficient test coverage, ask the user what their plans for testing are.
+6. codebase でこの領域の test coverage を確認する。不十分なら、テスト計画をユーザーに確認する。
 
-7. Break the implementation into a plan of tiny commits. Remember Martin Fowler's advice to "make each refactoring step as small as possible, so that you can always see the program working."
+7. 実装を tiny commit の plan に分解する。Martin Fowler の "make each refactoring step as small as possible, so that you can always see the program working." を念頭に置く。
 
-8. Create a GitHub issue with the refactor plan. Use the following template for the issue description:
+8. refactor plan を GitHub issue として作成する。issue description には次のテンプレートを使用:
 
 <refactor-plan-template>
 

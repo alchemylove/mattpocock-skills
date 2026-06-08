@@ -3,30 +3,30 @@ name: tdd
 description: Test-driven development with red-green-refactor loop. Use when user wants to build features or fix bugs using TDD, mentions "red-green-refactor", wants integration tests, or asks for test-first development.
 ---
 
-# Test-Driven Development
+# テスト駆動開発 (Test-Driven Development)
 
-## Philosophy
+## 哲学 (Philosophy)
 
-**Core principle**: Tests should verify behavior through public interfaces, not implementation details. Code can change entirely; tests shouldn't.
+**Core principle**: test は implementation details ではなく public interfaces 経由で behaviour を検証すべきである。コードは完全に変わってもよい; test は変わるべきではない。
 
-**Good tests** are integration-style: they exercise real code paths through public APIs. They describe _what_ the system does, not _how_ it does it. A good test reads like a specification - "user can checkout with valid cart" tells you exactly what capability exists. These tests survive refactors because they don't care about internal structure.
+**Good tests** は integration-style である: public API 経由で real code path を実行する。_何を_ するかを記述し、_どう_ するかではない。良い test は specification のように読める — "user can checkout with valid cart" は存在する capability を正確に伝える。これらの test は refactor を生き延びる。内部構造を気にしないからである。
 
-**Bad tests** are coupled to implementation. They mock internal collaborators, test private methods, or verify through external means (like querying a database directly instead of using the interface). The warning sign: your test breaks when you refactor, but behavior hasn't changed. If you rename an internal function and tests fail, those tests were testing implementation, not behavior.
+**Bad tests** は implementation に coupled している。internal collaborator を mock し、private method を test し、interface ではなく external means（例: database を直接 query）で検証する。警告サイン: refactor しても behaviour は変わっていないのに test が壊れる。internal function の rename で test が fail するなら、それらは behaviour ではなく implementation を test していた。
 
-See [tests.md](tests.md) for examples and [mocking.md](mocking.md) for mocking guidelines.
+例は [tests.md](tests.md)、mocking guideline は [mocking.md](mocking.md)。
 
-## Anti-Pattern: Horizontal Slices
+## アンチパターン: 水平スライス (Anti-Pattern: Horizontal Slices)
 
-**DO NOT write all tests first, then all implementation.** This is "horizontal slicing" - treating RED as "write all tests" and GREEN as "write all code."
+**すべての test を先に書き、次にすべての implementation を書いてはならない。** これは "horizontal slicing" である — RED を "すべての test を書く"、GREEN を "すべての code を書く" と扱う。
 
-This produces **crap tests**:
+これは **crap tests** を生む:
 
-- Tests written in bulk test _imagined_ behavior, not _actual_ behavior
-- You end up testing the _shape_ of things (data structures, function signatures) rather than user-facing behavior
-- Tests become insensitive to real changes - they pass when behavior breaks, fail when behavior is fine
-- You outrun your headlights, committing to test structure before understanding the implementation
+- bulk で書いた test は _想像した_ behaviour を test し、_実際の_ behaviour ではない
+- _形_（data structures、function signatures）を test し、user-facing behaviour ではない
+- test は real change に鈍感になる — behaviour が壊れても pass、behaviour が問題なくても fail
+- headlights の先を走り、implementation を理解する前に test structure に commit する
 
-**Correct approach**: Vertical slices via tracer bullets. One test → one implementation → repeat. Each test responds to what you learned from the previous cycle. Because you just wrote the code, you know exactly what behavior matters and how to verify it.
+**Correct approach**: tracer bullet による vertical slice。1 test → 1 implementation → 繰り返し。各 test は前の cycle から学んだことに応答する。コードを書いた直後なので、どの behaviour が重要か、どう検証するか正確に分かっている。
 
 ```
 WRONG (horizontal):
@@ -40,39 +40,39 @@ RIGHT (vertical):
   ...
 ```
 
-## Workflow
+## ワークフロー (Workflow)
 
-### 1. Planning
+### 1. 計画 (Planning)
 
-When exploring the codebase, use the project's domain glossary so that test names and interface vocabulary match the project's language, and respect ADRs in the area you're touching.
+コードベースを探索するときは、プロジェクトの domain glossary を使い test 名と interface 語彙がプロジェクトの言語と一致するようにし、触る領域の ADR を尊重する。
 
-Before writing any code:
+いかなる code を書く前に:
 
-- [ ] Confirm with user what interface changes are needed
-- [ ] Confirm with user which behaviors to test (prioritize)
-- [ ] Identify opportunities for [deep modules](deep-modules.md) (small interface, deep implementation)
-- [ ] Design interfaces for [testability](interface-design.md)
-- [ ] List the behaviors to test (not implementation steps)
-- [ ] Get user approval on the plan
+- [ ] ユーザーと必要な interface changes を確認
+- [ ] ユーザーと test する behaviour（優先順位）を確認
+- [ ] [deep modules](deep-modules.md) の機会を特定（small interface、deep implementation）
+- [ ] [testability](interface-design.md) のための interface を設計
+- [ ] test する behaviour を列挙（implementation steps ではない）
+- [ ] プランのユーザー承認を得る
 
-Ask: "What should the public interface look like? Which behaviors are most important to test?"
+尋ねる:「What should the public interface look like? Which behaviors are most important to test?」
 
-**You can't test everything.** Confirm with the user exactly which behaviors matter most. Focus testing effort on critical paths and complex logic, not every possible edge case.
+**すべては test できない。** ユーザーとどの behaviour が最も重要か正確に確認する。すべての edge case ではなく、critical path と complex logic に testing effort を集中する。
 
 ### 2. Tracer Bullet
 
-Write ONE test that confirms ONE thing about the system:
+システムについて **1 つ** を確認する test を **1 つ** 書く:
 
 ```
 RED:   Write test for first behavior → test fails
 GREEN: Write minimal code to pass → test passes
 ```
 
-This is your tracer bullet - proves the path works end-to-end.
+これが tracer bullet である — path が end-to-end で動くことを証明する。
 
-### 3. Incremental Loop
+### 3. インクリメンタルループ (Incremental Loop)
 
-For each remaining behavior:
+残りの各 behaviour について:
 
 ```
 RED:   Write next test → fails
@@ -81,24 +81,24 @@ GREEN: Minimal code to pass → passes
 
 Rules:
 
-- One test at a time
-- Only enough code to pass current test
-- Don't anticipate future tests
-- Keep tests focused on observable behavior
+- 一度に 1 test
+- 現在の test を pass するのに十分な code だけ
+- 将来の test を先取りしない
+- test は observable behaviour に集中
 
-### 4. Refactor
+### 4. リファクタ (Refactor)
 
-After all tests pass, look for [refactor candidates](refactoring.md):
+すべての test が pass したら、[refactor candidates](refactoring.md) を探す:
 
-- [ ] Extract duplication
-- [ ] Deepen modules (move complexity behind simple interfaces)
-- [ ] Apply SOLID principles where natural
-- [ ] Consider what new code reveals about existing code
-- [ ] Run tests after each refactor step
+- [ ] duplication を抽出
+- [ ] module を deepen（complexity を simple interface の背後へ）
+- [ ] 自然なところで SOLID principles を適用
+- [ ] 新 code が既存 code について何を明らかにするか検討
+- [ ] 各 refactor step の後に test を実行
 
-**Never refactor while RED.** Get to GREEN first.
+**RED の間は refactor しない。** まず GREEN に到達する。
 
-## Checklist Per Cycle
+## サイクルごとのチェックリスト (Checklist Per Cycle)
 
 ```
 [ ] Test describes behavior, not implementation

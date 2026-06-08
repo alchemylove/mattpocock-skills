@@ -8,114 +8,114 @@
   </a>
 </p>
 
-# Skills For Real Engineers
+# ?????????? Skills (Skills For Real Engineers)
 
 [![skills.sh](https://skills.sh/b/mattpocock/skills)](https://skills.sh/mattpocock/skills)
 
-My agent skills that I use every day to do real engineering - not vibe coding.
+vibe coding ?????real engineering ??????????? agent skills ???
 
-Developing real applications is hard. Approaches like GSD, BMAD, and Spec-Kit try to help by owning the process. But while doing so, they take away your control and make bugs in the process hard to resolve.
+real applications ????????GSD?BMAD?Spec-Kit ?????????? process ? own ????????????????????? control ????process ?? bug ? resolve ???????
 
-These skills are designed to be small, easy to adapt, and composable. They work with any model. They're based on decades of engineering experience. Hack around with them. Make them your own. Enjoy.
+???? skills ? small ? adapt ?????composable ??????????????? model ?????decades ? engineering experience ????????hack ??????????enjoy ??????
 
-If you want to keep up with changes to these skills, and any new ones I create, you can join ~60,000 other devs on my newsletter:
+skills ?????? skill ???????????newsletter ? ~60,000 ?? dev ?????????:
 
 [Sign Up To The Newsletter](https://www.aihero.dev/s/skills-newsletter)
 
-## Quickstart (30-second setup)
+## ???????? (Quickstart)?30-second setup?
 
-1. Run the skills.sh installer:
+1. skills.sh installer ? run:
 
 ```bash
 npx skills@latest add mattpocock/skills
 ```
 
-2. Pick the skills you want, and which coding agents you want to install them on. **Make sure you select `/setup-matt-pocock-skills`**.
+2. ??? skills ??install ?? coding agents ????**`/setup-matt-pocock-skills` ??????????**
 
-3. Run `/setup-matt-pocock-skills` in your agent. It will:
-   - Ask you which issue tracker you want to use (GitHub, Linear, or local files)
-   - Ask you what labels you apply to tickets when you triage them (`/triage` uses labels)
-   - Ask you where you want to save any docs we create
+3. agent ? `/setup-matt-pocock-skills` ? run ?????????:
+   - ?? issue tracker?GitHub?Linear???? local files?
+   - triage ?? tickets ? apply ?? labels?`/triage` ? labels ????
+   - ???? docs ????
 
-4. Bam - you're ready to go.
+4. Bam — ?????
 
-## Why These Skills Exist
+## ???? Skills ??????? (Why These Skills Exist)
 
-I built these skills as a way to fix common failure modes I see with Claude Code, Codex, and other coding agents.
+Claude Code?Codex????? coding agents ??? common failure modes ? fix ?????????? skills ? build ???
 
-### #1: The Agent Didn't Do What I Want
+### #1: Agent ????????????? (The Agent Didn't Do What I Want)
 
 > "No-one knows exactly what they want"
 >
 > David Thomas & Andrew Hunt, [The Pragmatic Programmer](https://www.amazon.co.uk/Pragmatic-Programmer-Anniversary-Journey-Mastery/dp/B0833F1T3V)
 
-**The Problem**. The most common failure mode in software development is misalignment. You think the dev knows what you want. Then you see what they've built - and you realize it didn't understand you at all.
+**The Problem**. software development ??? common ? failure mode ? misalignment ????dev ?????????????????build ?????????agent ???????????????????
 
-This is just the same in the AI age. There is a communication gap between you and the agent. The fix for this is a **grilling session** - getting the agent to ask you detailed questions about what you're building.
+AI age ?????agent ???? communication gap ????fix ? **grilling session** — build ???????? agent ? detailed questions ? ask ??????
 
-**The Fix** is to use:
+**The Fix** ???????:
 
-- [`/grill-me`](./skills/productivity/grill-me/SKILL.md) - for non-code uses
-- [`/grill-with-docs`](./skills/engineering/grill-with-docs/SKILL.md) - same as [`/grill-me`](./skills/productivity/grill-me/SKILL.md), but adds more goodies (see below)
+- [`/grill-me`](./skills/productivity/grill-me/SKILL.md) — non-code ????
+- [`/grill-with-docs`](./skills/engineering/grill-with-docs/SKILL.md) — [`/grill-me`](./skills/productivity/grill-me/SKILL.md) ????????? goodies ?????????
 
-These are my most popular skills. They help you align with the agent before you get started, and think deeply about the change you're making. Use them _every_ time you want to make a change.
+??????????? skills ???????? agent ? align ????????????????????????????? _every_ time ?????
 
-### #2: The Agent Is Way Too Verbose
+### #2: Agent ? verbose ??? (The Agent Is Way Too Verbose)
 
 > With a ubiquitous language, conversations among developers and expressions of the code are all derived from the same domain model.
 >
 > Eric Evans, [Domain-Driven-Design](https://www.amazon.co.uk/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215)
 
-**The Problem**: At the start of a project, devs and the people they're building the software for (the domain experts) are usually speaking different languages.
+**The Problem**: project ????devs ? software ? build ?????domain experts???? different languages ???????
 
-I felt the same tension with my agents. Agents are usually dropped into a project and asked to figure out the jargon as they go. So they use 20 words where 1 will do.
+agents ???? tension ?????agents ? project ? drop ???jargon ? go ???? figure out ????????????? 1 word ??????? 20 words ????
 
-**The Fix** for this is a shared language. It's a document that helps agents decode the jargon used in the project.
+**The Fix** ? shared language ????project ????? jargon ? agent ? decode ??????? document?
 
 <details>
 <summary>
 Example
 </summary>
 
-Here's an example [`CONTEXT.md`](https://github.com/mattpocock/course-video-manager/blob/076a5a7a182db0fe1e62971dd7a68bcadf010f1c/CONTEXT.md), from my `course-video-manager` repo. Which one is easier to read?
+`course-video-manager` repo ? [`CONTEXT.md`](https://github.com/mattpocock/course-video-manager/blob/076a5a7a182db0fe1e62971dd7a68bcadf010f1c/CONTEXT.md) ??????????????
 
 - **BEFORE**: "There's a problem when a lesson inside a section of a course is made 'real' (i.e. given a spot in the file system)"
 - **AFTER**: "There's a problem with the materialization cascade"
 
-This concision pays off session after session.
+?? concision ? session ??? payoff ???
 
 </details>
 
-This is built into [`/grill-with-docs`](./skills/engineering/grill-with-docs/SKILL.md). It's a grilling session, but that helps you build a shared language with the AI, and document hard-to-explain decisions in ADR's.
+??? [`/grill-with-docs`](./skills/engineering/grill-with-docs/SKILL.md) ? built-in ??????grilling session ???AI ? shared language ? build ??explain ???? decisions ? ADR's ? document ???
 
-It's hard to explain how powerful this is. It might be the single coolest technique in this repo. Try it, and see.
+powerful ?? explain ??????? repo ? single coolest technique ???????try ?? see?
 
 > [!TIP]
-> A shared language has many other benefits than reducing verbosity:
+> shared language ?? verbosity ????????? benefits ???:
 >
-> - **Variables, functions and files are named consistently**, using the shared language
-> - As a result, the **codebase is easier to navigate** for the agent
-> - The agent also **spends fewer tokens on thinking**, because it has access to a more concise language
+> - **Variables?functions?files ? shared language ? consistently named ???**
+> - ?????**codebase ? agent ???? navigate ??????**
+> - agent ? **more concise language ??? thinking ? tokens ??????**
 
-### #3: The Code Doesn't Work
+### #3: Code ????? (The Code Doesn't Work)
 
-> "Always take small, deliberate steps. The rate of feedback is your speed limit. Never take on a task thatâ€™s too big."
+> "Always take small, deliberate steps. The rate of feedback is your speed limit. Never take on a task that's too big."
 >
 > David Thomas & Andrew Hunt, [The Pragmatic Programmer](https://www.amazon.co.uk/Pragmatic-Programmer-Anniversary-Journey-Mastery/dp/B0833F1T3V)
 
-**The Problem**: Let's say that you and the agent are aligned on what to build. What happens when the agent _still_ produces crap?
+**The Problem**: agent ? build ??? align ??????agent ? _still_ crap ? produce ?????????
 
-It's time to look at your feedback loops. Without feedback on how the code it produces actually runs, the agent will be flying blind.
+feedback loops ???????produce ?? code ???? run ???? feedback ??????agent ? blind ? fly ???
 
-**The Fix**: You need the usual tranche of feedback loops: static types, browser access, and automated tests.
+**The Fix**:  usual tranche of feedback loops ??? — static types?browser access?automated tests?
 
-For automated tests, a red-green-refactor loop is critical. This is where the agent writes a failing test first, then fixes the test. This helps give the agent a consistent level of feedback that results in far better code.
+automated tests ?? red-green-refactor loop ? critical?agent ? failing test ? first ? write ???? test ? fix ???????? agent ? consistent level of feedback ??????far better code ????
 
-I've built a **[`/tdd`](./skills/engineering/tdd/SKILL.md) skill** you can slot into any project. It encourages red-green-refactor and gives the agent plenty of guidance on what makes good and bad tests.
+??? project ? slot ??? **[`/tdd`](./skills/engineering/tdd/SKILL.md) skill** ? build ???red-green-refactor ? encourage ??good/bad tests ??????? guidance ?????
 
-For debugging, I've also built a **[`/diagnose`](./skills/engineering/diagnose/SKILL.md)** skill that wraps best debugging practices into a simple loop.
+debugging ???best debugging practices ? simple loop ? wrap ?? **[`/diagnose`](./skills/engineering/diagnose/SKILL.md)** skill ? build ???
 
-### #4: We Built A Ball Of Mud
+### #4: Ball Of Mud ? build ?????? (We Built A Ball Of Mud)
 
 > "Invest in the design of the system _every day_."
 >
@@ -125,52 +125,52 @@ For debugging, I've also built a **[`/diagnose`](./skills/engineering/diagnose/S
 >
 > John Ousterhout, [A Philosophy Of Software Design](https://www.amazon.co.uk/Philosophy-Software-Design-2nd/dp/173210221X)
 
-**The Problem**: Most apps built with agents are complex and hard to change. Because agents can radically speed up coding, they also accelerate software entropy. Codebases get more complex at an unprecedented rate.
+**The Problem**: agents ? build ??? apps ???? complex ? change ?????agents ? coding ? radically speed up ??????software entropy ? accelerate ???codebases ? unprecedented rate ? complex ????
 
-**The Fix** for this is a radical new approach to AI-powered development: caring about the design of the code.
+**The Fix** ? AI-powered development ?? radical new approach: code ? design ? care ?????
 
-This is built in to every layer of these skills:
+skills ? every layer ? built-in ?????:
 
-- [`/to-prd`](./skills/engineering/to-prd/SKILL.md) quizzes you about which modules you're touching before creating a PRD
-- [`/zoom-out`](./skills/engineering/zoom-out/SKILL.md) tells the agent to explain code in the context of the whole system
+- [`/to-prd`](./skills/engineering/to-prd/SKILL.md) ? PRD ???? touch ?? modules ???? quiz ??
+- [`/zoom-out`](./skills/engineering/zoom-out/SKILL.md) ? agent ? whole system ? context ? code ? explain ???
 
-And crucially, [`/improve-codebase-architecture`](./skills/engineering/improve-codebase-architecture/SKILL.md) helps you rescue a codebase that has become a ball of mud. I recommend running it on your codebase once every few days.
+crucially?[`/improve-codebase-architecture`](./skills/engineering/improve-codebase-architecture/SKILL.md) ? ball of mud ???? codebase ? rescue ???codebase ?????? run ????? recommend?
 
-### Summary
+### ??? (Summary)
 
-Software engineering fundamentals matter more than ever. These skills are my best effort at condensing these fundamentals into repeatable practices, to help you ship the best apps of your career. Enjoy.
+software engineering fundamentals ? ever ???????????? skills ? fundamentals ? repeatable practices ? condense ?? best effort ??career ? best apps ? ship ????????Enjoy?
 
-## Reference
+## ?????? (Reference)
 
-### Engineering
+### ???????? (Engineering)
 
-Skills I use daily for code work.
+?? code work ??? skills?
 
-- **[diagnose](./skills/engineering/diagnose/SKILL.md)** â€” Disciplined diagnosis loop for hard bugs and performance regressions: reproduce â†’ minimise â†’ hypothesise â†’ instrument â†’ fix â†’ regression-test.
-- **[grill-with-docs](./skills/engineering/grill-with-docs/SKILL.md)** â€” Grilling session that challenges your plan against the existing domain model, sharpens terminology, and updates `CONTEXT.md` and ADRs inline.
-- **[triage](./skills/engineering/triage/SKILL.md)** â€” Triage issues through a state machine of triage roles.
-- **[improve-codebase-architecture](./skills/engineering/improve-codebase-architecture/SKILL.md)** â€” Find deepening opportunities in a codebase, informed by the domain language in `CONTEXT.md` and the decisions in `docs/adr/`.
-- **[setup-matt-pocock-skills](./skills/engineering/setup-matt-pocock-skills/SKILL.md)** â€” Scaffold the per-repo config (issue tracker, triage label vocabulary, domain doc layout) that the other engineering skills consume. Run once per repo before using `to-issues`, `to-prd`, `triage`, `diagnose`, `tdd`, `improve-codebase-architecture`, or `zoom-out`.
-- **[tdd](./skills/engineering/tdd/SKILL.md)** â€” Test-driven development with a red-green-refactor loop. Builds features or fixes bugs one vertical slice at a time.
-- **[to-issues](./skills/engineering/to-issues/SKILL.md)** â€” Break any plan, spec, or PRD into independently-grabbable GitHub issues using vertical slices.
-- **[to-prd](./skills/engineering/to-prd/SKILL.md)** â€” Turn the current conversation context into a PRD and submit it as a GitHub issue. No interview â€” just synthesizes what you've already discussed.
-- **[zoom-out](./skills/engineering/zoom-out/SKILL.md)** â€” Tell the agent to zoom out and give broader context or a higher-level perspective on an unfamiliar section of code.
-- **[prototype](./skills/engineering/prototype/SKILL.md)** â€” Build a throwaway prototype to flesh out a design â€” either a runnable terminal app for state/business-logic questions, or several radically different UI variations toggleable from one route.
+- **[diagnose](./skills/engineering/diagnose/SKILL.md)** — ??? bug ? performance regression ??? disciplined diagnosis loop: reproduce ? minimise ? hypothesise ? instrument ? fix ? regression-test?
+- **[grill-with-docs](./skills/engineering/grill-with-docs/SKILL.md)** — ?? domain model ???? plan ? challenge ??terminology ? sharpen?`CONTEXT.md` ? ADR ? inline update ?? grilling session?
+- **[triage](./skills/engineering/triage/SKILL.md)** — triage roles ? state machine ???? issues ? triage?
+- **[improve-codebase-architecture](./skills/engineering/improve-codebase-architecture/SKILL.md)** — `CONTEXT.md` ? domain language ? `docs/adr/` ? decisions ???? codebase ? deepening opportunities ? find?
+- **[setup-matt-pocock-skills](./skills/engineering/setup-matt-pocock-skills/SKILL.md)** — ?? engineering skills ? consume ?? per-repo config?issue tracker?triage label vocabulary?domain doc layout?? scaffold?`to-issues`?`to-prd`?`triage`?`diagnose`?`tdd`?`improve-codebase-architecture`?`zoom-out` ????? repo ??? 1 ? run?
+- **[tdd](./skills/engineering/tdd/SKILL.md)** — red-green-refactor loop ??? test-driven development?feature ? bug fix ? vertical slice ??? build?
+- **[to-issues](./skills/engineering/to-issues/SKILL.md)** — ??? plan?spec?PRD ? vertical slices ? independently-grabbable GitHub issues ? break?
+- **[to-prd](./skills/engineering/to-prd/SKILL.md)** — ??? conversation context ? PRD ? turn ? GitHub issue ??? submit?interview ?? — ?? discuss ????? synthesize ?????
+- **[zoom-out](./skills/engineering/zoom-out/SKILL.md)** — agent ? zoom out ????????? code section ???? broader context ? higher-level perspective ?????
+- **[prototype](./skills/engineering/prototype/SKILL.md)** — design ? flesh out ?? throwaway prototype ? build — state/business-logic ??? runnable terminal app???? 1 route ?? toggle ??? radically different UI variations?
 
-### Productivity
+### ??? (Productivity)
 
-General workflow tools, not code-specific.
+code ?????? general workflow ????
 
-- **[caveman](./skills/productivity/caveman/SKILL.md)** â€” Ultra-compressed communication mode. Cuts token usage ~75% by dropping filler while keeping full technical accuracy.
-- **[grill-me](./skills/productivity/grill-me/SKILL.md)** â€” Get relentlessly interviewed about a plan or design until every branch of the decision tree is resolved.
-- **[handoff](./skills/productivity/handoff/SKILL.md)** â€” Compact the current conversation into a handoff document so another agent can continue the work.
-- **[write-a-skill](./skills/productivity/write-a-skill/SKILL.md)** â€” Create new skills with proper structure, progressive disclosure, and bundled resources.
+- **[caveman](./skills/productivity/caveman/SKILL.md)** — ultra-compressed communication mode?filler ? drop ? full technical accuracy ?????? token usage ? ~75% ???
+- **[grill-me](./skills/productivity/grill-me/SKILL.md)** — decision tree ? every branch ? resolve ??????plan ? design ???? relentlessly interviewed ????
+- **[handoff](./skills/productivity/handoff/SKILL.md)** — ??? conversation ? handoff document ? compact ???? agent ? work ? continue ?????????
+- **[write-a-skill](./skills/productivity/write-a-skill/SKILL.md)** — proper structure?progressive disclosure?bundled resources ? new skills ? create?
 
-### Misc
+### ??? (Misc)
 
-Tools I keep around but rarely use.
+?????? rarely use ??????
 
-- **[git-guardrails-claude-code](./skills/misc/git-guardrails-claude-code/SKILL.md)** â€” Set up Claude Code hooks to block dangerous git commands (push, reset --hard, clean, etc.) before they execute.
-- **[migrate-to-shoehorn](./skills/misc/migrate-to-shoehorn/SKILL.md)** â€” Migrate test files from `as` type assertions to @total-typescript/shoehorn.
-- **[scaffold-exercises](./skills/misc/scaffold-exercises/SKILL.md)** â€” Create exercise directory structures with sections, problems, solutions, and explainers.
-- **[setup-pre-commit](./skills/misc/setup-pre-commit/SKILL.md)** â€” Set up Husky pre-commit hooks with lint-staged, Prettier, type checking, and tests.
+- **[git-guardrails-claude-code](./skills/misc/git-guardrails-claude-code/SKILL.md)** — execute ?? dangerous git commands?push?reset --hard?clean ???? block ?? Claude Code hooks ? set up?
+- **[migrate-to-shoehorn](./skills/misc/migrate-to-shoehorn/SKILL.md)** — test files ? `as` type assertions ? @total-typescript/shoehorn ? migrate?
+- **[scaffold-exercises](./skills/misc/scaffold-exercises/SKILL.md)** — sections?problems?solutions?explainers ??? exercise directory structures ? create?
+- **[setup-pre-commit](./skills/misc/setup-pre-commit/SKILL.md)** — lint-staged?Prettier?type checking?tests ??? Husky pre-commit hooks ? set up?

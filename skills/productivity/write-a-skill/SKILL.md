@@ -3,27 +3,27 @@ name: write-a-skill
 description: Create new agent skills with proper structure, progressive disclosure, and bundled resources. Use when user wants to create, write, or build a new skill.
 ---
 
-# Writing Skills
+# Skill の書き方 (Writing Skills)
 
-## Process
+## 手順 (Process)
 
-1. **Gather requirements** - ask user about:
-   - What task/domain does the skill cover?
-   - What specific use cases should it handle?
-   - Does it need executable scripts or just instructions?
-   - Any reference materials to include?
+1. **要件の収集 (Gather requirements)** — ユーザーに確認:
+   - この skill はどのタスク/ドメインをカバーするか?
+   - どの具体的なユースケースを扱うべきか?
+   - 実行可能な script が必要か、それとも指示だけでよいか?
+   - 含めるべき参考資料はあるか?
 
-2. **Draft the skill** - create:
-   - SKILL.md with concise instructions
-   - Additional reference files if content exceeds 500 lines
-   - Utility scripts if deterministic operations needed
+2. **skill のドラフト作成 (Draft the skill)** — 以下を作成:
+   - 簡潔な指示を含む SKILL.md
+   - 内容が 500 行を超える場合は追加の reference ファイル
+   - 決定的な操作が必要な場合は utility script
 
-3. **Review with user** - present draft and ask:
-   - Does this cover your use cases?
-   - Anything missing or unclear?
-   - Should any section be more/less detailed?
+3. **ユーザーとのレビュー (Review with user)** — ドラフトを提示し確認:
+   - ユースケースをカバーしているか?
+   - 不足や不明点はあるか?
+   - どのセクションを詳しく/簡潔にすべきか?
 
-## Skill Structure
+## Skill の構造 (Skill Structure)
 
 ```
 skill-name/
@@ -34,7 +34,7 @@ skill-name/
     └── helper.js
 ```
 
-## SKILL.md Template
+## SKILL.md テンプレート (SKILL.md Template)
 
 ```md
 ---
@@ -57,61 +57,61 @@ description: Brief description of capability. Use when [specific triggers].
 [Link to separate files: See [REFERENCE.md](REFERENCE.md)]
 ```
 
-## Description Requirements
+## description の要件 (Description Requirements)
 
-The description is **the only thing your agent sees** when deciding which skill to load. It's surfaced in the system prompt alongside all other installed skills. Your agent reads these descriptions and picks the relevant skill based on the user's request.
+description は、agent がどの skill を読み込むか判断するときに**唯一見えるもの**である。インストール済みの他の skill と並んで system prompt に表示される。agent はこれらの description を読み、ユーザーのリクエストに基づいて関連する skill を選ぶ。
 
-**Goal**: Give your agent just enough info to know:
+**目標**: agent が次を判断するのに十分な情報を与える:
 
-1. What capability this skill provides
-2. When/why to trigger it (specific keywords, contexts, file types)
+1. この skill が提供する capability
+2. いつ/なぜトリガーするか (特定のキーワード、コンテキスト、ファイルタイプ)
 
-**Format**:
+**フォーマット**:
 
-- Max 1024 chars
-- Write in third person
-- First sentence: what it does
-- Second sentence: "Use when [specific triggers]"
+- 最大 1024 文字
+- 三人称で書く
+- 最初の文: 何をするか
+- 2 番目の文: "Use when [specific triggers]"
 
-**Good example**:
+**良い例 (Good example)**:
 
 ```
 Extract text and tables from PDF files, fill forms, merge documents. Use when working with PDF files or when user mentions PDFs, forms, or document extraction.
 ```
 
-**Bad example**:
+**悪い例 (Bad example)**:
 
 ```
 Helps with documents.
 ```
 
-The bad example gives your agent no way to distinguish this from other document skills.
+悪い例では、他の document skill と区別する手がかりが agent に与えられない。
 
-## When to Add Scripts
+## script を追加するタイミング (When to Add Scripts)
 
-Add utility scripts when:
+以下の場合に utility script を追加:
 
-- Operation is deterministic (validation, formatting)
-- Same code would be generated repeatedly
-- Errors need explicit handling
+- 操作が決定的 (validation、formatting)
+- 同じ code が繰り返し生成される
+- エラーに明示的な handling が必要
 
-Scripts save tokens and improve reliability vs generated code.
+script は token を節約し、生成 code より信頼性が高い。
 
-## When to Split Files
+## ファイルを分割するタイミング (When to Split Files)
 
-Split into separate files when:
+以下の場合に別ファイルへ分割:
 
-- SKILL.md exceeds 100 lines
-- Content has distinct domains (finance vs sales schemas)
-- Advanced features are rarely needed
+- SKILL.md が 100 行を超える
+- 内容が異なるドメインを持つ (finance vs sales schemas)
+- 高度な機能がほとんど使われない
 
-## Review Checklist
+## レビューチェックリスト (Review Checklist)
 
-After drafting, verify:
+ドラフト後、以下を確認:
 
-- [ ] Description includes triggers ("Use when...")
-- [ ] SKILL.md under 100 lines
-- [ ] No time-sensitive info
-- [ ] Consistent terminology
-- [ ] Concrete examples included
-- [ ] References one level deep
+- [ ] description にトリガー ("Use when...") が含まれている
+- [ ] SKILL.md が 100 行未満
+- [ ] 時限のある情報がない
+- [ ] 用語が一貫している
+- [ ] 具体例が含まれている
+- [ ] 参照は 1 階層まで

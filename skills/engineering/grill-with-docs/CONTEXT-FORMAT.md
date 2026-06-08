@@ -1,6 +1,6 @@
-# CONTEXT.md Format
+# CONTEXT.md フォーマット (CONTEXT.md Format)
 
-## Structure
+## 構造 (Structure)
 
 ```md
 # {Context Name}
@@ -22,21 +22,21 @@ A person or organization that places orders.
 _Avoid_: Client, buyer, account
 ```
 
-## Rules
+## ルール (Rules)
 
-- **Be opinionated.** When multiple words exist for the same concept, pick the best one and list the others as aliases to avoid.
-- **Flag conflicts explicitly.** If a term is used ambiguously, call it out in "Flagged ambiguities" with a clear resolution.
-- **Keep definitions tight.** One or two sentences max. Define what it IS, not what it does.
-- **Show relationships.** Use bold term names and express cardinality where obvious.
-- **Only include terms specific to this project's context.** General programming concepts (timeouts, error types, utility patterns) don't belong even if the project uses them extensively. Before adding a term, ask: is this a concept unique to this context, or a general programming concept? Only the former belongs.
-- **Group terms under subheadings** when natural clusters emerge. If all terms belong to a single cohesive area, a flat list is fine.
-- **Write an example dialogue.** A conversation between a dev and a domain expert that demonstrates how the terms interact naturally and clarifies boundaries between related concepts.
+- **Be opinionated.** 同じ概念に複数の語があるとき、最良の 1 つを選び、他は避けるべき alias として列挙する。
+- **Flag conflicts explicitly.** 用語が曖昧に使われているなら、「Flagged ambiguities」で明示し、明確な解決を示す。
+- **Keep definitions tight.** 最大 1〜2 文。何をするかではなく、何であるかを定義する。
+- **Show relationships.** bold の用語名を使い、明らかなところでは cardinality を表現する。
+- **Only include terms specific to this project's context.** 一般的な programming concepts（timeouts、error types、utility patterns）は、プロジェクトで広く使っていても含めない。用語を追加する前に問う: これはこの context 固有の概念か、一般的な programming concept か? 前者だけが該当する。
+- **Group terms under subheadings** — 自然なクラスタが現れたとき。すべての用語が 1 つのまとまった領域に属するなら、フラットなリストでよい。
+- **Write an example dialogue.** dev と domain expert の会話で、用語が自然にどう相互作用するか、関連概念の境界がどう明確になるかを示す。
 
-## Single vs multi-context repos
+## 単一 context と複数 context の repo (Single vs multi-context repos)
 
-**Single context (most repos):** One `CONTEXT.md` at the repo root.
+**Single context（ほとんどの repo）:** repo ルートに 1 つの `CONTEXT.md`。
 
-**Multiple contexts:** A `CONTEXT-MAP.md` at the repo root lists the contexts, where they live, and how they relate to each other:
+**Multiple contexts:** repo ルートに `CONTEXT-MAP.md` を置き、contexts、所在、相互関係を列挙する:
 
 ```md
 # Context Map
@@ -54,10 +54,10 @@ _Avoid_: Client, buyer, account
 - **Ordering ↔ Billing**: Shared types for `CustomerId` and `Money`
 ```
 
-The skill infers which structure applies:
+skill はどちらの構造かを推論する:
 
-- If `CONTEXT-MAP.md` exists, read it to find contexts
-- If only a root `CONTEXT.md` exists, single context
-- If neither exists, create a root `CONTEXT.md` lazily when the first term is resolved
+- `CONTEXT-MAP.md` があれば、読んで contexts を特定
+- ルートの `CONTEXT.md` だけなら single context
+- どちらもなければ、最初の用語が解決されたとき lazy にルート `CONTEXT.md` を作成
 
-When multiple contexts exist, infer which one the current topic relates to. If unclear, ask.
+複数 context があるとき、現在のトピックに関連する context を推論する。不明なら質問する。

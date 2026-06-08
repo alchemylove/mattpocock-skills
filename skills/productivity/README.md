@@ -1,8 +1,8 @@
-# Productivity
+# 生産性 (Productivity)
 
-General workflow tools, not code-specific.
+code 固有ではない general workflow ツール。
 
-- **[caveman](./caveman/SKILL.md)** — Ultra-compressed communication mode. Cuts token usage ~75% by dropping filler while keeping full technical accuracy.
-- **[grill-me](./grill-me/SKILL.md)** — Get relentlessly interviewed about a plan or design until every branch of the decision tree is resolved.
-- **[handoff](./handoff/SKILL.md)** — Compact the current conversation into a handoff document so another agent can continue the work.
-- **[write-a-skill](./write-a-skill/SKILL.md)** — Create new skills with proper structure, progressive disclosure, and bundled resources.
+- **[caveman](./caveman/SKILL.md)** — ultra-compressed communication mode。filler を drop し full technical accuracy を保ちながら token usage を ~75% 削減。
+- **[grill-me](./grill-me/SKILL.md)** — decision tree の各 branch が resolve するまで、plan や design について執拗に interview される。
+- **[handoff](./handoff/SKILL.md)** — 現在の conversation を handoff document に compact し、別の agent が作業を continue できるようにする。
+- **[write-a-skill](./write-a-skill/SKILL.md)** — proper structure、progressive disclosure、bundled resources 付きの新しい skills を create する。

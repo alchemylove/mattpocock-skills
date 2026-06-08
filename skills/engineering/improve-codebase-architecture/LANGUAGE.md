@@ -1,53 +1,53 @@
-# Language
+# 用語 (Language)
 
-Shared vocabulary for every suggestion this skill makes. Use these terms exactly — don't substitute "component," "service," "API," or "boundary." Consistent language is the whole point.
+この skill が行うすべての提案で共有する語彙。これらの用語を正確に使う — "component"、"service"、"API"、"boundary" で置き換えない。一貫した language こそが目的のすべて。
 
-## Terms
+## 用語 (Terms)
 
 **Module**
-Anything with an interface and an implementation. Deliberately scale-agnostic — applies equally to a function, class, package, or tier-spanning slice.
+interface と implementation を持つあらゆるもの。意図的に scale-agnostic — function、class、package、tier をまたぐ slice に等しく適用される。
 _Avoid_: unit, component, service.
 
 **Interface**
-Everything a caller must know to use the module correctly. Includes the type signature, but also invariants, ordering constraints, error modes, required configuration, and performance characteristics.
+caller が module を正しく使うために知る必要があるすべて。type signature を含むが、invariants、ordering constraints、error modes、required configuration、performance characteristics も含む。
 _Avoid_: API, signature (too narrow — those refer only to the type-level surface).
 
 **Implementation**
-What's inside a module — its body of code. Distinct from **Adapter**: a thing can be a small adapter with a large implementation (a Postgres repo) or a large adapter with a small implementation (an in-memory fake). Reach for "adapter" when the seam is the topic; "implementation" otherwise.
+module の内側 — その code body。**Adapter** とは区別: 小さな adapter に大きな implementation（Postgres repo）があり得るし、大きな adapter に小さな implementation（in-memory fake）があり得る。seam が話題なら "adapter"、それ以外は "implementation"。
 
 **Depth**
-Leverage at the interface — the amount of behaviour a caller (or test) can exercise per unit of interface they have to learn. A module is **deep** when a large amount of behaviour sits behind a small interface. A module is **shallow** when the interface is nearly as complex as the implementation.
+interface における leverage — caller（または test）が学ぶべき interface の単位あたりに exercise できる behavior の量。多くの behavior が小さな interface の背後にある module は **deep**。interface が implementation とほぼ同じくらい複雑な module は **shallow**。
 
 **Seam** _(from Michael Feathers)_
-A place where you can alter behaviour without editing in that place. The *location* at which a module's interface lives. Choosing where to put the seam is its own design decision, distinct from what goes behind it.
+その場所を編集せずに behavior を変えられる場所。module の interface が存在する *location*。seam をどこに置くかは、背後に何を置くかとは別の design decision。
 _Avoid_: boundary (overloaded with DDD's bounded context).
 
 **Adapter**
-A concrete thing that satisfies an interface at a seam. Describes *role* (what slot it fills), not substance (what's inside).
+seam で interface を満たす concrete なもの。*role*（どの slot を埋めるか）を記述し、*substance*（中身）ではない。
 
 **Leverage**
-What callers get from depth. More capability per unit of interface they have to learn. One implementation pays back across N call sites and M tests.
+depth から caller が得るもの。学ぶべき interface の単位あたりにより多くの capability。1 つの implementation が N call sites と M tests に還元される。
 
 **Locality**
-What maintainers get from depth. Change, bugs, knowledge, and verification concentrate at one place rather than spreading across callers. Fix once, fixed everywhere.
+depth から maintainer が得るもの。change、bugs、knowledge、verification が callers に散らばるのではなく 1 か所に集中。1 回直せば、どこでも直る。
 
-## Principles
+## 原則 (Principles)
 
-- **Depth is a property of the interface, not the implementation.** A deep module can be internally composed of small, mockable, swappable parts — they just aren't part of the interface. A module can have **internal seams** (private to its implementation, used by its own tests) as well as the **external seam** at its interface.
-- **The deletion test.** Imagine deleting the module. If complexity vanishes, the module wasn't hiding anything (it was a pass-through). If complexity reappears across N callers, the module was earning its keep.
-- **The interface is the test surface.** Callers and tests cross the same seam. If you want to test *past* the interface, the module is probably the wrong shape.
-- **One adapter means a hypothetical seam. Two adapters means a real one.** Don't introduce a seam unless something actually varies across it.
+- **Depth は implementation ではなく interface の性質。** deep module は内部で小さく mockable で swappable な parts から構成され得る — それらは interface の一部ではない。module は **internal seams**（implementation 内 private、自分の tests が使う）と **external seam**（interface にある）の両方を持ち得る。
+- **The deletion test.** module を削除すると想像する。complexity が消えるなら、module は何も隠していなかった（pass-through だった）。complexity が N callers に再出現するなら、module は存在価値があった。
+- **The interface is the test surface.** callers と tests は同じ seam を越える。interface を *越えて* テストしたいなら、module の形がおそらく間違っている。
+- **One adapter means a hypothetical seam. Two adapters means a real one.** 実際に何かが seam をまたいで変わるのでなければ seam を導入しない。
 
-## Relationships
+## 関係 (Relationships)
 
-- A **Module** has exactly one **Interface** (the surface it presents to callers and tests).
-- **Depth** is a property of a **Module**, measured against its **Interface**.
-- A **Seam** is where a **Module**'s **Interface** lives.
-- An **Adapter** sits at a **Seam** and satisfies the **Interface**.
-- **Depth** produces **Leverage** for callers and **Locality** for maintainers.
+- **Module** は正確に 1 つの **Interface** を持つ（callers と tests に提示する surface）。
+- **Depth** は **Module** の性質で、**Interface** に対して測定される。
+- **Seam** は **Module** の **Interface** が存在する場所。
+- **Adapter** は **Seam** にあり **Interface** を満たす。
+- **Depth** は caller に **Leverage** を、maintainer に **Locality** を生む。
 
-## Rejected framings
+## 却下した枠組み (Rejected framings)
 
-- **Depth as ratio of implementation-lines to interface-lines** (Ousterhout): rewards padding the implementation. We use depth-as-leverage instead.
-- **"Interface" as the TypeScript `interface` keyword or a class's public methods**: too narrow — interface here includes every fact a caller must know.
-- **"Boundary"**: overloaded with DDD's bounded context. Say **seam** or **interface**.
+- **Depth as ratio of implementation-lines to interface-lines**（Ousterhout）: implementation を水増しする。depth-as-leverage を使う。
+- **"Interface" as the TypeScript `interface` keyword or a class's public methods**: 狭すぎる — ここでの interface は caller が知るべきすべての事実を含む。
+- **"Boundary"**: DDD の bounded context と overloaded。**seam** または **interface** と言う。

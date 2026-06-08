@@ -1,8 +1,8 @@
 # Deep Modules
 
-From "A Philosophy of Software Design":
+"A Philosophy of Software Design" より:
 
-**Deep module** = small interface + lots of implementation
+**Deep module** = 小さな interface + 多くの implementation
 
 ```
 ┌─────────────────────┐
@@ -16,7 +16,7 @@ From "A Philosophy of Software Design":
 └─────────────────────┘
 ```
 
-**Shallow module** = large interface + little implementation (avoid)
+**Shallow module** = 大きな interface + 少ない implementation（避ける）
 
 ```
 ┌─────────────────────────────────┐
@@ -26,8 +26,8 @@ From "A Philosophy of Software Design":
 └─────────────────────────────────┘
 ```
 
-When designing interfaces, ask:
+interface を設計するとき、次を問う:
 
-- Can I reduce the number of methods?
-- Can I simplify the parameters?
-- Can I hide more complexity inside?
+- methods の数を減らせるか?
+- parameters を単純化できるか?
+- 内部にもっと complexity を隠せるか?

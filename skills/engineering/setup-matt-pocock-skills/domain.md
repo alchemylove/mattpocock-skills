@@ -1,18 +1,18 @@
-# Domain Docs
+# ドメインドキュメント (Domain Docs)
 
-How the engineering skills should consume this repo's domain documentation when exploring the codebase.
+engineering skills が codebase を探索するとき、この repo の domain documentation をどう消費すべきか。
 
-## Before exploring, read these
+## 探索前に読むもの (Before exploring, read these)
 
-- **`CONTEXT.md`** at the repo root, or
-- **`CONTEXT-MAP.md`** at the repo root if it exists — it points at one `CONTEXT.md` per context. Read each one relevant to the topic.
-- **`docs/adr/`** — read ADRs that touch the area you're about to work in. In multi-context repos, also check `src/<context>/docs/adr/` for context-scoped decisions.
+- repo ルートの **`CONTEXT.md`**、または
+- 存在すれば repo ルートの **`CONTEXT-MAP.md`** — context ごとの `CONTEXT.md` を指す。トピックに関連するものをそれぞれ読む。
+- **`docs/adr/`** — これから作業する領域に触れる ADR を読む。multi-context repo では `src/<context>/docs/adr/` も context-scoped decisions を確認。
 
-If any of these files don't exist, **proceed silently**. Don't flag their absence; don't suggest creating them upfront. The producer skill (`/grill-with-docs`) creates them lazily when terms or decisions actually get resolved.
+これらのファイルが存在しなくても、**黙って続行**。欠如を指摘しない。最初から作成を提案しない。producer skill（`/grill-with-docs`）が用語や決定が実際に解決されたとき lazy に作成する。
 
-## File structure
+## ファイル構造 (File structure)
 
-Single-context repo (most repos):
+Single-context repo（ほとんどの repo）:
 
 ```
 /
@@ -23,7 +23,7 @@ Single-context repo (most repos):
 └── src/
 ```
 
-Multi-context repo (presence of `CONTEXT-MAP.md` at the root):
+Multi-context repo（ルートに `CONTEXT-MAP.md` がある）:
 
 ```
 /
@@ -38,14 +38,14 @@ Multi-context repo (presence of `CONTEXT-MAP.md` at the root):
         └── docs/adr/
 ```
 
-## Use the glossary's vocabulary
+## glossary の語彙を使う (Use the glossary's vocabulary)
 
-When your output names a domain concept (in an issue title, a refactor proposal, a hypothesis, a test name), use the term as defined in `CONTEXT.md`. Don't drift to synonyms the glossary explicitly avoids.
+出力で domain concept に名前を付けるとき（issue title、refactor proposal、hypothesis、test name）、`CONTEXT.md` で定義された用語を使う。glossary が明示的に避ける同義語に drift しない。
 
-If the concept you need isn't in the glossary yet, that's a signal — either you're inventing language the project doesn't use (reconsider) or there's a real gap (note it for `/grill-with-docs`).
+必要な概念が glossary にまだないなら、それはシグナル — プロジェクトが使わない language を発明している（再考）か、本当の gap がある（`/grill-with-docs` 向けにメモ）。
 
-## Flag ADR conflicts
+## ADR 衝突をフラグする (Flag ADR conflicts)
 
-If your output contradicts an existing ADR, surface it explicitly rather than silently overriding:
+出力が既存 ADR と矛盾するなら、黙って上書きせず明示的に surface する:
 
 > _Contradicts ADR-0007 (event-sourced orders) — but worth reopening because…_

@@ -1,26 +1,26 @@
-# Matt Pocock Skills
+# Matt Pocock Skills コレクション (Matt Pocock Skills)
 
-A collection of agent skills (slash commands and behaviors) loaded by Claude Code. Skills are organized into buckets and consumed by per-repo configuration emitted by `/setup-matt-pocock-skills`.
+Claude Code が load する agent skills（slash commands と behaviors）のコレクション。skills は bucket に整理され、`/setup-matt-pocock-skills` が emit する per-repo configuration によって consume されます。
 
-## Language
+## 言語 (Language)
 
 **Issue tracker**:
-The tool that hosts a repo's issues — GitHub Issues, Linear, a local `.scratch/` markdown convention, or similar. Skills like `to-issues`, `to-prd`, `triage`, and `qa` read from and write to it.
+repo の issues を host するツール — GitHub Issues、Linear、local `.scratch/` markdown convention、または類似のもの。`to-issues`、`to-prd`、`triage`、`qa` などの skills は、ここから read し、ここへ write します。
 _Avoid_: backlog manager, backlog backend, issue host
 
 **Issue**:
-A single tracked unit of work inside an **Issue tracker** — a bug, task, PRD, or slice produced by `to-issues`.
-_Avoid_: ticket (use only when quoting external systems that call them tickets)
+**Issue tracker** 内の単一 tracked unit of work — bug、task、PRD、または `to-issues` が produce する slice。
+_Avoid_: ticket（外部 system が ticket と呼ぶ場合の quote のみ）
 
 **Triage role**:
-A canonical state-machine label applied to an **Issue** during triage (e.g. `needs-triage`, `ready-for-afk`). Each role maps to a real label string in the **Issue tracker** via `docs/agents/triage-labels.md`.
+triage 中に **Issue** に適用される canonical state-machine label（例: `needs-triage`、`ready-for-afk`）。各 role は `docs/agents/triage-labels.md` 経由で **Issue tracker** 内の実 label string に map されます。
 
-## Relationships
+## 関係 (Relationships)
 
-- An **Issue tracker** holds many **Issues**
-- An **Issue** carries one **Triage role** at a time
+- 1 つの **Issue tracker** は多数の **Issues** を保持する
+- 1 つの **Issue** は、常に 1 つの **Triage role** を持つ
 
-## Flagged ambiguities
+## 曖昧さのフラグ (Flagged ambiguities)
 
-- "backlog" was previously used to mean both the *tool* hosting issues and the *body of work* inside it — resolved: the tool is the **Issue tracker**; "backlog" is no longer used as a domain term.
-- "backlog backend" / "backlog manager" — resolved: collapsed into **Issue tracker**.
+- 以前 "backlog" は issues を host する *tool* と、その中の *body of work* の両方を指していた — 解決: tool は **Issue tracker**；"backlog" は domain term としては使わない。
+- "backlog backend" / "backlog manager" — 解決: **Issue tracker** に統合。

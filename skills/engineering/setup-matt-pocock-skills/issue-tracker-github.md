@@ -1,22 +1,22 @@
-# Issue tracker: GitHub
+# Issue tracker: GitHub (Issue tracker: GitHub)
 
-Issues and PRDs for this repo live as GitHub issues. Use the `gh` CLI for all operations.
+この repo の issues と PRD は GitHub issues として存在する。すべての操作に `gh` CLI を使う。
 
-## Conventions
+## 慣習 (Conventions)
 
-- **Create an issue**: `gh issue create --title "..." --body "..."`. Use a heredoc for multi-line bodies.
-- **Read an issue**: `gh issue view <number> --comments`, filtering comments by `jq` and also fetching labels.
-- **List issues**: `gh issue list --state open --json number,title,body,labels,comments --jq '[.[] | {number, title, body, labels: [.labels[].name], comments: [.comments[].body]}]'` with appropriate `--label` and `--state` filters.
+- **Create an issue**: `gh issue create --title "..." --body "..."`。複数行 body は heredoc を使う。
+- **Read an issue**: `gh issue view <number> --comments`。`jq` で comments をフィルタし、labels も取得。
+- **List issues**: 適切な `--label` と `--state` フィルタ付きで `gh issue list --state open --json number,title,body,labels,comments --jq '[.[] | {number, title, body, labels: [.labels[].name], comments: [.comments[].body]}]'`
 - **Comment on an issue**: `gh issue comment <number> --body "..."`
 - **Apply / remove labels**: `gh issue edit <number> --add-label "..."` / `--remove-label "..."`
 - **Close**: `gh issue close <number> --comment "..."`
 
-Infer the repo from `git remote -v` — `gh` does this automatically when run inside a clone.
+`git remote -v` から repo を推論 — clone 内で実行すれば `gh` は自動で行う。
 
-## When a skill says "publish to the issue tracker"
+## skill が "publish to the issue tracker" と言うとき
 
-Create a GitHub issue.
+GitHub issue を作成する。
 
-## When a skill says "fetch the relevant ticket"
+## skill が "fetch the relevant ticket" と言うとき
 
-Run `gh issue view <number> --comments`.
+`gh issue view <number> --comments` を実行する。

@@ -1,25 +1,25 @@
-# Issue tracker integrations are limited to mainstream tools
+# issue tracker integrations は mainstream ツールに限定 (Issue tracker integrations are limited to mainstream tools)
 
-`setup-matt-pocock-skills` only offers first-class support for **mainstream** issue trackers. Requests to add support for niche, new, or single-vendor experimental trackers are out of scope.
+`setup-matt-pocock-skills` は **mainstream** issue trackers のみ first-class support を提供します。niche、new、または single-vendor experimental trackers の support 追加要求は out of scope です。
 
-## Why this is out of scope
+## out of scope である理由 (Why this is out of scope)
 
-Every issue-tracker backend hard-codes a CLI shape into the skills (commands, flags, output parsing). Each new backend is permanent maintenance surface — it has to keep working as the tool's CLI evolves, and it has to keep being tested against `/to-prd`, `/to-issues`, `/triage`, and friends. That cost is only worth paying for trackers a meaningful fraction of users actually have.
+各 issue-tracker backend は CLI shape（commands、flags、output parsing）を skills に hard-code します。新 backend ごとに permanent maintenance surface が増える — tool の CLI が evolve しても動き続け、`/to-prd`、`/to-issues`、`/triage` などで test し続ける必要があります。その cost は、meaningful fraction の users が実際に持っている trackers に対してのみ worth paying です。
 
-"Mainstream" is a judgment call, not a numeric bar:
+"Mainstream" は numeric bar ではなく judgment call です:
 
-- GitHub, GitLab, and Backlog.md are the kind of tools we'd consider mainstream — broadly known, widely used, well past the experimental phase.
-- A brand-new agent-focused tool with a few hundred GitHub stars is not, no matter how interesting the design.
+- GitHub、GitLab、Backlog.md は mainstream と見なす類の tool — broadly known、widely used、experimental phase を well past。
+- GitHub stars が数百の brand-new agent-focused tool は、design がどれほど interesting でも mainstream ではない。
 
-Stars, age, and download counts are useful signals when making the call but none of them is the rule. The rule is: would a typical engineer recognise this tool and have plausibly chosen it for their team?
+Stars、age、download counts は call を下す際の useful signals だが、どれも rule ではない。rule は: typical engineer がこの tool を recognise し、team のために plausibly 選んだか？
 
-The escape hatches for non-mainstream trackers already exist:
+non-mainstream trackers 向け escape hatch は既にある:
 
-- `local markdown` for lightweight in-repo tracking.
-- `other/custom` for users who want to wire something up themselves.
+- lightweight in-repo tracking 向け `local markdown`。
+- 自分で wire up したい users 向け `other/custom`。
 
-Neither requires the core skills to know about the specific tool.
+どちらも core skills が specific tool を知る必要はない。
 
-## Prior requests
+## 過去の要求 (Prior requests)
 
-- #99 — "Add dex as an issue tracker backend" (dex was ~3 months old and ~300 stars at the time of the request)
+- #99 — "Add dex as an issue tracker backend"（要求時点で dex は ~3 ヶ月、~300 stars）

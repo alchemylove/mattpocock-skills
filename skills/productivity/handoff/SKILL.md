@@ -4,12 +4,12 @@ description: Compact the current conversation into a handoff document for anothe
 argument-hint: "What will the next session be used for?"
 ---
 
-Write a handoff document summarising the current conversation so a fresh agent can continue the work. Save to the temporary directory of the user's OS - not the current workspace.
+現在の会話を要約した handoff ドキュメントを書き、新しい agent が作業を引き継げるようにする。ユーザーの OS の一時ディレクトリに保存する — 現在の workspace ではない。
 
-Include a "suggested skills" section in the document, which suggests skills that the agent should invoke.
+ドキュメントには "suggested skills" セクションを含め、agent が呼び出すべき skill を提案する。
 
-Do not duplicate content already captured in other artifacts (PRDs, plans, ADRs, issues, commits, diffs). Reference them by path or URL instead.
+他のアーティファクト (PRD、plan、ADR、issue、commit、diff) に既に記録されている内容は重複させない。パスまたは URL で参照する。
 
-Redact any sensitive information, such as API keys, passwords, or personally identifiable information.
+API keys、パスワード、個人を特定できる情報などの機密情報は redact する。
 
-If the user passed arguments, treat them as a description of what the next session will focus on and tailor the doc accordingly.
+ユーザーが引数を渡した場合、次のセッションの焦点として扱い、ドキュメントをそれに合わせて調整する。

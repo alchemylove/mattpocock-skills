@@ -1,14 +1,14 @@
-Skills are organized into bucket folders under `skills/`:
+`skills/` 配下の bucket フォルダに skills が整理されています:
 
-- `engineering/` — daily code work
-- `productivity/` — daily non-code workflow tools
-- `misc/` — kept around but rarely used
-- `personal/` — tied to my own setup, not promoted
-- `in-progress/` — drafts not yet ready to ship
-- `deprecated/` — no longer used
+- `engineering/` — 日々の code 作業
+- `productivity/` — 日々の non-code workflow ツール
+- `misc/` — 残しておくがあまり使わない
+- `personal/` — 自分の setup に紐づくもので、promote しない
+- `in-progress/` — まだ ship 準備ができていない draft
+- `deprecated/` — もう使わない
 
-Every skill in `engineering/`, `productivity/`, or `misc/` must have a reference in the top-level `README.md` and an entry in `.claude-plugin/plugin.json`. Skills in `personal/`, `in-progress/`, and `deprecated/` must not appear in either.
+`engineering/`、`productivity/`、`misc/` の各 skill は、トップレベルの `README.md` への参照と `.claude-plugin/plugin.json` への entry が必須です。`personal/`、`in-progress/`、`deprecated/` の skill は、どちらにも載せてはいけません。
 
-Each skill entry in the top-level `README.md` must link the skill name to its `SKILL.md`.
+トップレベルの `README.md` の各 skill entry は、skill 名をその `SKILL.md` に link しなければなりません。
 
-Each bucket folder has a `README.md` that lists every skill in the bucket with a one-line description, with the skill name linked to its `SKILL.md`.
+各 bucket フォルダには `README.md` があり、その bucket 内の全 skill を one-line description 付きで一覧し、skill 名はその `SKILL.md` に link します。

@@ -1,8 +1,8 @@
-# Misc
+# その他 (Misc)
 
-Tools I keep around but rarely use.
+残しておくがあまり使わないツール。
 
-- **[git-guardrails-claude-code](./git-guardrails-claude-code/SKILL.md)** — Set up Claude Code hooks to block dangerous git commands (push, reset --hard, clean, etc.) before they execute.
-- **[migrate-to-shoehorn](./migrate-to-shoehorn/SKILL.md)** — Migrate test files from `as` type assertions to @total-typescript/shoehorn.
-- **[scaffold-exercises](./scaffold-exercises/SKILL.md)** — Create exercise directory structures with sections, problems, solutions, and explainers.
-- **[setup-pre-commit](./setup-pre-commit/SKILL.md)** — Set up Husky pre-commit hooks with lint-staged, Prettier, type checking, and tests.
+- **[git-guardrails-claude-code](./git-guardrails-claude-code/SKILL.md)** — 実行前に dangerous git commands（push、reset --hard、clean など）を block する Claude Code hooks を set up する。
+- **[migrate-to-shoehorn](./migrate-to-shoehorn/SKILL.md)** — test files を `as` type assertions から @total-typescript/shoehorn へ migrate する。
+- **[scaffold-exercises](./scaffold-exercises/SKILL.md)** — sections、problems、solutions、explainers 付きの exercise directory structures を create する。
+- **[setup-pre-commit](./setup-pre-commit/SKILL.md)** — lint-staged、Prettier、type checking、tests 付きの Husky pre-commit hooks を set up する。

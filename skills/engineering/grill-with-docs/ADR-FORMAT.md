@@ -1,10 +1,10 @@
-# ADR Format
+# ADR フォーマット (ADR Format)
 
-ADRs live in `docs/adr/` and use sequential numbering: `0001-slug.md`, `0002-slug.md`, etc.
+ADR は `docs/adr/` に置き、連番で命名する: `0001-slug.md`、`0002-slug.md` など。
 
-Create the `docs/adr/` directory lazily — only when the first ADR is needed.
+`docs/adr/` ディレクトリは lazy に作成する — 最初の ADR が必要になったときだけ。
 
-## Template
+## テンプレート (Template)
 
 ```md
 # {Short title of the decision}
@@ -12,36 +12,36 @@ Create the `docs/adr/` directory lazily — only when the first ADR is needed.
 {1-3 sentences: what's the context, what did we decide, and why.}
 ```
 
-That's it. An ADR can be a single paragraph. The value is in recording *that* a decision was made and *why* — not in filling out sections.
+以上。ADR は 1 段落で十分。価値はセクションを埋めることではなく、決定が行われたことと *why* を記録することにある。
 
-## Optional sections
+## 任意セクション (Optional sections)
 
-Only include these when they add genuine value. Most ADRs won't need them.
+本当に価値があるときだけ含める。多くの ADR では不要。
 
-- **Status** frontmatter (`proposed | accepted | deprecated | superseded by ADR-NNNN`) — useful when decisions are revisited
-- **Considered Options** — only when the rejected alternatives are worth remembering
-- **Consequences** — only when non-obvious downstream effects need to be called out
+- **Status** frontmatter（`proposed | accepted | deprecated | superseded by ADR-NNNN`）— 決定を再検討するときに有用
+- **Considered Options** — 却下した代替案を覚えておく価値があるときだけ
+- **Consequences** — 自明でない下流の影響を明示する必要があるときだけ
 
-## Numbering
+## 採番 (Numbering)
 
-Scan `docs/adr/` for the highest existing number and increment by one.
+`docs/adr/` の既存の最大番号を確認し、1 つ増やす。
 
-## When to offer an ADR
+## ADR を提案するタイミング (When to offer an ADR)
 
-All three of these must be true:
+次の 3 つすべてが真であること:
 
-1. **Hard to reverse** — the cost of changing your mind later is meaningful
-2. **Surprising without context** — a future reader will look at the code and wonder "why on earth did they do it this way?"
-3. **The result of a real trade-off** — there were genuine alternatives and you picked one for specific reasons
+1. **Hard to reverse** — 後から考えを変えるコストが意味ある
+2. **Surprising without context** — 将来の読者がコードを見て「なぜこんなことを?」と思う
+3. **The result of a real trade-off** — 本当の代替案があり、特定の理由で 1 つを選んだ
 
-If a decision is easy to reverse, skip it — you'll just reverse it. If it's not surprising, nobody will wonder why. If there was no real alternative, there's nothing to record beyond "we did the obvious thing."
+決定が簡単に取り消せるならスキップ — 取り消せばよい。驚きがなければ誰も理由を問わない。本当の代替がなければ「当たり前のことをした」以上に記録するものはない。
 
-### What qualifies
+### 該当するもの (What qualifies)
 
-- **Architectural shape.** "We're using a monorepo." "The write model is event-sourced, the read model is projected into Postgres."
-- **Integration patterns between contexts.** "Ordering and Billing communicate via domain events, not synchronous HTTP."
-- **Technology choices that carry lock-in.** Database, message bus, auth provider, deployment target. Not every library — just the ones that would take a quarter to swap out.
-- **Boundary and scope decisions.** "Customer data is owned by the Customer context; other contexts reference it by ID only." The explicit no-s are as valuable as the yes-s.
-- **Deliberate deviations from the obvious path.** "We're using manual SQL instead of an ORM because X." Anything where a reasonable reader would assume the opposite. These stop the next engineer from "fixing" something that was deliberate.
-- **Constraints not visible in the code.** "We can't use AWS because of compliance requirements." "Response times must be under 200ms because of the partner API contract."
-- **Rejected alternatives when the rejection is non-obvious.** If you considered GraphQL and picked REST for subtle reasons, record it — otherwise someone will suggest GraphQL again in six months.
+- **Architectural shape.** 「monorepo を使う。」「write model は event-sourced、read model は Postgres に project する。」
+- **Integration patterns between contexts.** 「Ordering と Billing は synchronous HTTP ではなく domain events で通信する。」
+- **Technology choices that carry lock-in.** Database、message bus、auth provider、deployment target。すべての library ではなく、入れ替えに四半期かかるものだけ。
+- **Boundary and scope decisions.** 「Customer data は Customer context が所有し、他 context は ID のみで参照する。」明示的な no は yes と同じくらい価値がある。
+- **Deliberate deviations from the obvious path.** 「X のため ORM ではなく manual SQL を使う。」合理的な読者が逆を想定するもの。次のエンジニアが意図的なものを「修正」しようとするのを防ぐ。
+- **Constraints not visible in the code.** 「compliance 要件のため AWS は使えない。」「partner API contract のため response time は 200ms 未満である必要がある。」
+- **Rejected alternatives when the rejection is non-obvious.** GraphQL を検討して subtle な理由で REST を選んだなら記録する — さもなければ 6 か月後にまた GraphQL が提案される。

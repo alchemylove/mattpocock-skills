@@ -1,8 +1,8 @@
-# Good and Bad Tests
+# 良いテストと悪いテスト (Good and Bad Tests)
 
-## Good Tests
+## 良いテスト (Good Tests)
 
-**Integration-style**: Test through real interfaces, not mocks of internal parts.
+**Integration-style**: 内部パーツの mock ではなく、実際の interface 経由でテストする。
 
 ```typescript
 // GOOD: Tests observable behavior
@@ -14,17 +14,17 @@ test("user can checkout with valid cart", async () => {
 });
 ```
 
-Characteristics:
+特徴:
 
-- Tests behavior users/callers care about
-- Uses public API only
-- Survives internal refactors
-- Describes WHAT, not HOW
-- One logical assertion per test
+- users/callers が気にする behavior をテストする
+- public API のみを使う
+- 内部 refactor 後も生き残る
+- HOW ではなく WHAT を記述する
+- テストあたり 1 つの論理的 assertion
 
-## Bad Tests
+## 悪いテスト (Bad Tests)
 
-**Implementation-detail tests**: Coupled to internal structure.
+**Implementation-detail tests**: 内部構造に結合している。
 
 ```typescript
 // BAD: Tests implementation details
@@ -35,14 +35,14 @@ test("checkout calls paymentService.process", async () => {
 });
 ```
 
-Red flags:
+危険信号:
 
-- Mocking internal collaborators
-- Testing private methods
-- Asserting on call counts/order
-- Test breaks when refactoring without behavior change
-- Test name describes HOW not WHAT
-- Verifying through external means instead of interface
+- internal collaborators を mock している
+- private methods をテストしている
+- call counts/order を assertion している
+- behavior が変わらない refactor でテストが壊れる
+- テスト名が WHAT ではなく HOW を記述している
+- interface ではなく外部手段で検証している
 
 ```typescript
 // BAD: Bypasses interface to verify

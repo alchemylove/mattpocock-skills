@@ -1,18 +1,18 @@
-# Hard limits on the number of questions during grilling
+# grilling 中の question 数に hard limits (Hard limits on the number of questions during grilling)
 
-The `/grill-me` skill (and grilling sessions inside other skills) does not enforce a maximum number of questions. Requests to add a configurable cap or hard ceiling are out of scope.
+`/grill-me` skill（および他 skills 内の grilling sessions）は question の maximum 数を enforce しない。configurable cap や hard ceiling 追加の要求は out of scope です。
 
-## Why this is out of scope
+## out of scope である理由 (Why this is out of scope)
 
-Grilling is intentionally open-ended. The point is to keep digging until each branch of the decision tree is resolved — some plans need three questions, some need fifty. A fixed cap would either cut off useful exploration on hard problems or feel arbitrary on easy ones.
+Grilling は intentionally open-ended です。point は decision tree の各 branch が resolve するまで dig し続けること — ある plan は 3 questions、ある plan は 50 必要。fixed cap は hard problems で useful exploration を cut off するか、easy ones で arbitrary に feel します。
 
-If a session feels too long, the right escape hatches already exist:
+session が長すぎると feel する場合、right escape hatch は既にある:
 
-- The user can stop the session at any time and accept the current state of the plan.
-- The user can tell the model to wrap up, summarise, and move on — natural-language steering is the intended control surface, not a numeric limit.
+- user はいつでも session を stop し、plan の current state を accept できる。
+- user は model に wrap up、summarise、move on を指示できる — natural-language steering が intended control surface であり、numeric limit ではない。
 
-Adding a hard cap would also conflate two different failure modes: a model that asks too many questions because the plan is genuinely under-specified (working as intended) vs. a model that asks redundant or low-value questions (a prompt-quality issue, not a quantity issue). The fix for the latter belongs in the skill prompt, not in a counter.
+hard cap を add すると 2 つの異なる failure modes が conflate される: plan が genuinely under-specified なため questions が多い model（working as intended）vs. redundant または low-value questions を ask する model（prompt-quality issue であり quantity issue ではない）。後者の fix は skill prompt に属し、counter ではない。
 
-## Prior requests
+## 過去の要求 (Prior requests)
 
 - #44 — "Codex just asked me 200 questions"

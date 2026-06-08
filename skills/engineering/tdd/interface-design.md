@@ -1,8 +1,8 @@
-# Interface Design for Testability
+# テスト容易性のための interface 設計 (Interface Design for Testability)
 
-Good interfaces make testing natural:
+良い interface はテストを自然にする:
 
-1. **Accept dependencies, don't create them**
+1. **依存を受け取り、内部で作らない**
 
    ```typescript
    // Testable
@@ -14,7 +14,7 @@ Good interfaces make testing natural:
    }
    ```
 
-2. **Return results, don't produce side effects**
+2. **結果を返し、side effects を生まない**
 
    ```typescript
    // Testable
@@ -27,5 +27,5 @@ Good interfaces make testing natural:
    ```
 
 3. **Small surface area**
-   - Fewer methods = fewer tests needed
-   - Fewer params = simpler test setup
+   - methods が少ない = 必要なテストが少ない
+   - params が少ない = test setup が単純
