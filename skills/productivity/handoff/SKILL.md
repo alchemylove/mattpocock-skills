@@ -2,6 +2,7 @@
 name: handoff
 description: Compact the current conversation into a handoff document for another agent to pick up.
 argument-hint: "What will the next session be used for?"
+disable-model-invocation: true
 ---
 
 現在の会話を要約した handoff ドキュメントを書き、新しい agent が作業を引き継げるようにする。ユーザーの OS の一時ディレクトリに保存する — 現在の workspace ではない。

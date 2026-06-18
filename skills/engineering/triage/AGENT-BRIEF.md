@@ -1,40 +1,42 @@
-# Agent Brief の書き方 (Writing Agent Briefs)
+# Writing Agent Briefs
 
-agent brief は、issue が `ready-for-agent` に移ったときに GitHub issue に投稿する構造化コメント。AFK agent が作業する際の authoritative specification である。元の issue body と discussion は context — agent brief が contract。
+An agent brief is a structured comment posted on a GitHub issue or PR when it moves to `ready-for-agent`. It is the authoritative specification that an AFK agent will work from. The original body and discussion are context — the agent brief is the contract.
 
-## 原則 (Principles)
+The brief states **what the agent should do**, which stretches to both surfaces: for an issue, that's building the change from nothing; for a PR, it's what's left to do *to the existing diff* — finish it, close gaps, address review points. Same principles either way; the PR example below shows the difference.
 
-### 精度より耐久性 (Durability over precision)
+## Principles
 
-issue は `ready-for-agent` に数日〜数週間置かれることがある。その間 codebase は変わる。ファイルが rename、移動、refactor されても brief が有用なままになるよう書く。
+### Durability over precision
 
-- **Do** interfaces、types、behavioral contracts を記述する
-- **Do** agent が探す・変更すべき具体的な types、function signatures、config shapes を名指しする
-- **Don't** file paths を参照する — すぐ古くなる
-- **Don't** line numbers を参照する
-- **Don't** 現在の implementation 構造が同じままであると仮定する
+The issue may sit in `ready-for-agent` for days or weeks. The codebase will change in the meantime. Write the brief so it stays useful even as files are renamed, moved, or refactored.
 
-### 手順ではなく振る舞い (Behavioral, not procedural)
+- **Do** describe interfaces, types, and behavioral contracts
+- **Do** name specific types, function signatures, or config shapes that the agent should look for or modify
+- **Don't** reference file paths — they go stale
+- **Don't** reference line numbers
+- **Don't** assume the current implementation structure will remain the same
 
-システムが **what** すべきかを記述し、**how** を実装する方法は書かない。agent は codebase を新鮮に探索し、自分で implementation 判断をする。
+### Behavioral, not procedural
 
-- **Good:** "`SkillConfig` type は optional な `schedule` field（type `CronExpression`）を受け付けるべき"
-- **Bad:** "`src/types/skill.ts` を開き、42 行目に schedule field を追加"
-- **Good:** "ユーザーが引数なしで `/triage` を実行したとき、注意が必要な issues の summary が見えるべき"
-- **Bad:** "main handler function に switch statement を追加"
+Describe **what** the system should do, not **how** to implement it. The agent will explore the codebase fresh and make its own implementation decisions.
 
-### 完全な acceptance criteria
+- **Good:** "The `SkillConfig` type should accept an optional `schedule` field of type `CronExpression`"
+- **Bad:** "Open src/types/skill.ts and add a schedule field on line 42"
+- **Good:** "When a user runs `/triage` with no arguments, they should see a summary of issues needing attention"
+- **Bad:** "Add a switch statement in the main handler function"
 
-agent は完了条件を知る必要がある。すべての agent brief に具体的でテスト可能な acceptance criteria を含める。各 criterion は独立して検証可能であること。
+### Complete acceptance criteria
 
-- **Good:** "`gh issue list --label needs-triage` を実行すると、初期分類を経た issues が返る"
-- **Bad:** "Triage が正しく動くべき"
+The agent needs to know when it's done. Every agent brief must have concrete, testable acceptance criteria. Each criterion should be independently verifiable.
 
-### 明示的な scope 境界
+- **Good:** "Running `gh issue list --label needs-triage` returns issues that have been through initial classification"
+- **Bad:** "Triage should work correctly"
 
-out of scope を明記する。agent が gold-plating したり、隣接 feature について勝手に仮定するのを防ぐ。
+### Explicit scope boundaries
 
-## テンプレート (Template)
+State what is out of scope. This prevents the agent from gold-plating or making assumptions about adjacent features.
+
+## Template
 
 ```markdown
 ## Agent Brief
@@ -65,9 +67,9 @@ Be specific about edge cases and error conditions.
 - Adjacent feature that might seem related but is separate
 ```
 
-## 例 (Examples)
+## Examples
 
-### 良い agent brief（bug）
+### Good agent brief (bug)
 
 ```markdown
 ## Agent Brief
@@ -102,7 +104,7 @@ and append "..." to indicate truncation.
 - Multi-line description support
 ```
 
-### 良い agent brief（enhancement）
+### Good agent brief (enhancement)
 
 ```markdown
 ## Agent Brief
@@ -143,7 +145,44 @@ checked for matches.
 - Bug reports (only enhancement rejections go to `.out-of-scope/`)
 ```
 
-### 悪い agent brief
+### Good agent brief (PR)
+
+For a PR, "Current behavior" describes the state of the diff, and the brief asks the agent to finish or fix it rather than build from scratch.
+
+```markdown
+## Agent Brief
+
+**Category:** enhancement
+**Summary:** Finish the contributor's `--json` output flag for `triage list`
+
+**Current behavior:**
+The PR adds a `--json` flag that serializes the issue list to JSON. The happy
+path works and the diff matches the project's command structure. Two gaps
+remain: errors are still printed as human text (not JSON), and the new flag has
+no test coverage.
+
+**Desired behavior:**
+With `--json`, all output — including errors — is well-formed JSON on stdout,
+and the command's exit codes are unchanged. The existing human-readable output
+is untouched when the flag is absent.
+
+**Key interfaces:**
+- The command's error path should emit `{ "error": string }` under `--json`
+  instead of the plain-text error
+- Reuse the existing serializer the PR already added; don't introduce a second
+
+**Acceptance criteria:**
+- [ ] `triage list --json` emits valid JSON for both success and error cases
+- [ ] Exit codes match the non-JSON command
+- [ ] A test covers the `--json` success output and one error case
+- [ ] Default (non-JSON) output is byte-for-byte unchanged
+
+**Out of scope:**
+- Adding `--json` to any other command
+- Changing the JSON shape of the success payload the PR already defined
+```
+
+### Bad agent brief
 
 ```markdown
 ## Agent Brief
@@ -159,11 +198,10 @@ The function around line 150 has the issue.
 - src/types.ts (line 42)
 ```
 
-これが悪い理由:
-
-- category がない
-- 曖昧な記述（"the triage thing is broken"）
-- すぐ古くなる file paths と line numbers を参照している
-- acceptance criteria がない
-- scope 境界がない
-- current vs desired behavior の記述がない
+This is bad because:
+- No category
+- Vague description ("the triage thing is broken")
+- References file paths and line numbers that will go stale
+- No acceptance criteria
+- No scope boundaries
+- No description of current vs desired behavior

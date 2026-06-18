@@ -1,14 +1,25 @@
-# エンジニアリング (Engineering)
+# Engineering
 
-日々 code 作業で使う skills。
+Skills I use daily for code work.
 
-- **[diagnose](./diagnose/SKILL.md)** — 難しい bug と performance regression 向けの disciplined diagnosis loop: reproduce → minimise → hypothesise → instrument → fix → regression-test。
-- **[grill-with-docs](./grill-with-docs/SKILL.md)** — 既存 domain model に対して plan を challenge し、terminology を sharpen し、`CONTEXT.md` と ADR を inline で update する grilling session。
-- **[triage](./triage/SKILL.md)** — triage roles の state machine を通じて issues を triage する。
-- **[improve-codebase-architecture](./improve-codebase-architecture/SKILL.md)** — `CONTEXT.md` の domain language と `docs/adr/` の decisions を踏まえ、codebase 内の deepening opportunities を見つける。
-- **[setup-matt-pocock-skills](./setup-matt-pocock-skills/SKILL.md)** — 他の engineering skills が consume する per-repo config（issue tracker、triage label vocabulary、domain doc layout）を scaffold する。
-- **[tdd](./tdd/SKILL.md)** — red-green-refactor loop による test-driven development。feature や bug fix を vertical slice ごとに build する。
-- **[to-issues](./to-issues/SKILL.md)** — 任意の plan、spec、PRD を vertical slices で independently-grabbable GitHub issues に分解する。
-- **[to-prd](./to-prd/SKILL.md)** — 現在の conversation context を PRD に変換し、GitHub issue として submit する。
-- **[zoom-out](./zoom-out/SKILL.md)** — agent に zoom out させ、馴染みのない code section について broader context や higher-level perspective を与える。
-- **[prototype](./prototype/SKILL.md)** — design を flesh out する throwaway prototype を build する — state/business-logic 向けの runnable terminal app、または 1 route から toggle できる radically different UI variations のいずれか。
+## User-invoked
+
+Reachable only when you type them (`disable-model-invocation: true`).
+
+- **[ask-matt](./ask-matt/SKILL.md)** — Ask which skill or flow fits your situation. A router over the user-invoked skills in this repo.
+- **[grill-with-docs](./grill-with-docs/SKILL.md)** — Grilling session that also builds your project's domain model, sharpening terminology and updating `CONTEXT.md` and ADRs inline.
+- **[triage](./triage/SKILL.md)** — Move issues through a state machine of triage roles.
+- **[improve-codebase-architecture](./improve-codebase-architecture/SKILL.md)** — Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.
+- **[setup-matt-pocock-skills](./setup-matt-pocock-skills/SKILL.md)** — Configure this repo for the engineering skills (issue tracker, triage labels, domain doc layout). Run once per repo.
+- **[to-issues](./to-issues/SKILL.md)** — Break any plan, spec, or PRD into independently-grabbable issues using vertical slices.
+- **[to-prd](./to-prd/SKILL.md)** — Turn the current conversation into a PRD and publish it to the issue tracker.
+- **[prototype](./prototype/SKILL.md)** — Build a throwaway prototype — a runnable terminal app for state/logic questions, or several toggleable UI variations.
+
+## Model-invoked
+
+Model- or user-reachable (rich trigger phrasing so the model can reach for them).
+
+- **[diagnosing-bugs](./diagnosing-bugs/SKILL.md)** — Disciplined diagnosis loop for hard bugs and performance regressions: reproduce → minimise → hypothesise → instrument → fix → regression-test.
+- **[tdd](./tdd/SKILL.md)** — Test-driven development with a red-green-refactor loop. Builds features or fixes bugs one vertical slice at a time.
+- **[domain-modeling](./domain-modeling/SKILL.md)** — Actively build and sharpen a project's domain model — challenge terms, stress-test with scenarios, update `CONTEXT.md` and ADRs inline.
+- **[codebase-design](./codebase-design/SKILL.md)** — Shared discipline and vocabulary for designing deep modules: small interfaces, clean seams, testable through the interface.

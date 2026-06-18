@@ -1,81 +1,66 @@
 ---
 name: improve-codebase-architecture
-description: Find deepening opportunities in a codebase, informed by the domain language in CONTEXT.md and the decisions in docs/adr/. Use when the user wants to improve architecture, find refactoring opportunities, consolidate tightly-coupled modules, or make a codebase more testable and AI-navigable.
+description: Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.
+disable-model-invocation: true
 ---
 
-# コードベースアーキテクチャの改善 (Improve Codebase Architecture)
+# Improve Codebase Architecture
 
-architectural friction を surface し、**deepening opportunities** — shallow module を deep module に変える refactor — を提案する。目的は testability と AI-navigability である。
+Surface architectural friction and propose **deepening opportunities** — refactors that turn shallow modules into deep ones. The aim is testability and AI-navigability.
 
-## 用語集 (Glossary)
+This command is _informed_ by the project's domain model and built on a shared design vocabulary:
 
-すべての提案でこれらの term を正確に使う。一貫した言語が要点である — "component"、"service"、"API"、"boundary" に drift しない。完全な定義は [LANGUAGE.md](LANGUAGE.md)。
+- Run the `/codebase-design` skill for the architecture vocabulary (**module**, **interface**, **depth**, **seam**, **adapter**, **leverage**, **locality**) and its principles (the deletion test, "the interface is the test surface", "one adapter = hypothetical seam, two = real"). Use these terms exactly in every suggestion — don't drift into "component," "service," "API," or "boundary."
+- The domain language in `CONTEXT.md` gives names to good seams; ADRs in `docs/adr/` record decisions this command should not re-litigate.
 
-- **Module** — interface と implementation を持つもの（function、class、package、slice）。
-- **Interface** — caller が module を使うために知るべきすべて: types、invariants、error modes、ordering、config。type signature だけではない。
-- **Implementation** — 内部のコード。
-- **Depth** — interface における leverage: 小さな interface の背後に多くの behaviour。**Deep** = high leverage。**Shallow** = interface が implementation とほぼ同じ複雑さ。
-- **Seam** — interface が存在する場所; in place を編集せずに behaviour を変えられる場所。（"boundary" ではなくこれを使う。）
-- **Adapter** — seam で interface を満たす concrete なもの。
-- **Leverage** — caller が depth から得るもの。
-- **Locality** — maintainer が depth から得るもの: change、bugs、knowledge が 1 か所に集中。
+## Process
 
-主要原則（完全なリストは [LANGUAGE.md](LANGUAGE.md)）:
+### 1. Explore
 
-- **Deletion test**: module を削除したと想像する。複雑さが消えれば pass-through だった。複雑さが N 個の caller に再出現すれば、その存在意義があった。
-- **The interface is the test surface.**
-- **One adapter = hypothetical seam. Two adapters = real seam.**
+Read the project's domain glossary (`CONTEXT.md`) and any ADRs in the area you're touching first.
 
-この skill はプロジェクトの domain model に _informed_ される。domain language は good seam に名前を与え、ADR は skill が再 litigate すべきでない決定を記録する。
+Then use the Agent tool with `subagent_type=Explore` to walk the codebase. Don't follow rigid heuristics — explore organically and note where you experience friction:
 
-## プロセス (Process)
+- Where does understanding one concept require bouncing between many small modules?
+- Where are modules **shallow** — interface nearly as complex as the implementation?
+- Where have pure functions been extracted just for testability, but the real bugs hide in how they're called (no **locality**)?
+- Where do tightly-coupled modules leak across their seams?
+- Which parts of the codebase are untested, or hard to test through their current interface?
 
-### 1. 探索 (Explore)
+Apply the **deletion test** to anything you suspect is shallow: would deleting it concentrate complexity, or just move it? A "yes, concentrates" is the signal you want.
 
-まずプロジェクトの domain glossary と、触る領域の ADR を読む。
+### 2. Present candidates as an HTML report
 
-次に Agent tool で `subagent_type=Explore` を使いコードベースを歩く。硬い heuristic に従わない — 有機的に探索し、friction を感じる場所を記録する:
+Write a self-contained HTML file to the OS temp directory so nothing lands in the repo. Resolve the temp dir from `$TMPDIR`, falling back to `/tmp` (or `%TEMP%` on Windows), and write to `<tmpdir>/architecture-review-<timestamp>.html` so each run gets a fresh file. Open it for the user — `xdg-open <path>` on Linux, `open <path>` on macOS, `start <path>` on Windows — and tell them the absolute path.
 
-- 1 つの概念を理解するのに、多くの小さな module を行き来する必要がある場所は？
-- module が **shallow** な場所は？ — interface が implementation とほぼ同じ複雑さ。
-- testability のためだけに pure function が抽出されたが、real bug は呼び出し方に隠れる場所（**locality** がない）は？
-- tightly-coupled module が seam を越えて leak する場所は？
-- codebase のどの部分が untested、または現在の interface 経由では test しにくいか？
+The report uses **Tailwind via CDN** for layout and styling, and **Mermaid via CDN** for diagrams where a graph/flow/sequence reliably communicates the structure. Mix Mermaid with hand-crafted CSS/SVG visuals — use Mermaid when relationships are graph-shaped (call graphs, dependencies, sequences), and hand-built divs/SVG when you want something more editorial (mass diagrams, cross-sections, collapse animations). Each candidate gets a **before/after visualisation**. Be visual.
 
-shallow と疑うものに **deletion test** を適用する: 削除すると複雑さが集中するか、単に移動するだけか？"yes, concentrates" が欲しいシグナルである。
+For each candidate, render a card with:
 
-### 2. 候補を HTML report として提示する (Present candidates as an HTML report)
+- **Files** — which files/modules are involved
+- **Problem** — why the current architecture is causing friction
+- **Solution** — plain English description of what would change
+- **Benefits** — explained in terms of locality and leverage, and how tests would improve
+- **Before / After diagram** — side-by-side, custom-drawn, illustrating the shallowness and the deepening
+- **Recommendation strength** — one of `Strong`, `Worth exploring`, `Speculative`, rendered as a badge
 
-repo に何も置かないよう、自己完結型 HTML ファイルを OS temp directory に書く。temp dir は `$TMPDIR` から解決し、なければ `/tmp`（Windows では `%TEMP%`）にフォールバックし、`<tmpdir>/architecture-review-<timestamp>.html` に書いて各実行で新しいファイルにする。ユーザー向けに開く — Linux では `xdg-open <path>`、macOS では `open <path>`、Windows では `start <path>` — 絶対パスを伝える。
+End the report with a **Top recommendation** section: which candidate you'd tackle first and why.
 
-report はレイアウトとスタイリングに **Tailwind via CDN**、構造を graph/flow/sequence で確実に伝えられる場合は **Mermaid via CDN** を使う。Mermaid と hand-crafted CSS/SVG を混ぜる — 関係が graph 形状（call graphs、dependencies、sequences）なら Mermaid、より editorial な表現（mass diagrams、cross-sections、collapse animations）なら hand-built divs/SVG。各候補に **before/after visualisation** を付ける。視覚的であること。
+**Use CONTEXT.md vocabulary for the domain, and the `/codebase-design` vocabulary for the architecture.** If `CONTEXT.md` defines "Order," talk about "the Order intake module" — not "the FooBarHandler," and not "the Order service."
 
-各候補は以前と同じ template だが、card としてレンダリングする:
+**ADR conflicts**: if a candidate contradicts an existing ADR, only surface it when the friction is real enough to warrant revisiting the ADR. Mark it clearly in the card (e.g. a warning callout: _"contradicts ADR-0007 — but worth reopening because…"_). Don't list every theoretical refactor an ADR forbids.
 
-- **Files** — 関与する files/modules
-- **Problem** — 現在の architecture が friction を生む理由
-- **Solution** — 何が変わるかの平易な英語説明
-- **Benefits** — locality と leverage の観点での説明、test がどう改善するか
-- **Before / After diagram** — 並列、custom-drawn、shallowness と deepening を示す
-- **Recommendation strength** — `Strong`、`Worth exploring`、`Speculative` のいずれか、badge としてレンダリング
+See [HTML-REPORT.md](HTML-REPORT.md) for the full HTML scaffold, diagram patterns, and styling guidance.
 
-report の末尾に **Top recommendation** セクション: 最初に着手する候補とその理由。
-
-**domain には CONTEXT.md の語彙、architecture には [LANGUAGE.md](LANGUAGE.md) の語彙を使う。** `CONTEXT.md` が "Order" を定義していれば、"Order intake module" と言う — "FooBarHandler" でも "Order service" でもない。
-
-**ADR conflicts**: 候補が既存 ADR と矛盾する場合、ADR を再検討するに足る real friction があるときだけ surface する。card に明確にマークする（例: warning callout: _"contradicts ADR-0007 — but worth reopening because…"_）。ADR が forbid する理論上の refactor をすべて列挙しない。
-
-完全な HTML scaffold、diagram patterns、styling guidance は [HTML-REPORT.md](HTML-REPORT.md)。
-
-まだ interface を提案しない。ファイル書き込み後、ユーザーに尋ねる:「Which of these would you like to explore?」
+Do NOT propose interfaces yet. After the file is written, ask the user: "Which of these would you like to explore?"
 
 ### 3. Grilling loop
 
-ユーザーが候補を選んだら、grilling conversation に入る。design tree を一緒に歩く — constraints、dependencies、deepened module の形、seam の背後に何があるか、どの test が残るか。
+Once the user picks a candidate, run the `/grilling` skill to walk the design tree with them — constraints, dependencies, the shape of the deepened module, what sits behind the seam, what tests survive.
 
-意思決定が crystallize するとき、side effect はインラインで起きる:
+Side effects happen inline as decisions crystallize — run the `/domain-modeling` skill to keep the domain model current as you go:
 
-- **`CONTEXT.md` にない concept 名の deepened module を命名する？** term を `CONTEXT.md` に追加 — `/grill-with-docs` と同じ規律（[CONTEXT-FORMAT.md](../grill-with-docs/CONTEXT-FORMAT.md)）。存在しなければ lazy に作成。
-- **会話中に fuzzy term を sharpen する？** その場で `CONTEXT.md` を更新。
-- **load-bearing な理由で候補を reject する？** ADR を提案し、_「Want me to record this as an ADR so future architecture reviews don't re-suggest it?」_ と frame する。将来の explorer が同じ提案を避けるのに実際に必要な理由のときだけ offer — ephemeral な理由（"not worth it right now"）や自明な理由は skip。[ADR-FORMAT.md](../grill-with-docs/ADR-FORMAT.md) を参照。
-- **deepened module の代替 interface を探索したい？** [INTERFACE-DESIGN.md](INTERFACE-DESIGN.md) を参照。
+- **Naming a deepened module after a concept not in `CONTEXT.md`?** Add the term to `CONTEXT.md`. Create the file lazily if it doesn't exist.
+- **Sharpening a fuzzy term during the conversation?** Update `CONTEXT.md` right there.
+- **User rejects the candidate with a load-bearing reason?** Offer an ADR, framed as: _"Want me to record this as an ADR so future architecture reviews don't re-suggest it?"_ Only offer when the reason would actually be needed by a future explorer to avoid re-suggesting the same thing — skip ephemeral reasons ("not worth it right now") and self-evident ones.
+- **Want to explore alternative interfaces for the deepened module?** Run the `/codebase-design` skill and use its design-it-twice parallel sub-agent pattern.
