@@ -1,6 +1,6 @@
 ---
 name: edit-article
-description: Edit and improve articles by restructuring sections, improving clarity, and tightening prose. Use when user wants to edit, revise, or improve an article draft.
+description: セクションを再構成し、明瞭さを高め、文章を引き締めることで記事を編集・改善する。ユーザーが記事のドラフトを編集・改訂・改善したいときに使う。
 disable-model-invocation: true
 ---
 

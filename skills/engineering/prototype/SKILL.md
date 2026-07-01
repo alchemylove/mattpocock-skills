@@ -1,6 +1,6 @@
 ---
 name: prototype
-description: Build a throwaway prototype to flesh out a design — a runnable terminal app for state/business-logic questions, or several radically different UI variations toggleable from one route.
+description: 設計を具体化するための使い捨てプロトタイプを作る — 状態やビジネスロジックの検討用に動作するターミナルアプリ、または1つの route から切り替えられる、まったく異なる複数の UI バリエーション。
 disable-model-invocation: true
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: decision-mapping
-description: Turn a loose idea into a sequenced map of investigation tickets, then drive them to resolution one at a time.
+description: 漠然としたアイデアを、順序付けられた調査チケットのマップに変換し、それらを一つずつ解決へと導く。
 disable-model-invocation: true
 ---
 

@@ -2,7 +2,7 @@
 
 残しておくがあまり使わないツール。
 
-- **[git-guardrails-claude-code](./git-guardrails-claude-code/SKILL.md)** — 実行前に dangerous git commands（push、reset --hard、clean など）を block する Claude Code hooks を set up する。
-- **[migrate-to-shoehorn](./migrate-to-shoehorn/SKILL.md)** — test files を `as` type assertions から @total-typescript/shoehorn へ migrate する。
-- **[scaffold-exercises](./scaffold-exercises/SKILL.md)** — sections、problems、solutions、explainers 付きの exercise directory structures を create する。
-- **[setup-pre-commit](./setup-pre-commit/SKILL.md)** — lint-staged、Prettier、type checking、tests 付きの Husky pre-commit hooks を set up する。
+- **[git-guardrails-claude-code](./git-guardrails-claude-code/SKILL.md)** — 危険な git コマンド（push、reset --hard、clean など）を実行前にブロックする Claude Code hooks を設定する。
+- **[migrate-to-shoehorn](./migrate-to-shoehorn/SKILL.md)** — test ファイルを `as` type assertion から @total-typescript/shoehorn へ移行する。
+- **[scaffold-exercises](./scaffold-exercises/SKILL.md)** — sections、problems、solutions、explainers からなる演習ディレクトリ構造を作成する。
+- **[setup-pre-commit](./setup-pre-commit/SKILL.md)** — lint-staged、Prettier、型チェック、テストを備えた Husky の pre-commit hooks を設定する。

@@ -1,6 +1,6 @@
 ---
 name: ubiquitous-language
-description: Extract a DDD-style ubiquitous language glossary from the current conversation, flagging ambiguities and proposing canonical terms. Saves to UBIQUITOUS_LANGUAGE.md. Use when user wants to define domain terms, build a glossary, harden terminology, create a ubiquitous language, or mentions "domain model" or "DDD".
+description: 現在の会話から DDD スタイルの ubiquitous language の glossary を抽出し、曖昧さを指摘して正規の用語を提案する。UBIQUITOUS_LANGUAGE.md に保存する。ユーザーが domain の用語を定義したい、glossary を作りたい、用語を厳密化したい、ubiquitous language を作りたいとき、または「domain model」や「DDD」に言及したときに使う。
 disable-model-invocation: true
 ---
 

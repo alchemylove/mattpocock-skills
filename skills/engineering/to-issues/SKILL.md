@@ -1,6 +1,6 @@
 ---
 name: to-issues
-description: Break a plan, spec, or PRD into independently-grabbable issues on the project issue tracker using tracer-bullet vertical slices.
+description: plan、spec、または PRD を、tracer-bullet の vertical slice を使って、プロジェクトの issue tracker 上で独立して着手可能な issue に分解する。
 disable-model-invocation: true
 ---
 

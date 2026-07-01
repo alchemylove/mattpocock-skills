@@ -1,6 +1,6 @@
 ---
 name: grill-me
-description: A relentless interview to sharpen a plan or design.
+description: 計画や設計を洗練するための容赦ないインタビュー。
 disable-model-invocation: true
 ---
 

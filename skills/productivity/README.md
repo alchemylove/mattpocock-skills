@@ -1,18 +1,18 @@
-# Productivity
+# 生産性 (Productivity)
 
-General workflow tools, not code-specific.
+コードに限らない、汎用的なワークフローツール。
 
-## User-invoked
+## ユーザー起動 (User-invoked)
 
-Reachable only when you type them (`disable-model-invocation: true`).
+あなたがタイプした場合にのみ到達可能（`disable-model-invocation: true`）。
 
-- **[grill-me](./grill-me/SKILL.md)** — Get relentlessly interviewed about a plan or design until every branch of the decision tree is resolved.
-- **[handoff](./handoff/SKILL.md)** — Compact the current conversation into a handoff document so another agent can continue the work.
-- **[teach](./teach/SKILL.md)** — Teach the user a new skill or concept over multiple sessions, using the current directory as a stateful teaching workspace.
-- **[writing-great-skills](./writing-great-skills/SKILL.md)** — Reference for writing and editing skills well: the vocabulary and principles that make a skill predictable.
+- **[grill-me](./grill-me/SKILL.md)** — 計画や設計を洗練するための容赦ないインタビュー。
+- **[handoff](./handoff/SKILL.md)** — 現在の会話を、別のエージェントが引き継げるよう handoff document に圧縮する。
+- **[teach](./teach/SKILL.md)** — このワークスペース内で、ユーザーに新しい skill や概念を教える。
+- **[writing-great-skills](./writing-great-skills/SKILL.md)** — skills を上手く書き・編集するためのリファレンス — skill を予測可能にする語彙と原則。
 
-## Model-invoked
+## モデル起動 (Model-invoked)
 
-Model- or user-reachable (rich trigger phrasing so the model can reach for them).
+モデルとユーザーの両方から到達可能（モデルが自動的に使えるよう豊富なトリガーフレーズを持つ）。
 
-- **[grilling](./grilling/SKILL.md)** — Interview the user relentlessly about a plan or design until every branch of the decision tree is resolved.
+- **[grilling](./grilling/SKILL.md)** — 決定木のあらゆる分岐が解消されるまで、計画や設計についてユーザーを容赦なくインタビューする。`grill-me` と `grill-with-docs` の背後にある再利用可能なループ。

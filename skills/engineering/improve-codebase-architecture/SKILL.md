@@ -1,6 +1,6 @@
 ---
 name: improve-codebase-architecture
-description: Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.
+description: codebase をスキャンして deepening の機会を見つけ、視覚的な HTML レポートとして提示し、選んだ箇所について grilling を進める。
 disable-model-invocation: true
 ---
 

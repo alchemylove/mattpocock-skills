@@ -1,6 +1,6 @@
 ---
 name: implement
-description: "Implement a piece of work based on a PRD or set of issues."
+description: "PRD または一連の issue に基づいて、一区切りの作業を実装する。"
 disable-model-invocation: true
 ---
 

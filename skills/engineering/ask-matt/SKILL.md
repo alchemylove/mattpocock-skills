@@ -1,6 +1,6 @@
 ---
 name: ask-matt
-description: Ask which skill or flow fits your situation. A router over the user-invoked skills in this repo.
+description: 状況に合う skill やフローを尋ねる。このリポジトリのユーザー起動 skills を束ねるルーター。
 disable-model-invocation: true
 ---
 
