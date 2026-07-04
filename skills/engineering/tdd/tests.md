@@ -60,7 +60,7 @@ test("createUser makes user retrievable", async () => {
 });
 ```
 
-**Tautological tests**: Expected value restates the implementation, so the test passes by construction.
+**Tautological tests**: 期待値が implementation を言い換えているだけなので、テストは構造上必ず通ってしまう。
 
 ```typescript
 // BAD: Expected value is recomputed the way the code computes it

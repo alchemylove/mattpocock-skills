@@ -16,7 +16,7 @@ H1 は存在しない — 公開されたページはタイトルを slug から
 
 <page-template>
 
-Quickstart:
+クイックスタート (Quickstart):
 
 ```bash
 npx skills add mattpocock/skills --skill=<name>
@@ -28,38 +28,38 @@ npx skills update <name>
 
 [Source](https://github.com/mattpocock/skills/tree/main/skills/<bucket>/<name>)
 
-## What it does
+## 何をするか (What it does)
 
-One or two plain-language paragraphs. Lead with the skill's one-sentence job, then state the **defining constraint** — the single fact that makes this skill behave differently from the obvious default (for `to-prd`: it does not interview the user again, it synthesises what is already known). Write it as a plain declarative sentence — never a labelled aside like "The defining constraint:" or "The key thing:"; the formula reads as filler. This line is the most valuable on the page; never omit it.
+1〜2段落の平易な文章。まず skill の一文仕事を述べ、次に **defining constraint**（この skill を自明なデフォルトとは異なる振る舞いにする唯一の事実。`to-prd` なら: ユーザーへ再度インタビューせず、すでに分かっていることを統合する）を述べる。「The defining constraint:」や「The key thing:」のようなラベル付きの傍注ではなく、平易な宣言文として書くこと — その定型句は filler にしか読めない。このページで最も価値のある行なので、決して省略しない。
 
-## When to reach for it
+## いつ使うか (When to reach for it)
 
-How and when you reach for the skill — two beats, both effectively always present:
+skill をどう・いつ使うか — 事実上常に存在する2つの beat:
 
-- **Invocation mode.** State whether you type it or the agent fires it. A user-invoked skill: "You invoke this by typing `/<name>` — the agent won't reach for it on its own." A model-invoked skill: "Type `/<name>`, or the agent reaches for it automatically when a task fits."
-- **Trigger boundary.** The index entry: "reach for this when …". Where the skill is confusable with a sibling, add the other half — "for <X> instead, use [<sibling>](https://aihero.dev/skills-<sibling>)."
+- **Invocation mode。** タイプするのか、エージェントが発火するのかを述べる。user-invoked skill の場合: 「`/<name>` とタイプして呼び出す — エージェントが自力でこれを使うことはない。」 model-invoked skill の場合: 「`/<name>` とタイプするか、タスクに合えばエージェントが自動的に使う。」
+- **Trigger boundary。** インデックスの項目: 「〜のときに使う」。兄弟 skill と混同しやすい場合は、もう半分も加える — 「<X> にはこちらではなく [<sibling>](https://aihero.dev/skills-<sibling>) を使う。」
 
-## Prerequisites
+## 前提条件 (Prerequisites)
 
-Optional — include only when the skill needs something in place to be functional; omit the heading entirely otherwise. Covers: a **workspace it writes into** (a stateful skill like `grill-with-docs` writes `CONTEXT.md` and ADRs; `teach` builds a whole directory — say what it writes and where), **prior setup** (`triage`/`to-prd`/`to-issues` need `setup-matt-pocock-skills` to have configured an issue tracker), or **repo-specific tooling**. A stateless skill that runs anywhere has no prerequisites — drop the section.
+任意 — skill が機能するために何かが事前に整っている必要がある場合のみ含め、そうでなければ見出しごと省略する。カバーする内容: **書き込み先の workspace**（`grill-with-docs` のような stateful skill は `CONTEXT.md` と ADR を書く。`teach` はディレクトリ全体を構築する — 何をどこに書くかを述べる）、**事前セットアップ**（`triage`/`to-prd`/`to-issues` は `setup-matt-pocock-skills` が issue tracker を設定済みであることを必要とする）、または **repo 固有のツール**。どこでも動く stateless な skill には前提条件がない — そのセクションは削除する。
 
-## <free-form middle>
+## <自由形式の中間部>
 
-One to three short sections, in the skill's *own vocabulary*, that make it click — choose whatever headings fit the skill: the loop it runs, the artifact it produces, the fork it makes, the one anti-pattern it kills. There is no prescribed heading; the skills are too heterogeneous for one.
+skill *固有の語彙*で書く1〜3個の短いセクション。腑に落ちるようにする — その skill に合う見出しを自由に選ぶ: 実行する loop、生み出す artifact、作る fork、潰す唯一の anti-pattern。決まった見出しはない。skill は一つの型に収めるには多様すぎる。
 
-The single non-negotiable: **surface the skill's leading word / defining idea** — `tight` feedback loop, `deep module`, throwaway-code-answers-a-question, red-green. It pays off twice: the reader learns what the skill *is*, and learns the word they'll later think with to *reach for* it.
+唯一譲れないこと: **skill の leading word / defining idea を浮き上がらせる** — `tight` feedback loop、`deep module`、throwaway-code-answers-a-question、red-green など。これは二重に効く: 読者は skill が *何であるか* を学び、後で *使う* ときに考える手がかりとなる語を学ぶ。
 
-## It's working if
+## うまく機能しているかの目安 (It's working if)
 
-Optional. A short, checkable list of the observable signals that tell the reader the skill is actually doing its job — what they should see when it fires, and by absence when it hasn't. Include it when a skill has crisp tells (e.g. `to-prd` writes without re-interviewing you; a leading word reappearing in the trace); omit the heading when the signals are vague. A few bullets, no more.
+任意。skill が実際に仕事をしていることを読者に伝える、観察可能なシグナルの短いチェックリスト — 発火したときに何が見えるべきか、発火していないときはそれが無いこと。skill に明確な tell がある場合（例: `to-prd` は再インタビューせずに書き込む。trace の中に leading word が再登場する）に含め、シグナルが曖昧な場合は見出しごと省略する。数個の箇条書きにとどめる。
 
-## Where it fits
+## 全体の中での位置づけ (Where it fits)
 
-Always present. Situate the skill in the system in a sentence or two:
+常に存在する。skill をシステムの中に一〜二文で位置づける:
 
-- **Role.** Name it: a **chain step** (`grill-with-docs → to-prd → to-issues → implement → code-review`), a **run-once setup** (`setup-matt-pocock-skills`), **periodic maintenance** (`improve-codebase-architecture`, "every few days"), or a **reach-for-it-anytime standalone** (`diagnosing-bugs`, `prototype`, `handoff`). A standalone's map is one honest sentence — far better than omitting the section.
-- **Neighbours.** The one or two siblings that matter, each with a because-clause, linked absolutely.
-- **The map.** Point to [ask-matt](https://aihero.dev/skills-ask-matt), the router over the whole set, so this page stays a node and never has to redraw the graph.
+- **Role。** 名指しする: **chain step**（`grill-with-docs → to-prd → to-issues → implement → code-review`）、**run-once setup**（`setup-matt-pocock-skills`）、**periodic maintenance**（`improve-codebase-architecture`、「数日に一度」）、または **reach-for-it-anytime standalone**（`diagnosing-bugs`、`prototype`、`handoff`）のいずれか。standalone の位置づけは正直な一文で十分 — セクションを省略するよりずっとよい。
+- **Neighbours。** 重要な1〜2個の兄弟 skill を、それぞれ because 節付きで、絶対パスでリンクする。
+- **The map。** [ask-matt](https://aihero.dev/skills-ask-matt)（skill 全体を束ねる router）を指し示し、このページが node であり続け、グラフを描き直さずに済むようにする。
 
 </page-template>
 

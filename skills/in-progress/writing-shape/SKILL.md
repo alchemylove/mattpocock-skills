@@ -40,15 +40,15 @@ grounded になったものの running list を保つ。「読者は次に何を
 
 ## 会話の雰囲気 (Conversational feel)
 
-これは逆転した grilling session。ideation では "what are you actually noticing?" だった。ここでは "what is this article actually arguing, and in what order does the reader need to hear it?" と問う。押し返す。弱い transition を見逃さない。段落がその場を稼いでいなければ切る。
+これは逆転した grilling session。ideation では「実際に何に気づいているか?」だった。ここでは「この記事は実際に何を主張していて、読者はどの順番でそれを聞く必要があるか?」と問う。押し返す。弱い transition を見逃さない。段落がその場を稼いでいなければ切る。
 
 使い続ける具体的な move:
 
-- "What does this paragraph do for the reader that the previous one didn't?"
-- "If I cut this, what breaks?"
-- "Is this prose, or should it be a list? Why prose?"
-- "This sentence is doing two jobs — split it or pick one."
-- "The opening promised X. We've drifted to Y. Either re-thread it or change the opening."
+- 「この段落は、前の段落がしなかった何を読者にもたらすか?」
+- 「これを切ったら何が壊れるか?」
+- 「これは prose か、それともリストにすべきか? なぜ prose なのか?」
+- 「この文は2つの仕事をしている — 分けるか、どちらか一方を選べ。」
+- 「opening は X を約束していた。我々は Y にドリフトしている。再度糸を通すか、opening を変えるかだ。」
 
 ## pile からの引き出し (Pulling from the pile)
 

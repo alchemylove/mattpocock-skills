@@ -1,6 +1,6 @@
 ---
 name: qa
-description: Interactive QA session where user reports bugs or issues conversationally, and the agent files GitHub issues. Explores the codebase in the background for context and domain language. Use when user wants to report bugs, do QA, file issues conversationally, or mentions "QA session".
+description: ユーザーが会話形式でバグや issue を報告し、agent が GitHub issue を作成する対話的な QA セッション。文脈と domain language のためにバックグラウンドで codebase を探索する。ユーザーがバグを報告したい、QA を行いたい、会話的に issue を作成したい、または「QA session」に言及したときに使う。
 ---
 
 # QA セッション (QA Session)
@@ -123,7 +123,7 @@ Or "None — can start immediately" if no blockers.
 - **再現手順は必須** — 特定できなければユーザーに確認
 - **簡潔に** — developer が 30 秒で読めること
 
-作成後、すべての issue URL (blocking 関係の要約付き) を表示し確認: "Next issue, or are we done?"
+作成後、すべての issue URL (blocking 関係の要約付き) を表示し確認: 「次の issue に進むか、それともこれで終わりか?」
 
 ### 5. セッションの継続 (Continue the session)
 

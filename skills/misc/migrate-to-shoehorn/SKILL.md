@@ -98,9 +98,9 @@ getUser(fromAny({ body: { id: 123 } }));
 
 | Function        | Use case                                           |
 | --------------- | -------------------------------------------------- |
-| `fromPartial()` | Pass partial data that still type-checks           |
-| `fromAny()`     | Pass intentionally wrong data (keeps autocomplete) |
-| `fromExact()`   | Force full object (swap with fromPartial later)    |
+| `fromPartial()` | type-check は通るが部分的なデータを渡す           |
+| `fromAny()`     | 意図的に誤ったデータを渡す（autocomplete は維持される） |
+| `fromExact()`   | 完全な object を強制する（後で fromPartial に差し替え）    |
 
 ## ワークフロー (Workflow)
 

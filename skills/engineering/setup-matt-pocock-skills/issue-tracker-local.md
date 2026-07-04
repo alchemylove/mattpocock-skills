@@ -1,4 +1,4 @@
-# Issue tracker: Local Markdown (Issue tracker: Local Markdown)
+# Issue tracker: Local Markdown
 
 この repo の issues と PRD は `.scratch/` 内の markdown ファイルとして存在する。
 
@@ -16,15 +16,15 @@
 
 ## skill が "fetch the relevant ticket" と言うとき
 
-Read the file at the referenced path. The user will normally pass the path or the issue number directly.
+参照されたパスのファイルを読む。ユーザーは通常、パスまたは issue 番号を直接渡す。
 
-## Wayfinding operations
+## Wayfinding 操作 (Wayfinding operations)
 
-Used by `/wayfinder`. The **map** is a file with one **child** file per ticket.
+`/wayfinder` が使用する。**map** は ticket ごとに1つの **child** ファイルを持つファイルである。
 
-- **Map**: `.scratch/<effort>/map.md` — the Notes / Decisions-so-far / Fog body.
-- **Child ticket**: `.scratch/<effort>/issues/NN-<slug>.md`, numbered from `01`, with the question in the body. A `Type:` line records the ticket type (`research`/`prototype`/`grilling`/`task`); a `Status:` line records `claimed`/`resolved`.
-- **Blocking**: a `Blocked by: NN, NN` line near the top. A ticket is unblocked when every file it lists is `resolved`.
-- **Frontier**: scan `.scratch/<effort>/issues/` for files that are open, unblocked, and unclaimed; first by number wins.
-- **Claim**: set `Status: claimed` and save before any work.
-- **Resolve**: append the answer under an `## Answer` heading, set `Status: resolved`, then append a context pointer (gist + link) to the map's Decisions-so-far in `map.md`.
+- **Map**: `.scratch/<effort>/map.md` — Notes / Decisions-so-far / Fog の本体。
+- **Child ticket**: `.scratch/<effort>/issues/NN-<slug>.md`、`01` から採番し、本文に質問を記載する。`Type:` 行に ticket の種類（`research`/`prototype`/`grilling`/`task`）を、`Status:` 行に `claimed`/`resolved` を記録する。
+- **Blocking**: 先頭付近の `Blocked by: NN, NN` 行。列挙されたすべてのファイルが `resolved` になるとブロック解除される。
+- **Frontier**: `.scratch/<effort>/issues/` を走査し、open・unblocked・unclaimed なファイルを探す。番号の早いものが優先される。
+- **Claim**: 作業を始める前に `Status: claimed` を設定して保存する。
+- **Resolve**: `## Answer` 見出しの下に回答を追記し、`Status: resolved` を設定してから、map の `map.md` 内 Decisions-so-far に context pointer（gist + link）を追記する。

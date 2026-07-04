@@ -1,8 +1,8 @@
 # GLOSSARY.md Format
 
-`GLOSSARY.md` is the canonical language for this teaching workspace. All explainers, exercises, and learning records should adhere to its terminology. Building it is itself part of learning: compressing a concept into a tight definition is evidence the user understands it.
+`GLOSSARY.md` は、この teaching workspace における canonical な言語である。すべての explainer・演習・learning record はその用語に従うべきである。これを構築すること自体が学習の一部である: 概念を引き締まった定義に圧縮できることは、ユーザーがそれを理解している証拠である。
 
-## Structure
+## 構造 (Structure)
 
 ```md
 # {Topic} Glossary
@@ -24,12 +24,12 @@ A 1–10 self-rating of how hard a set felt, where 10 is failure and 8 means two
 _Avoid_: Effort score, intensity rating
 ```
 
-## Rules
+## ルール (Rules)
 
-- **Add a term only when the user understands it.** The glossary is a record of compressed knowledge, not a dictionary the user reads to learn. If the user has just been introduced to a concept, wait until they can use it correctly before promoting it here.
-- **Be opinionated.** When several words exist for the same concept, pick the best one and list the rest as aliases to avoid. This is how language compresses.
-- **Keep definitions tight.** One or two sentences. Define what the term IS, not what it does or how to do it.
-- **Use the glossary's own terms inside definitions.** Once a term is in the glossary, prefer it everywhere — including inside other definitions. This is what makes complex terms easier to grasp later.
-- **Group under subheadings** when natural clusters emerge (e.g. `## Anatomy`, `## Programming`). A flat list is fine when terms cohere.
-- **Flag ambiguities explicitly.** If a term is used loosely in the wider field, note the resolution: "In this workspace, 'set' always means a working set — warm-ups are tracked separately."
-- **Revise as understanding deepens.** A definition the user wrote in week one may be wrong by week six. Update in place; do not leave stale entries.
+- **ユーザーが理解した用語だけを追加する。** glossary は圧縮された知識の記録であり、ユーザーが学ぶために読む辞書ではない。ユーザーが概念に触れたばかりなら、正しく使えるようになるまでここに昇格させるのを待つ。
+- **意見を持つ。** 同じ概念に複数の語がある場合、最良のものを選び、残りは避けるべき別名として列挙する。これが言語を圧縮する方法である。
+- **定義を引き締める。** 1〜2文にとどめる。その用語が何を _する_ か・どう _行う_ かではなく、何で _ある_ かを定義する。
+- **glossary 自身の用語を定義の中で使う。** 一度 glossary に入った用語は、他の定義の中も含めて、あらゆる場所で優先的に使う。これが後で複雑な用語を掴みやすくする。
+- 自然なまとまりが生まれたら**サブ見出しでグループ化する**（例: `## Anatomy`、`## Programming`）。用語がまとまっているならフラットなリストでも構わない。
+- **曖昧さを明示的にフラグする。** ある用語がより広い分野で緩く使われている場合、解決策を記す: 「この workspace では、'set' は常に working set を意味する — ウォームアップは別途記録する。」
+- **理解が深まるにつれて改訂する。** ユーザーが1週目に書いた定義は、6週目には誤りになっているかもしれない。その場で更新し、古びたエントリを残さない。
