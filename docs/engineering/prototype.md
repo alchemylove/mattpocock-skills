@@ -1,4 +1,4 @@
-Quickstart:
+クイックスタート (Quickstart):
 
 ```bash
 npx skills add mattpocock/skills --skill=prototype
@@ -10,31 +10,31 @@ npx skills update prototype
 
 [Source](https://github.com/mattpocock/skills/tree/main/skills/engineering/prototype)
 
-## What it does
+## 何をするか (What it does)
 
-`prototype` builds a small, disposable program whose only job is to answer one design question — does this state model feel right, or what should this UI look like.
+`prototype` は、たった1つの設計上の問い — この状態モデルはしっくりくるか、あるいはこの UI はどんな見た目にすべきか — に答えることだけを目的とした、小さな使い捨てのプログラムを作ります。
 
-The code is **throwaway from day one**, and marked as such. It carries no tests, no error handling beyond what makes it run, no abstractions, and no persistence. The point is to learn something fast and then delete it — so the moment you start hardening it, you've stopped prototyping.
+コードは**最初から使い捨て**であり、そう明記されます。テストは持たず、動かすために最低限必要な以上のエラーハンドリングも、抽象化も、永続化もありません。狙いは何かを素早く学び、それから削除することです — 硬化させ始めた瞬間、あなたはプロトタイピングをやめたことになります。
 
-## When to reach for it
+## いつ使うか (When to reach for it)
 
-Type `/prototype`, or the agent reaches for it automatically when a task fits.
+`/prototype` と入力するか、タスクに合致すればエージェントが自動的に使います。
 
-Reach for it when you have a design question that's hard to settle on paper — a state machine with cases you can't hold in your head, or a screen you can't picture until you see a few versions side by side. If instead something already built is misbehaving and you need to find out why, use [diagnosing-bugs](https://aihero.dev/skills-diagnosing-bugs); prototyping explores what to build, not why the built thing is broken.
+紙の上では決着がつきにくい設計上の問い — 頭の中に収まらないほどケースの多い状態機械や、いくつかのバージョンを並べて見るまで思い描けない画面 — があるときに使ってください。すでに構築済みの何かが誤動作していて、その理由を突き止める必要があるなら、代わりに [diagnosing-bugs](https://aihero.dev/skills-diagnosing-bugs) を使ってください。prototyping は何を作るべきかを探るものであり、作ったものがなぜ壊れているかを探るものではありません。
 
-## Two branches
+## 2つの分岐
 
-The question decides the shape, and there are two shapes:
+問いが形を決め、形は2つあります。
 
-- **"Does this logic / state model feel right?"** — a tiny interactive terminal app that pushes the state machine through the awkward cases, printing the full state after every action so you can watch what changes.
-- **"What should this look like?"** — several radically different UI variations on one route, switchable from a floating bar, so you compare real renders instead of imagining them.
+- **「このロジック / 状態モデルはしっくりくるか？」** — 状態機械を厄介なケースへと押し進める小さな対話式のターミナルアプリで、各アクションの後に完全な状態を出力し、何が変化するかを見られるようにします。
+- **「これはどんな見た目にすべきか？」** — 1つのルートに対する複数の全く異なる UI バリエーションを用意し、フローティングバーから切り替えられるようにすることで、想像するのではなく実際のレンダリング結果を比較できます。
 
-Picking the wrong branch wastes the whole prototype, so the question comes first. Both branches keep state in memory, run from one command, and surface the full state on every step.
+間違った分岐を選ぶとプロトタイプ全体が無駄になるため、問いが最初に来ます。どちらの分岐も、状態をメモリ内に保持し、1つのコマンドから実行され、各ステップで完全な状態を表示します。
 
-## The answer is the artifact
+## 答えこそが成果物
 
-The code is disposable; the **answer** is the only thing worth keeping. When the prototype has settled its question, capture the verdict somewhere durable — a commit message, an ADR, an issue, or a `NOTES.md` next to it — alongside the question it answered, then delete or absorb the code. A prototype left rotting in the repo has outlived its purpose.
+コードは使い捨てですが、**答え**だけが残す価値のあるものです。プロトタイプがその問いに決着をつけたら、その判定を何か永続的な場所 — コミットメッセージ、ADR、issue、あるいは隣に置く `NOTES.md` — に、それが答えた問いとともに記録し、それからコードを削除するか吸収してください。リポジトリの中で朽ちていくプロトタイプは、その目的をすでに終えています。
 
-## Where it fits
+## 全体の中での位置づけ (Where it fits)
 
-`prototype` is a reach-for-it-anytime standalone: you drop into it to resolve a design question, then drop back out. Its answer often feeds the next step — a validated state model or UI direction becomes settled input for [to-prd](https://aihero.dev/skills-to-prd) to write up, or an architectural decision worth recording via [domain-modeling](https://aihero.dev/skills-domain-modeling). When you're unsure which skill or flow fits, [ask-matt](https://aihero.dev/skills-ask-matt) routes you.
+`prototype` はいつでも使える standalone です — 設計上の問いを解決するために飛び込み、それから抜け出します。その答えはしばしば次のステップの材料になります — 検証済みの状態モデルや UI の方向性は [to-prd](https://aihero.dev/skills-to-prd) が書き上げるための確定した入力になり、あるいはアーキテクチャ上の決定は [domain-modeling](https://aihero.dev/skills-domain-modeling) を通じて記録する価値があるものになります。どの skill や flow が合うか迷ったときは、[ask-matt](https://aihero.dev/skills-ask-matt) が導いてくれます。

@@ -1,4 +1,4 @@
-Quickstart:
+クイックスタート (Quickstart):
 
 ```bash
 npx skills add mattpocock/skills --skill=handoff
@@ -10,27 +10,27 @@ npx skills update handoff
 
 [Source](https://github.com/mattpocock/skills/tree/main/skills/productivity/handoff)
 
-## What it does
+## 概要 (What it does)
 
-`handoff` compacts the current conversation into a **handoff document** — a single write-up a fresh agent can read to pick up the work where you left off.
+`handoff` は、現在の会話を **ハンドオフドキュメント (handoff document)** に圧縮します — 新しいエージェントがそれを読めば、あなたがやめた場所から作業を引き継げるような1つの文書です。
 
-It does **not** re-state what already lives elsewhere. Anything captured in a PRD, plan, ADR, issue, commit, or diff is referenced by path or URL, never copied. The document carries only the live thread — what you were doing, why, and what's next — and it's saved to your OS's temporary directory, not into the workspace, so it never becomes another artifact to maintain.
+どこか別の場所に既にある内容を書き直すことは **しません**。PRD、プラン、ADR、issue、コミット、diff に記録されている内容は、コピーではなくパスや URL で参照されます。この文書が運ぶのは進行中のスレッドだけです — 何をしていたか、なぜそうしていたか、次に何をするか — そして OS の一時ディレクトリに保存され、ワークスペースには保存されません。つまり、維持すべきもう1つの成果物にはなりません。
 
-## When to reach for it
+## 使いどころ (When to reach for it)
 
-You invoke this by typing `/handoff` — the agent won't reach for it on its own. Pass a note about what the next session is for and the document is tailored to it.
+`/handoff` と入力して呼び出します — エージェントが自発的に使うことはありません。次のセッションが何のためのものかというメモを渡せば、それに合わせて文書が調整されます。
 
-Reach for this when a conversation has gone long enough that its context is at risk — you're near a context limit, wrapping for the day, or deliberately handing the work to another agent — and you want the thread preserved without dragging the whole transcript along.
+会話が長くなりすぎてコンテキストが危うくなったとき — コンテキストの上限に近づいている、その日の作業を切り上げる、意図的に別のエージェントに作業を引き継ぐ、といった場面で、トランスクリプト全体を引きずることなくスレッドを保存したいときに使いましょう。
 
-## What the document carries
+## ドキュメントに含まれるもの
 
-- **The live thread** — what's in flight and why, in the conversation's own terms, minus anything already written down elsewhere.
-- **Suggested skills** — a pointer to the skills the next agent should reach for to continue.
-- **References, not copies** — links and paths to the PRDs, plans, ADRs, issues, and diffs that hold the settled detail.
-- **Redacted secrets** — API keys, passwords, and PII stripped before the document is written.
+- **進行中のスレッド (live thread)** — 他の場所に既に書かれている内容を除いた、進行中の作業とその理由を、会話自身の言葉で。
+- **おすすめのスキル (suggested skills)** — 次のエージェントが作業を続けるために使うべきスキルへのポインタ。
+- **参照であってコピーではない** — 確定した詳細を保持する PRD、プラン、ADR、issue、diff へのリンクとパス。
+- **秘密情報の削除 (redacted secrets)** — API キー、パスワード、個人情報は文書化される前に取り除かれます。
 
-The idea to hold onto is **compaction**: a handoff is the conversation squeezed down to just its resumable core, so a fresh agent inherits the momentum, not the noise.
+心に留めておくべき考え方は **圧縮 (compaction)** です。ハンドオフとは、会話を再開可能な核だけに絞り込んだものであり、新しいエージェントはノイズではなく勢いを引き継ぐことになります。
 
-## Where it fits
+## 位置づけ (Where it fits)
 
-`handoff` is a reach-for-it-anytime standalone — it sits at the seam between two sessions rather than inside a build chain. It pairs naturally with the artifact-producing skills whose output it points at: [to-prd](https://aihero.dev/skills-to-prd), because a finished PRD is exactly the kind of settled detail a handoff references instead of repeating. When you're unsure which skill fits the moment, [ask-matt](https://aihero.dev/skills-ask-matt) routes you.
+`handoff` は、ビルドチェーンの中の1ステップというよりも、2つのセッションの継ぎ目に位置する、いつでも手に取れる単体スキルです。出力先を指す成果物生成系のスキルと自然に組み合わさります。とりわけ [to-prd](https://aihero.dev/skills-to-prd) とは相性がよく、完成した PRD はまさに、繰り返す代わりにハンドオフが参照すべき確定した詳細だからです。どのスキルがその瞬間に合うか迷ったときは、[ask-matt](https://aihero.dev/skills-ask-matt) が案内します。

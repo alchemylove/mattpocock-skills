@@ -1,4 +1,4 @@
-Quickstart:
+クイックスタート (Quickstart):
 
 ```bash
 npx skills add mattpocock/skills --skill=resolving-merge-conflicts
@@ -10,31 +10,31 @@ npx skills update resolving-merge-conflicts
 
 [Source](https://github.com/mattpocock/skills/tree/main/skills/engineering/resolving-merge-conflicts)
 
-## What it does
+## 何をするか (What it does)
 
-`resolving-merge-conflicts` works through an in-progress git merge or rebase conflict, hunk by hunk, and finishes the operation — resolved, checked, and committed.
+`resolving-merge-conflicts` は進行中の git merge や rebase の衝突を hunk ごとに処理し、その操作を完了させます — 解決し、確認し、コミットまで終えます。
 
-It resolves by **intent**, not by text. Before touching a hunk it traces each side back to its **primary source** — the commit message, the PR, the original issue — to understand why the change was made, then preserves both intents where they're compatible. It never invents new behaviour to paper over a clash, and it never reaches for `--abort`: the merge always gets finished.
+これは**テキストではなく意図**によって解決します。hunk に触れる前に、それぞれの側を**primary source**（コミットメッセージ、PR、元の issue）まで遡り、なぜその変更がなされたのかを理解したうえで、両者の意図が両立する場合はそれを保持します。衝突を覆い隠すために新しい振る舞いを発明することは決してなく、`--abort` に頼ることも決してありません — merge は必ず完了させます。
 
-## When to reach for it
+## いつ使うか (When to reach for it)
 
-Type `/resolving-merge-conflicts`, or the agent reaches for it automatically when a task fits.
+`/resolving-merge-conflicts` と入力するか、タスクに合致すればエージェントが自動的に使います。
 
-Reach for this when you're mid-merge or mid-rebase and git has stopped on conflicts it can't resolve itself. It's for the conflict in front of you — not for planning the merge or for debugging behaviour that broke afterwards. If the merge is done but something's now failing for reasons you can't see, use [diagnosing-bugs](https://aihero.dev/skills-diagnosing-bugs) instead.
+merge や rebase の途中で、git が自力で解決できない衝突で止まっているときに使ってください。これは目の前にある衝突のためのものであり、merge を計画するためのものでも、その後に壊れた振る舞いをデバッグするためのものでもありません。merge は完了したが、何かが理由の分からない形で失敗し始めた場合は、代わりに [diagnosing-bugs](https://aihero.dev/skills-diagnosing-bugs) を使ってください。
 
-## Resolving by intent
+## 意図で解決する
 
-The trap in a conflict is treating it as a text problem — picking "ours" or "theirs" to make the markers go away. This skill treats it as an **intent** problem. Each side of a hunk exists because someone wanted something; the resolution has to honour both wants where it can, and where they're genuinely incompatible, pick the one that matches the merge's stated goal and note the trade-off out loud.
+衝突におけるよくある罠は、それをテキストの問題として扱うことです — マーカーを消すために「ours」か「theirs」かを選ぶだけ、というやり方です。この skill はそれを**意図**の問題として扱います。hunk の両側は、誰かが何かを望んだからこそ存在します。解決は可能な限り両方の望みを尊重しなければならず、それが本当に両立しない場合は、merge の掲げる目標に合う方を選び、そのトレードオフを声に出して書き留めます。
 
-That's why the primary sources matter. You can't preserve an intent you haven't read, so the work starts in the history — commits, PRs, tickets — not in the diff.
+だからこそ primary source が重要なのです。読んでいない意図を保持することはできません。作業は diff の中からではなく、履歴 — コミット、PR、チケット — から始まります。
 
-## It's working if
+## うまく機能しているかの目安 (It's working if)
 
-- Each resolved hunk keeps both sides' behaviour, or names the trade-off where it couldn't.
-- No new behaviour appears that wasn't on either branch.
-- The project's own checks — typecheck, tests, format — are found and run green before the commit.
-- The merge or rebase is carried all the way to a finished commit, never aborted.
+- 解決された各 hunk が両側の振る舞いを保持している、あるいは保持できなかった場合はそのトレードオフを明示している。
+- どちらのブランチにもなかった新しい振る舞いが現れていない。
+- プロジェクト自身のチェック — 型チェック、テスト、フォーマット — が見つかり、コミット前に green で通っている。
+- merge や rebase が中断されることなく、最後まで完了したコミットに至っている。
 
-## Where it fits
+## 全体の中での位置づけ (Where it fits)
 
-A reach-for-it-anytime standalone: you invoke it at the moment a merge or rebase stalls, and it hands you back a clean, committed tree. Its natural neighbour is [diagnosing-bugs](https://aihero.dev/skills-diagnosing-bugs), because a merge that resolves cleanly but misbehaves afterwards is a diagnosis problem, not a conflict one. When you're unsure which skill fits, [ask-matt](https://aihero.dev/skills-ask-matt) routes you.
+いつでも使える standalone です — merge や rebase が行き詰まった瞬間に呼び出し、クリーンでコミット済みのツリーを返してくれます。自然な隣人は [diagnosing-bugs](https://aihero.dev/skills-diagnosing-bugs) です。merge 自体はきれいに解決したのにその後誤動作するなら、それは衝突の問題ではなく診断の問題だからです。どの skill が合うか迷ったときは、[ask-matt](https://aihero.dev/skills-ask-matt) が導いてくれます。

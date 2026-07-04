@@ -1,4 +1,4 @@
-Quickstart:
+クイックスタート (Quickstart):
 
 ```bash
 npx skills add mattpocock/skills --skill=grilling
@@ -10,28 +10,28 @@ npx skills update grilling
 
 [Source](https://github.com/mattpocock/skills/tree/main/skills/productivity/grilling)
 
-## What it does
+## 概要 (What it does)
 
-`grilling` is the relentless interview that stress-tests a plan or design before you build it. It walks down the design tree branch by branch, resolving the dependencies between decisions one at a time until you and the agent share the same understanding.
+`grilling` は、ビルドに入る前にプランや設計をストレステストする、容赦のないインタビューです。設計ツリー (design tree) を枝ごとに降りていき、決定同士の依存関係を1つずつ解決して、あなたとエージェントが同じ理解を共有するまで続きます。
 
-It asks **one question at a time** and waits for your answer before the next — never a bulk list, which is bewildering. Each question comes with the agent's own recommended answer, and any question the codebase can settle it explores instead of asking you. It won't start enacting the plan until you confirm the shared understanding has been reached.
+一度に **1つの質問だけ** を投げかけ、あなたの回答を待ってから次に進みます — まとめてのリストは混乱を招くので決して行いません。それぞれの質問にはエージェント自身のおすすめの回答が添えられ、コードベースで解決できる質問はあなたに尋ねる代わりに自ら調べます。共通理解に達したとあなたが確認するまで、プランの実行には入りません。
 
-## When to reach for it
+## 使いどころ (When to reach for it)
 
-Type `/grilling`, or the agent reaches for it automatically when a task fits — this is the underlying primitive, not a user-only entry point.
+`/grilling` と入力するか、タスクに合致すればエージェントが自動的に使います — これはユーザー専用の入口ではなく、根底にあるプリミティブです。
 
-Reach for it when a plan or design still has soft spots and you want them surfaced before code is written. In practice you usually invoke it through one of its two wrappers rather than by name: for a plain grilling session use [grill-me](https://aihero.dev/skills-grill-me); to have the session also write ADRs and a glossary as it goes, use [grill-with-docs](https://aihero.dev/skills-grill-with-docs).
+プランや設計にまだ弱い部分があり、コードを書く前にそれを表に出したいときに使いましょう。実際にはこの名前で直接呼び出すよりも、2つのラッパーのどちらかを通して使うことがほとんどです。普通の grilling セッションには [grill-me](https://aihero.dev/skills-grill-me) を、セッション中に ADR とグロッサリーも書き残したい場合は [grill-with-docs](https://aihero.dev/skills-grill-with-docs) を使ってください。
 
-## The design tree
+## 設計ツリー (design tree)
 
-The mental model is a **design tree**: every plan branches into decisions, and decisions depend on each other. `grilling` descends that tree one node at a time, so an early answer can reshape which questions come next. That is why the questions arrive singly and in dependency order — a firehose of parallel questions loses the structure that makes the interview converge on a shared understanding.
+ここでのメンタルモデルは **設計ツリー (design tree)** です。あらゆるプランは決定へと枝分かれし、決定同士は互いに依存し合っています。`grilling` はそのツリーを一度に1ノードずつ降りていくので、早い段階での答えが後続の質問の内容を変えることがあります。質問が1つずつ、かつ依存関係の順序で届くのはそのためです — 並行した質問の奔流は、インタビューを共通理解へ収束させる構造を失わせてしまいます。
 
-## Pulled out on purpose
+## 意図的な切り出し
 
-`grilling` is the **single source of truth** for the interview technique, split out as a model-invoked **primitive** so every skill that needs an interview can reach it instead of reinventing one. [grill-me](https://aihero.dev/skills-grill-me) and [grill-with-docs](https://aihero.dev/skills-grill-with-docs) are its two user-invoked front doors, but [improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) and [triage](https://aihero.dev/skills-triage) also lean on it to pressure-test their own decisions.
+`grilling` はインタビュー手法の **唯一の正典 (single source of truth)** であり、インタビューを必要とするあらゆるスキルがそれぞれ車輪の再発明をするのではなく参照できるように、モデル起動 (Model-invoked) の **プリミティブ (primitive)** として切り出されています。[grill-me](https://aihero.dev/skills-grill-me) と [grill-with-docs](https://aihero.dev/skills-grill-with-docs) はそのユーザー起動 (User-invoked) の2つの入口ですが、[improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) と [triage](https://aihero.dev/skills-triage) も自らの判断を検証するためにこれに頼っています。
 
-Keeping the technique in one place means you can also reach for it directly when you just want the interview — without the ADR-writing or ticket-shaping that its wrappers add on top.
+この手法を一箇所にまとめておくことで、ADR の作成やチケットの整形を伴わずに、純粋にインタビューだけが欲しいときにも直接呼び出せるようになります。
 
-## Where it fits
+## 位置づけ (Where it fits)
 
-`grilling` is the interview **primitive** under the main build chain: [grill-with-docs](https://aihero.dev/skills-grill-with-docs) runs it to sharpen context before [to-prd](https://aihero.dev/skills-to-prd) writes the spec. When you're unsure which entry point fits, [ask-matt](https://aihero.dev/skills-ask-matt) routes you.
+`grilling` はメインのビルドチェーンの土台となるインタビューの **プリミティブ (primitive)** です。[grill-with-docs](https://aihero.dev/skills-grill-with-docs) がこれを実行してコンテキストを研ぎ澄ませてから、[to-prd](https://aihero.dev/skills-to-prd) がスペックを書きます。どの入口が合うか迷ったときは、[ask-matt](https://aihero.dev/skills-ask-matt) が案内します。

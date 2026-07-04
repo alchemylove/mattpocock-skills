@@ -1,4 +1,4 @@
-Quickstart:
+クイックスタート (Quickstart):
 
 ```bash
 npx skills add mattpocock/skills --skill=triage
@@ -10,37 +10,37 @@ npx skills update triage
 
 [Source](https://github.com/mattpocock/skills/tree/main/skills/engineering/triage)
 
-## What it does
+## 何をするか (What it does)
 
-`triage` moves issues on your project's tracker through a small **state machine** of triage roles — categorise them, verify the claim, grill them into shape if needed, and leave a ready-for-agent brief.
+`triage` はプロジェクトの tracker 上の issue を、triage の役割からなる小さな **state machine** の中で動かします — 分類し、主張を検証し、必要なら grilling で形にし、ready-for-agent なブリーフを残します。
 
-It never labels blind. Every triaged item carries exactly one **category** role (`bug` / `enhancement`) and one **state** role (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`), and it *recommends and waits* — it tells you its category and state call with reasoning, then acts only on your direction. Before anything is promoted to `ready-for-agent`, it verifies the claim first: a bug gets reproduced, a PR gets checked out and run.
+これは決して盲目的にラベルを付けません。triage されたすべての項目は、正確に1つの **category** 役割（`bug` / `enhancement`）と1つの **state** 役割（`needs-triage`、`needs-info`、`ready-for-agent`、`ready-for-human`、`wontfix`）を持ち、これは*推奨して待つ*だけです — category と state の判断を理由とともに伝え、あなたの指示があって初めて動きます。何かが `ready-for-agent` に昇格する前に、まず主張を検証します — バグは再現され、PR はチェックアウトされて実行されます。
 
-## When to reach for it
+## いつ使うか (When to reach for it)
 
-You invoke this by typing `/triage` and describing what you want in natural language — the agent won't reach for it on its own. "Show me anything that needs my attention", "let's look at #42", "move #42 to ready-for-agent".
+これは `/triage` と入力し、自然言語で望むことを説明して呼び出します — エージェントが自発的にこれを使うことはありません。「対応が必要なものを見せて」「#42 を見てみよう」「#42 を ready-for-agent に移動して」。
 
-Reach for it when your issue tracker has raw, unevaluated reports and you want them sorted, verified, and turned into work an agent or human can pick up. To turn a settled conversation into a fresh spec instead, use [to-prd](https://aihero.dev/skills-to-prd); to split an existing PRD into tickets, use [to-issues](https://aihero.dev/skills-to-issues). `triage` is the reverse direction — it processes what's *already* landed in the tracker.
+issue tracker に生の未評価の報告があり、それらを仕分けし、検証し、エージェントや人間が着手できる作業に変えたいときに使ってください。すでにまとまった会話を新しい仕様に変えたいなら、代わりに [to-prd](https://aihero.dev/skills-to-prd) を使います。既存の PRD をチケットに分割するには [to-issues](https://aihero.dev/skills-to-issues) を使います。`triage` は逆方向です — *すでに*tracker に入っているものを処理します。
 
-## Prerequisites
+## 前提条件 (Prerequisites)
 
-`triage` reads and writes your issue tracker, so [setup-matt-pocock-skills](https://aihero.dev/skills-setup-matt-pocock-skills) must have configured the tracker and the label mapping first. The role names above are **canonical** — the actual label strings in your tracker may differ, and that mapping is what setup provides. The config also decides whether external PRs count as a request surface, and who counts as external.
+`triage` はあなたの issue tracker を読み書きするので、まず [setup-matt-pocock-skills](https://aihero.dev/skills-setup-matt-pocock-skills) が tracker とラベルのマッピングを設定している必要があります。上記の役割名は**正典**です — あなたの tracker における実際のラベル文字列は異なるかもしれず、そのマッピングは setup が提供します。この設定はまた、外部の PR を request surface として数えるかどうか、誰を外部と数えるかも決めます。
 
-## A PR is an issue with attached code
+## PR はコードが添付された Issue である
 
-Where the tracker treats external pull requests as a request surface, `triage` runs them through the *same* machine: same category roles, same states, same transitions — the states just read against the diff instead of a report. `ready-for-agent` means a brief is attached and an agent should take the next step on the code; `ready-for-human` means it's ready to merge. Discovery surfaces only external PRs, but an explicitly named PR is always triaged regardless of author.
+tracker が外部の pull request を request surface として扱う場合、`triage` はそれらを*同じ*機械にかけます — 同じ category 役割、同じ state、同じ遷移です。違いは、state が報告ではなく diff に対して読まれるだけです。`ready-for-agent` はブリーフが添付され、エージェントがコードの次のステップを取るべきであることを意味し、`ready-for-human` はマージ準備ができていることを意味します。Discovery は外部の PR しか表面化させませんが、明示的に名指しされた PR は作者に関わらず常に triage されます。
 
-## Verify before you brief
+## ブリーフを書く前に検証する
 
-The step that separates `triage` from ad-hoc labelling is verification. It reproduces the bug from the reporter's steps, or checks out the PR and runs the tests, and reports back: confirmed with a code path, failed, or insufficient detail (which is itself a strong `needs-info` signal). It also runs two codebase checks — **redundancy** (is this already implemented? then it's a `wontfix`) and **prior rejection** (does `.out-of-scope/` already say no?). A confirmed verification makes a far stronger agent brief; guessing does not.
+`triage` を場当たり的なラベル付けと区別するステップは検証です。報告者の手順からバグを再現するか、PR をチェックアウトしてテストを実行し、結果を報告します — コードパスとともに確認できた、失敗した、あるいは詳細不足（それ自体が強い `needs-info` のシグナルです）。また2つのコードベースチェックも行います — **redundancy**（これはすでに実装済みか？ ならば `wontfix`）と **prior rejection**（`.out-of-scope/` がすでに拒否していないか？）。確認済みの検証は、はるかに強いエージェント向けブリーフを作ります。推測ではそうはいきません。
 
-## It's working if
+## うまく機能しているかの目安 (It's working if)
 
-- Every item it touches ends with exactly one category role and one state role — never zero, never two conflicting states.
-- It hands you a recommendation with reasoning and waits, rather than relabelling on its own.
-- Bugs get reproduced and PRs get run before anything reaches `ready-for-agent`.
-- Every comment it posts to the tracker opens with the `> *This was generated by AI during triage.*` disclaimer.
+- 触れたすべての項目が、正確に1つの category 役割と1つの state 役割で終わる — ゼロでも、矛盾する2つでもない。
+- 理由とともに推奨を提示して待つのであって、自分でラベルを付け替えることはない。
+- 何かが `ready-for-agent` に届く前に、バグは再現され PR は実行される。
+- tracker に投稿するすべてのコメントは `> *This was generated by AI during triage.*` の免責事項で始まる。
 
-## Where it fits
+## 全体の中での位置づけ (Where it fits)
 
-`triage` is the **periodic maintenance** pass over your issue tracker — run it whenever reports pile up, to keep the queue sorted and the `ready-for-agent` column trustworthy. It sits at the front of the tracker, upstream of the build chain: the briefs it writes are what [tdd](https://aihero.dev/skills-tdd) later picks up to implement. When a request needs sharpening it leans on [grilling](https://aihero.dev/skills-grilling) and [domain-modeling](https://aihero.dev/skills-domain-modeling) to grill it into shape one question at a time. Its close neighbour is [to-prd](https://aihero.dev/skills-to-prd), which populates the tracker from a fresh conversation where `triage` processes what's already there. When you're unsure which skill or flow fits, [ask-matt](https://aihero.dev/skills-ask-matt) routes you.
+`triage` はあなたの issue tracker に対する**定期メンテナンス**パスです — 報告が溜まったらいつでも実行し、キューを整理し `ready-for-agent` 列を信頼できるものに保ちます。これは tracker の最前線、build chain の上流に位置します — ここが書くブリーフは、後で [tdd](https://aihero.dev/skills-tdd) が実装のために拾い上げるものです。要望を研ぎ澄ます必要があるときは、一度に1つずつ質問して形にするために [grilling](https://aihero.dev/skills-grilling) と [domain-modeling](https://aihero.dev/skills-domain-modeling) に頼ります。近い隣人は [to-prd](https://aihero.dev/skills-to-prd) で、こちらは新しい会話から tracker に項目を投入し、`triage` はすでにそこにあるものを処理します。どの skill や flow が合うか迷ったときは、[ask-matt](https://aihero.dev/skills-ask-matt) が導いてくれます。

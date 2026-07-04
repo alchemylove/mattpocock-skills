@@ -1,4 +1,4 @@
-Quickstart:
+クイックスタート (Quickstart):
 
 ```bash
 npx skills add mattpocock/skills --skill=research
@@ -10,20 +10,20 @@ npx skills update research
 
 [Source](https://github.com/mattpocock/skills/tree/main/skills/engineering/research)
 
-## What it does
+## 何をするか (What it does)
 
-`research` answers a question by reading the sources that own the answer and leaving a cited Markdown file behind. It works only from **primary sources** — official docs, source code, specs, first-party APIs — never a secondary write-up of them, so what it saves is traceable back to something authoritative rather than a summary of a summary.
+`research` は、答えを持つ一次情報源を読むことで疑問に答え、引用付きの Markdown ファイルを残します。これは**一次情報源**（公式ドキュメント、ソースコード、仕様、ファーストパーティの API）だけから動作し、それらについての二次的な要約には決して頼りません。そのため保存されるものは、要約のそのまた要約ではなく、権威ある何かへと遡れるものになります。
 
-## When to reach for it
+## いつ使うか (When to reach for it)
 
-Type `/research`, or the agent reaches for it automatically when a task turns into reading legwork.
+`/research` と入力するか、タスクが調べ物の作業に転じたときエージェントが自動的に使います。
 
-Reach for it when the next step is *finding something out* — how an API behaves, what a spec actually says, whether a claim holds — and you'd rather not stall your own thread doing the reading. For sharpening a plan by interview instead of by reading, use [grilling](https://aihero.dev/skills-grilling); for exploring what to build with throwaway code, use [prototype](https://aihero.dev/skills-prototype).
+次のステップが*何かを調べること* — あるAPIがどう振る舞うか、仕様が実際に何と言っているか、ある主張が成り立つかどうか — であり、自分のスレッドをその読み込み作業で止めたくないときに使ってください。読むことではなくインタビューによって計画を研ぎ澄ますには [grilling](https://aihero.dev/skills-grilling) を、使い捨てのコードで何を作るべきかを探るには [prototype](https://aihero.dev/skills-prototype) を使ってください。
 
-## Delegated legwork
+## 委任される調べ物
 
-The defining move is that the reading runs as a **background agent**. You keep working; it goes off, follows each claim back to its primary source, and drops a single cited Markdown file into wherever the repo keeps such notes. Research is legwork you delegate, not thinking you outsource — you get back a document to react to, with its sources attached.
+決定的な動きは、その読み込み作業が**バックグラウンドエージェント**として実行されることです。あなたは作業を続け、エージェントは離れたところで各主張をその一次情報源まで遡り、リポジトリがそうしたメモを置く場所に、引用付きの単一の Markdown ファイルを落とします。Research は委任する調べ物であり、外注する思考ではありません — あなたが受け取るのは、出典が添付された、反応すべき文書です。
 
-## Where it fits
+## 全体の中での位置づけ (Where it fits)
 
-A reach-for-it-anytime standalone that feeds the thinking skills: the file it produces is something to grill, plan, or design against, so it sits upstream of work like [grilling](https://aihero.dev/skills-grilling) and [to-prd](https://aihero.dev/skills-to-prd) rather than in the build chain. For the whole map, see [ask-matt](https://aihero.dev/skills-ask-matt).
+いつでも使える standalone であり、思考系の skill に材料を供給します。それが生み出すファイルは grill したり、計画したり、設計したりする対象となるものなので、[grilling](https://aihero.dev/skills-grilling) や [to-prd](https://aihero.dev/skills-to-prd) のような作業の上流に位置し、ビルドチェーンの中には入りません。全体像については [ask-matt](https://aihero.dev/skills-ask-matt) を参照してください。

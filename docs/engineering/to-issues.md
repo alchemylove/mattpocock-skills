@@ -1,4 +1,4 @@
-Quickstart:
+クイックスタート (Quickstart):
 
 ```bash
 npx skills add mattpocock/skills --skill=to-issues
@@ -10,34 +10,34 @@ npx skills update to-issues
 
 [Source](https://github.com/mattpocock/skills/tree/main/skills/engineering/to-issues)
 
-## What it does
+## 何をするか (What it does)
 
-`to-issues` breaks a plan, spec, or PRD into a set of independently-grabbable issues and publishes them to your project's issue tracker, in dependency order.
+`to-issues` は計画、仕様、あるいは PRD を、独立して着手可能な issue の集合に分解し、依存関係の順序でプロジェクトの issue tracker に公開します。
 
-Every issue is a **tracer bullet** — a thin *vertical* slice that cuts through all integration layers end-to-end (schema, API, UI, tests), never a horizontal slice of one layer. A completed slice is demoable or verifiable on its own, which is what makes the resulting tickets safe to hand to independent agents.
+すべての issue は **tracer bullet** です — すべての統合レイヤー（schema、API、UI、テスト）をエンドツーエンドで貫く薄い*垂直*スライスであり、1つのレイヤーだけの水平スライスでは決してありません。完成したスライスはそれ単体でデモ可能あるいは検証可能であり、これが結果として得られるチケットを独立したエージェントに安全に渡せるものにしています。
 
-## When to reach for it
+## いつ使うか (When to reach for it)
 
-You invoke this by typing `/to-issues` — the agent won't reach for it on its own.
+これは `/to-issues` と入力して呼び出します — エージェントが自発的にこれを使うことはありません。
 
-Reach for it once you have an agreed plan or a written spec and you want it split into tickets an agent can pick up. Point it at the conversation, or pass an existing issue reference and it fetches the body and comments first. If the change hasn't been written up as a spec yet, produce one first — for that, use [to-prd](https://aihero.dev/skills-to-prd).
+合意済みの計画や書かれた仕様があり、それをエージェントが着手できるチケットに分割したいときに使ってください。会話を指し示すか、既存の issue 参照を渡せば、まず本文とコメントを取得します。変更がまだ仕様として書かれていないなら、まずそれを作成してください — そのためには [to-prd](https://aihero.dev/skills-to-prd) を使います。
 
-## Prerequisites
+## 前提条件 (Prerequisites)
 
-`to-issues` publishes into your issue tracker, so [setup-matt-pocock-skills](https://aihero.dev/skills-setup-matt-pocock-skills) must have configured the tracker and its triage label vocabulary for this repo first. It applies the ready-for-agent triage label itself as it publishes.
+`to-issues` はあなたの issue tracker に公開するので、まず [setup-matt-pocock-skills](https://aihero.dev/skills-setup-matt-pocock-skills) がこのリポジトリの tracker と triage ラベルの語彙を設定している必要があります。公開時に ready-for-agent の triage ラベルを自身で適用します。
 
-## Vertical slices, not horizontal ones
+## 水平スライスではなく垂直スライス
 
-The whole skill turns on one distinction. A **horizontal** slice ships one layer of the change — all the schema, or all the API — and nothing works until every layer lands. A **vertical** slice, the tracer bullet, ships one narrow path through *every* layer at once, so it can be demoed the moment it's done.
+この skill 全体は1つの区別を軸に回っています。**水平**スライスは変更の1つのレイヤー — schema 全部、あるいは API 全部 — を出荷しますが、すべてのレイヤーが揃うまで何も動きません。**垂直**スライス、すなわち tracer bullet は、*すべて*のレイヤーを一度に貫く1本の狭い経路を出荷するので、完成した瞬間にデモできます。
 
-Before slicing, `to-issues` looks for prefactoring — "make the change easy, then make the easy change" — and orders that work first. It then quizzes you on the breakdown (granularity, dependencies, what to merge or split) before writing anything, and publishes blockers first so each issue's "Blocked by" field can reference a real ticket.
+スライスする前に、`to-issues` は prefactoring — 「変更を簡単にしてから、簡単な変更をする」— を探し、その作業を最初に順序づけます。その後、何も書く前に分解について（粒度、依存関係、何を統合し何を分割するか）あなたに質問し、各 issue の「Blocked by」フィールドが本物のチケットを参照できるよう、ブロッカーを最初に公開します。
 
-## Where it fits
+## 全体の中での位置づけ (Where it fits)
 
-`to-issues` is a step in the main build chain:
+`to-issues` は main build chain の1ステップです。
 
 ```txt
 grill-with-docs → to-prd → to-issues → implement → code-review
 ```
 
-It sits between [to-prd](https://aihero.dev/skills-to-prd), which hands it a settled spec with user stories to slice against, and [implement](https://aihero.dev/skills-implement), which builds each independently-grabbable issue, driving [tdd](https://aihero.dev/skills-tdd) internally to write the tests test-first, before its [code-review](https://aihero.dev/skills-code-review) pass. When you're unsure which skill or flow fits, [ask-matt](https://aihero.dev/skills-ask-matt) routes you.
+これは、スライスする対象となる user story を含む確定済みの仕様を渡す [to-prd](https://aihero.dev/skills-to-prd) と、独立して着手可能な各 issue を構築する [implement](https://aihero.dev/skills-implement)（[code-review](https://aihero.dev/skills-code-review) パスの前に、テストファーストでテストを書くために内部で [tdd](https://aihero.dev/skills-tdd) を駆動します）の間に位置します。どの skill や flow が合うか迷ったときは、[ask-matt](https://aihero.dev/skills-ask-matt) が導いてくれます。

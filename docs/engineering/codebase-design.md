@@ -1,4 +1,4 @@
-Quickstart:
+クイックスタート (Quickstart):
 
 ```bash
 npx skills add mattpocock/skills --skill=codebase-design
@@ -10,34 +10,34 @@ npx skills update codebase-design
 
 [Source](https://github.com/mattpocock/skills/tree/main/skills/engineering/codebase-design)
 
-## What it does
+## 何をするか (What it does)
 
-`codebase-design` gives you a shared, precise vocabulary for designing **deep modules** — a lot of behaviour hidden behind a small interface, placed at a clean seam, testable through that interface.
+`codebase-design` は、**deep module**（小さなインターフェースの背後に多くの振る舞いを隠し、きれいな seam に配置され、そのインターフェース越しにテスト可能なモジュール）を設計するための、共有された精密な語彙を与えます。
 
-It is a **language, not a procedure**. It doesn't restructure your code or hand you a refactor plan — it fixes the words (module, interface, depth, seam, adapter, leverage, locality) so that every design conversation and every other skill that touches design speaks the same way. Consistent language is the whole point; "component," "service," "API," and "boundary" are deliberately banned because they blur the distinctions that matter.
+これは**手順ではなく言語**です。コードを再構成したり、リファクタリング計画を渡したりすることはありません — module、interface、depth、seam、adapter、leverage、locality といった言葉を固定し、あらゆる設計の会話や、設計に触れる他のすべての skill が同じ言い方をできるようにします。一貫した言語であることこそが本質であり、「component」「service」「API」「boundary」といった語は、重要な区別を曖昧にするため意図的に禁止されています。
 
-## When to reach for it
+## いつ使うか (When to reach for it)
 
-Type `/codebase-design`, or the agent reaches for it automatically when a task fits.
+`/codebase-design` と入力するか、タスクに合致すればエージェントが自動的に使います。
 
-Reach for it when you're designing or improving a module's interface, hunting for deepening opportunities, deciding where a seam goes, or making code more testable and AI-navigable. Other skills pull it in whenever they need the deep-module vocabulary. If you want to sharpen the project's *domain* terms rather than its module design, use [domain-modeling](https://aihero.dev/skills-domain-modeling) instead; to run a whole architecture pass over an existing codebase, use [improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture).
+モジュールのインターフェースを設計・改善しているとき、deepening の機会を探しているとき、seam をどこに置くか決めているとき、コードをよりテスト可能かつ AI が扱いやすいものにしようとしているときに使ってください。他の skill も deep-module の語彙が必要になるたびにこれを取り込みます。もし磨きたいのがモジュール設計ではなくプロジェクトの*ドメイン*用語であれば、代わりに [domain-modeling](https://aihero.dev/skills-domain-modeling) を使ってください。既存のコードベース全体にアーキテクチャの見直しを行いたい場合は [improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) を使ってください。
 
-## Deep, not shallow
+## Deep であって Shallow でない
 
-A module is **deep** when a large amount of behaviour sits behind a small interface, and **shallow** when the interface is nearly as complex as the implementation. Depth is measured as **leverage** — how much a caller (or a test) can exercise per unit of interface they have to learn. Crucially, depth is a property of the *interface*, not the implementation: a deep module can be internally composed of small, swappable parts that just never surface to callers.
+モジュールは、小さなインターフェースの背後に大量の振る舞いが収まっているとき **deep** であり、インターフェースが実装とほぼ同じくらい複雑なとき **shallow** です。深さは **leverage**（呼び出し側やテストが、学習すべきインターフェースの単位あたりでどれだけのことを行使できるか）として測られます。重要なのは、深さは*インターフェース*の性質であって実装の性質ではないということです — deep なモジュールは、内部的には小さく交換可能な部品で構成されていて構いません。呼び出し側にそれが見えさえしなければよいのです。
 
-Two checks do most of the work. The **deletion test**: imagine deleting the module — if complexity vanishes, it was a pass-through; if it reappears across N callers, it was earning its keep. And **one adapter means a hypothetical seam; two adapters means a real one** — don't cut a seam until something actually varies across it.
+主に2つのチェックが役立ちます。**deletion test（削除テスト）**: そのモジュールを削除したと想像してみる — 複雑さが消え去るならそれは単なる pass-through であり、N 個の呼び出し元に複雑さが再び現れるなら、それは存在価値があったということです。そして**アダプターが1つならそれは仮説上の seam、2つあれば本物の seam**である — 実際に何かがそこを境に変化するまで seam を切らないこと。
 
-## The interface is the test surface
+## インターフェースはテストの接点
 
-Callers and tests cross the same seam, so a well-placed interface gives tests something durable to aim at while the code underneath moves freely. That's why the vocabulary insists on **seam** (Feathers' term — a place you can change behaviour without editing there) over the overloaded "boundary," and why "interface" here means *every fact a caller must know*: signatures, yes, but also invariants, ordering, error modes, and performance — not just the type-level surface.
+呼び出し側とテストは同じ seam を横切るので、適切に配置されたインターフェースは、下にあるコードが自由に動き回れる一方で、テストには狙うべき安定した的を与えます。だからこそこの語彙は、使い古された「boundary」よりも **seam**（Feathers の用語 — そこを編集せずに振る舞いを変えられる場所）を重視し、ここでの「interface」は*呼び出し側が知っておくべきすべての事実*を意味します — シグネチャはもちろん、不変条件、順序、エラーモード、パフォーマンスも含み、型レベルの表面だけではありません。
 
-## Pulled out on purpose
+## 意図的に切り出されている
 
-`codebase-design` is the **single source of truth** for the deep-module vocabulary, split out as its own model-invoked skill so anything can reach it. Other skills point at it rather than restating the words: [tdd](https://aihero.dev/skills-tdd) borrows it to place a seam before writing the test, [improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) leans on it while restructuring existing code, and [to-prd](https://aihero.dev/skills-to-prd) speaks it when it sketches seams and deepening opportunities before writing a spec.
+`codebase-design` は deep-module の語彙に関する**唯一の正典**であり、どこからでも参照できるよう独立した model-invoked skill として切り出されています。他の skill は言葉を言い直すのではなく、これを指し示します — [tdd](https://aihero.dev/skills-tdd) はテストを書く前に seam を置くためにこれを借り、[improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) は既存コードを再構成する際にこれに頼り、[to-prd](https://aihero.dev/skills-to-prd) は仕様を書く前に seam や deepening の機会をスケッチする際にこの言葉を使います。
 
-The point of keeping it standalone is that you can also reach for it on its own — as a **reference** for how to think about module design — without triggering the larger process any of those skills mandate. Fix the words once, in one place, and every design conversation inherits them.
+これを standalone のまま保つ狙いは、それらの skill が定める手順を発火させることなく、モジュール設計の考え方についての**リファレンス**として単独で参照できるようにするためです。言葉を一箇所で一度だけ固定すれば、それを必要とするすべてのものがそこを参照できます。
 
-## Where it fits
+## 全体の中での位置づけ (Where it fits)
 
-`codebase-design` is a **reach-for-it-anytime standalone** — the shared vocabulary layer under the engineering skills. Its closest neighbour is [domain-modeling](https://aihero.dev/skills-domain-modeling), the parallel vocabulary skill for the problem domain rather than the module structure. When you're unsure which skill or flow fits, [ask-matt](https://aihero.dev/skills-ask-matt) routes you.
+`codebase-design` は**いつでも使える standalone** — エンジニアリング skill 群の下にある共有語彙レイヤーです。最も近い隣人は [domain-modeling](https://aihero.dev/skills-domain-modeling) で、こちらはモジュール構造ではなく問題ドメインのための並行する語彙 skill です。どの skill や flow が合うか迷ったときは、[ask-matt](https://aihero.dev/skills-ask-matt) が導いてくれます。

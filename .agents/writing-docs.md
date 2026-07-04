@@ -1,18 +1,18 @@
-# Writing docs pages
+# Docs page を書く (Writing docs pages)
 
-Every skill in `engineering/` and `productivity/` has a human-facing **docs page** at `docs/<bucket>/<skill-name>.md` — the docs tree mirrors those two bucket folders under `skills/`. It is published at `https://aihero.dev/skills-<skill-name>`; the URL is always `skills-<skill-name>` regardless of bucket, so the docs path is repo organisation only. The page is not the skill and not a copy of `SKILL.md`. Only these two buckets are promoted; the rest (`misc/`, `personal/`, `in-progress/`, `deprecated/`) ship no docs page.
+`engineering/` と `productivity/` 内のすべての skill には、`docs/<bucket>/<skill-name>.md` に人間向けの **docs page** がある — docs ツリーは `skills/` 配下のこの2つの bucket フォルダを反映している。`https://aihero.dev/skills-<skill-name>` として公開され、URL はバケットに関わらず常に `skills-<skill-name>` なので、docs のパスはリポジトリ内の整理のためだけのものだ。このページは skill そのものではなく、`SKILL.md` のコピーでもない。promoted なのはこの2つのバケットだけであり、残り（`misc/`、`personal/`、`in-progress/`、`deprecated/`）には docs page がない。
 
-Most of these skills are **user-invoked**: the agent will never fire them for you, so *you* are the index that has to remember they exist and when to reach for them. That memory is **cognitive load**. The job of a docs page is to relieve it — to orient one reader around one skill so they can hold it in their head, know when to reach for it, and see where it sits in the system. The pages are collectively a distributed router; each is a node.
+これらの skill の多くは **user-invoked** である: エージェントが代わりに発火してくれることはないため、それらが存在すること・いつ使うべきかを覚えておかなければならない index は *あなた自身* だ。その記憶こそが **cognitive load**（認知負荷）である。docs page の仕事はそれを軽くすることだ — 一人の読者を一つの skill の周りにオリエンテーションし、頭の中に保持でき、いつ使うべきかを知り、システムの中でどこに位置するかを見えるようにする。これらのページは集合的に分散した router であり、それぞれが一つの node である。
 
-Act whenever a promoted skill is added, renamed, or has its behaviour changed: create or re-sync its docs page. A rename moves the file too (`docs/<bucket>/<old>.md` → `docs/<bucket>/<new>.md`), because the published URL tracks the name; a skill that moves between `engineering/` and `productivity/` moves its docs file to the matching folder. Skills in `misc/`, `personal/`, `in-progress/`, and `deprecated/` get no page — none of those buckets is promoted. A skill moving *out* of one of them into `engineering/` or `productivity/` gains a page; one moving the other way loses it.
+promoted skill が追加・リネーム・挙動変更されたときは必ず行動する: docs page を作成または再同期する。リネームの際はファイルも移動する（`docs/<bucket>/<old>.md` → `docs/<bucket>/<new>.md`）。公開 URL が名前を追跡するためだ。`engineering/` と `productivity/` の間を移動する skill は、その docs ファイルも対応するフォルダへ移動する。`misc/`、`personal/`、`in-progress/`、`deprecated/` 内の skill にはページがない — これらのバケットはどれも promoted ではないためだ。それらのいずれかから `engineering/` や `productivity/` へ*移動してくる* skill はページを得て、逆方向へ移動する skill はページを失う。
 
-Because these pages are published on `aihero.dev`, **every link is absolute** — never a repo-relative path. A link to another skill points at `https://aihero.dev/skills-<name>`; a link into the repo points at its full `https://github.com/mattpocock/skills/...` URL. A relative link that works in the repo breaks once published.
+これらのページは `aihero.dev` 上で公開されるため、**すべてのリンクは絶対パス**である — リポジトリ相対パスは決して使わない。他の skill へのリンクは `https://aihero.dev/skills-<name>` を指す。リポジトリ内へのリンクは完全な `https://github.com/mattpocock/skills/...` URL を指す。リポジトリ内では機能する相対リンクも、公開されると壊れる。
 
-There is no H1 — the published page takes its title from the slug.
+H1 は存在しない — 公開されたページはタイトルを slug から取得する。
 
-## Page structure
+## ページ構成 (Page structure)
 
-Fill the template below. The **fixed frame** (Quickstart block, source link, `## What it does`, `## When to reach for it`, `## Where it fits`) appears on every page. The **adaptable middle** — `## Prerequisites` and the free-form substance sections — carries only what this particular skill earns; delete the rest.
+以下のテンプレートを埋める。**固定フレーム**（Quickstart ブロック、source link、`## What it does`、`## When to reach for it`、`## Where it fits`）はすべてのページに現れる。**可変の中間部**——`## Prerequisites` と自由形式の本文セクション——には、その skill 固有に見合う内容だけを載せ、それ以外は削除する。
 
 <page-template>
 
@@ -63,19 +63,19 @@ Always present. Situate the skill in the system in a sentence or two:
 
 </page-template>
 
-## Conventions
+## 規約 (Conventions)
 
-- Explain the **why**, not the process. The page orients and situates the skill; it never reproduces the `SKILL.md` steps or template dumps — a human choosing a tool does not need the runbook.
-- Use the skill's **leading words** (_seam_, _deep module_, _tracer bullet_) so the page and the skill speak one language.
-- Keep the page itself low-load. It is documentation *about* low-cognitive-load skills; furniture (spare headings, restated links) is the thing it is arguing against.
+- プロセスではなく**理由 (why)** を説明する。ページは skill をオリエンテーションし位置づけるものであり、`SKILL.md` の手順やテンプレートの丸写しを再現することは決してない — ツールを選ぶ人間に runbook は必要ない。
+- skill の**leading words**（_seam_、_deep module_、_tracer bullet_ など）を使い、ページと skill が同じ言語を話すようにする。
+- ページ自体を low-load に保つ。これは low-cognitive-load な skill について*の*ドキュメントであり、furniture（余分な見出し、繰り返されるリンク）はまさにそれが反対しているものだ。
 
-## Done when
+## 完了の定義 (Done when)
 
-- The page exists at `docs/<bucket>/<name>.md`, and no stale page survives a rename or bucket move.
-- The Quickstart block and source link name the correct bucket and skill; the update line names the skill.
-- `## What it does` states the defining constraint, as plain prose rather than a labelled aside.
-- `## When to reach for it` states invocation mode and the trigger boundary.
-- `## Where it fits` names the role and links to `ask-matt`.
-- A prerequisite (workspace, prior setup, tooling) is stated where one exists, and the section is absent where none does.
-- The middle surfaces the leading word.
-- Every link is absolute, and every one resolves.
+- ページが `docs/<bucket>/<name>.md` に存在し、リネームやバケット移動の後に古いページが残っていない。
+- Quickstart ブロックと source link が正しい bucket と skill を示している。update の行が skill 名を示している。
+- `## What it does` が、ラベル付きの傍注ではなく平易な散文として defining constraint を述べている。
+- `## When to reach for it` が invocation mode と trigger boundary を述べている。
+- `## Where it fits` が role を名指しし、`ask-matt` にリンクしている。
+- prerequisite（workspace、事前セットアップ、tooling）が存在する場合はそれが述べられ、存在しない場合はそのセクション自体がない。
+- 中間部が leading word を浮き上がらせている。
+- すべてのリンクが絶対パスであり、すべて解決する。

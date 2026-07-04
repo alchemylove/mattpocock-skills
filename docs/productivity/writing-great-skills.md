@@ -1,4 +1,4 @@
-Quickstart:
+クイックスタート (Quickstart):
 
 ```bash
 npx skills add mattpocock/skills --skill=writing-great-skills
@@ -10,36 +10,36 @@ npx skills update writing-great-skills
 
 [Source](https://github.com/mattpocock/skills/tree/main/skills/productivity/writing-great-skills)
 
-## What it does
+## 概要 (What it does)
 
-`writing-great-skills` is the reference you write and edit skills against — the shared vocabulary and principles that make a skill predictable.
+`writing-great-skills` は、スキルを書いたり編集したりする際に照らし合わせるリファレンスです — スキルを予測可能にするための、共通の語彙と原則です。
 
-A skill's job is to wrangle determinism out of a stochastic system, so the goal is not the same *output* every run but the same *process*. **Predictability** is the root virtue, and every design choice is judged against it — not against how clever, complete, or exhaustive the skill reads.
+スキルの仕事は、確率的なシステムから決定性を引き出すことなので、目指すのは毎回同じ *出力* ではなく、毎回同じ *プロセス* です。**予測可能性 (predictability)** が根本の美徳であり、あらゆる設計判断はこれに照らして評価されます — スキルがどれだけ賢く、網羅的で、完璧に読めるかではなく。
 
-## When to reach for it
+## 使いどころ (When to reach for it)
 
-You invoke this by typing `/writing-great-skills` — the agent won't reach for it on its own.
+`/writing-great-skills` と入力して呼び出します — エージェントが自発的に使うことはありません。
 
-Reach for it whenever you're authoring a new skill or editing an existing one and want it to behave the same way every time: deciding invocation mode, writing a description, choosing what lives in `SKILL.md` versus a linked file, or diagnosing why a skill misfires.
+新しいスキルを書いたり、既存のスキルを編集したりしていて、それを毎回同じように振る舞わせたいとき — 起動モードを決める、説明文を書く、`SKILL.md` に何を書き、何をリンク先のファイルに書くかを選ぶ、あるいはなぜスキルがうまく発火しないのかを診断するとき — に使いましょう。
 
-## Cognitive load
+## 認知負荷 (cognitive load)
 
-The concept the whole reference turns on is **cognitive load** — and its counterpart, **context load**. Every skill spends one or the other:
+このリファレンス全体が軸としているのは **認知負荷 (cognitive load)** という概念と、その対になる **コンテキスト負荷 (context load)** です。どのスキルも、そのどちらかを消費します。
 
-- A **model-invoked** skill keeps a description in the window every turn, so it costs **context load** but fires on its own.
-- A **user-invoked** skill strips that description; it costs zero context load, but now *you* are the index that has to remember it exists — that's **cognitive load**.
+- **モデル起動 (Model-invoked)** のスキルは説明文を毎ターン、コンテキストウィンドウ内に保持し続けます。つまり **コンテキスト負荷 (context load)** を払う代わりに、自発的に発火します。
+- **ユーザー起動 (User-invoked)** のスキルはその説明文を取り除きます。コンテキスト負荷はゼロですが、その代わり *あなた* がそのスキルの存在を覚えておくためのインデックスにならなければなりません — これが **認知負荷 (cognitive load)** です。
 
-Most of these skills are user-invoked, which is why cognitive load is the pressure the whole system is built to manage: when user-invoked skills multiply past what you can hold in your head, the cure is a **router skill** that names the others and when to reach for each. Once you're thinking in these two loads, most authoring decisions — split or don't, inline or disclose, model- or user-invoked — become the same trade made in different places.
+これらのスキルの大半はユーザー起動 (User-invoked) です。だからこそ認知負荷は、このシステム全体が管理しようとしているプレッシャーなのです。ユーザー起動のスキルがあなたの頭で抱えきれる数を超えて増えたとき、その処方箋は、他のスキルの名前と、いつそれぞれを使うべきかを示す **ルータースキル (router skill)** です。この2つの負荷で考えられるようになれば、分割するかしないか、インラインにするか外に出すか、モデル起動かユーザー起動か、といったスキル作成上のほとんどの判断は、場所こそ違え同じトレードオフになります。
 
-## The other levers
+## その他のレバー
 
-The rest of the reference is the toolkit for spending those loads well:
+このリファレンスの残りの部分は、これらの負荷をうまく使うためのツールキットです。
 
-- **Leading words** — a compact concept already in the model's pretraining (_tight_, _red_, _tracer bullet_) that the agent thinks with while running the skill. It anchors execution *and* invocation in the fewest tokens; hunt restatements that a single word can retire.
-- **Information hierarchy** — the ladder from in-skill step, to in-skill reference, to external reference behind a **context pointer**. **Progressive disclosure** is the move down that ladder so the top stays legible.
-- **Pruning** — single source of truth, relevance, and the no-op test applied sentence by sentence, against **sediment** and **sprawl**.
-- **Failure modes** — **premature completion**, **duplication**, **sediment**, **sprawl**, **no-op** — to diagnose a skill that isn't behaving.
+- **リーディングワード (leading words)** — モデルの事前学習の中に既にある、コンパクトな概念（_tight_、_red_、_tracer bullet_ など）で、エージェントがスキルを実行する際にそれを使って考えます。最少のトークン数で実行と起動の両方に錨を下ろします。1語で言い換えられる説明は狩り出して削りましょう。
+- **情報の階層 (information hierarchy)** — スキル内のステップから、スキル内のリファレンス、そして **コンテキストポインタ (context pointer)** の向こうにある外部リファレンスへとつながる梯子です。**段階的開示 (progressive disclosure)** は、その梯子を降りていく動きのことで、これによってトップレベルが読みやすいまま保たれます。
+- **刈り込み (pruning)** — 唯一の正典 (single source of truth)、関連性、そして no-op テストを、一文ずつ、**堆積物 (sediment)** と **肥大化 (sprawl)** に照らして適用すること。
+- **失敗モード (failure modes)** — **早すぎる完了 (premature completion)**、**重複 (duplication)**、**堆積物 (sediment)**、**肥大化 (sprawl)**、**no-op** — うまく機能していないスキルを診断するためのもの。
 
-## Where it fits
+## 位置づけ (Where it fits)
 
-This is a reach-for-it-anytime standalone reference — the meta-skill you consult while building the rest of the set, not a step in a chain. Its natural neighbour is any router you maintain, because a router is the direct cure for the cognitive load that user-invoked skills pile up; when you're unsure which skill or flow fits a task, [ask-matt](https://aihero.dev/skills-ask-matt) routes you over the whole set.
+これは、いつでも手に取れる単体のリファレンスです — チェーンの中の1ステップではなく、他のスキル群を構築している間に参照するメタスキルです。自然な隣人はあなたが維持しているどんなルーターでもあります。ルーターは、ユーザー起動のスキルが積み上げていく認知負荷に対する直接的な処方箋だからです。どのスキルやフローがタスクに合うか迷ったときは、[ask-matt](https://aihero.dev/skills-ask-matt) がスキル群全体を案内します。

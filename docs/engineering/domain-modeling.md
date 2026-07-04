@@ -1,4 +1,4 @@
-Quickstart:
+クイックスタート (Quickstart):
 
 ```bash
 npx skills add mattpocock/skills --skill=domain-modeling
@@ -10,37 +10,37 @@ npx skills update domain-modeling
 
 [Source](https://github.com/mattpocock/skills/tree/main/skills/engineering/domain-modeling)
 
-## What it does
+## 何をするか (What it does)
 
-`domain-modeling` builds and sharpens a project's **ubiquitous language** as you design — challenging fuzzy terms, stress-testing relationships with concrete scenarios, and writing the glossary and decisions down the moment they crystallise.
+`domain-modeling` は、設計を進めながらプロジェクトの **ubiquitous language** を構築し磨いていきます — 曖昧な用語に異議を唱え、具体的なシナリオで関係性をストレステストし、それらが結晶化した瞬間に glossary と decisions を書き留めます。
 
-This is the **active** discipline, not the passive one. Merely reading `CONTEXT.md` to borrow its vocabulary is a one-line habit any skill can do; this skill is for when you are *changing* the model — coining a canonical term, catching a contradiction between the code and what you just said, recording a hard-to-reverse decision. And it keeps the glossary clean: `CONTEXT.md` is a glossary and nothing else — no implementation details, no spec, no scratch pad.
+これは**能動的な**訓練であり、受動的なものではありません。`CONTEXT.md` を読んでその語彙を借用するだけなら、どの skill でもできる一行の習慣に過ぎません。この skill は、あなたが*モデルを変更している*ときのためのものです — 標準となる用語を作る、コードとたった今言ったことの間の矛盾に気づく、後戻りしにくい決定を記録する、といった場面です。そして glossary をクリーンに保ちます — `CONTEXT.md` は glossary であってそれ以外の何ものでもありません。実装の詳細も、仕様も、走り書きもここには置きません。
 
-## When to reach for it
+## いつ使うか (When to reach for it)
 
-Type `/domain-modeling`, or the agent reaches for it automatically when a task fits — when you are pinning down terminology, resolving an overloaded word, or recording an architectural decision.
+`/domain-modeling` と入力するか、タスクに合致すればエージェントが自動的に使います — 用語を確定させているとき、多義的な言葉を解消しているとき、アーキテクチャ上の決定を記録しているときです。
 
-Reach for it when the *words* are the problem: two people mean different things by "cancellation", "account" is doing three jobs, or a design conversation keeps snagging on a concept that has never been named precisely. If instead the module's *shape* is the problem — where the seam goes, how deep the interface is — use [codebase-design](https://aihero.dev/skills-codebase-design). If you want the plan itself interrogated before you build, use [grilling](https://aihero.dev/skills-grilling).
+*言葉*が問題であるときに使ってください — 2人が「cancellation」で異なることを意味している、「account」が3つの役割を担っている、あるいは設計の会話が一度も正確に名付けられたことのない概念でつっかえ続けている、といった場合です。問題がモジュールの*形状*（seam をどこに置くか、インターフェースをどれだけ深くするか）であれば、代わりに [codebase-design](https://aihero.dev/skills-codebase-design) を使ってください。構築前に計画そのものを尋問してほしいなら、[grilling](https://aihero.dev/skills-grilling) を使ってください。
 
-## Prerequisites
+## 前提条件 (Prerequisites)
 
-The skill writes into two places, both created lazily — only once there is something to record. Resolved terms go into `CONTEXT.md` at the root (or, in a multi-context repo flagged by a `CONTEXT-MAP.md`, into the per-context `CONTEXT.md`). Decisions go into `docs/adr/`. Nothing needs to exist up front; the first resolved term creates the glossary, the first real trade-off creates the ADR.
+この skill は2箇所に書き込みますが、どちらも遅延生成されます — 記録すべきことが実際に生じたときにだけ作られます。解決した用語はルート直下の `CONTEXT.md`（あるいは `CONTEXT-MAP.md` でマルチコンテキストと示されたリポジトリでは、コンテキストごとの `CONTEXT.md`）に入ります。決定事項は `docs/adr/` に入ります。事前に何かを用意しておく必要はなく、最初の解決した用語が glossary を、最初の本物のトレードオフが ADR を作ります。
 
-## Glossary vs. ADR
+## Glossary と ADR
 
-Two artifacts, two different bars:
+2つの成果物、それぞれ異なる基準があります。
 
-- **The glossary** (`CONTEXT.md`) captures language. Every time a vague term is made canonical, it's written down inline — not batched — so the shared vocabulary stays current with the conversation. It stays ruthlessly free of implementation detail.
-- **An ADR** captures a decision, and the bar is high: offered only when the choice is **hard to reverse**, **surprising without context**, and **the result of a real trade-off**. Miss any one of the three and there is no ADR. This is what keeps `docs/adr/` a record of consequential forks rather than a diary.
+- **Glossary**（`CONTEXT.md`）は言語を捉えます。曖昧な用語が標準化されるたびに、まとめてではなくその場で書き留められるので、共有語彙は会話と同期し続けます。実装の詳細を徹底的に排除した状態を保ちます。
+- **ADR** は決定を捉えます。その基準は高く、その選択が**後戻りしにくく**、**文脈なしには意外であり**、かつ**本物のトレードオフの結果である**場合にのみ提示されます。3つのうちどれか1つでも欠ければ ADR は作られません。これが `docs/adr/` を、日記ではなく重大な分岐点の記録として保つ理由です。
 
-The move that makes it click: when you state how something works, the skill cross-references the code and surfaces the contradiction — "your code cancels entire Orders, but you just said partial cancellation is possible — which is right?" The language and the code are forced to agree.
+決め手となる動きはこうです。何かがどう動くかを言葉にすると、この skill はコードと照合し、矛盾を表面化させます — 「あなたのコードは Order 全体をキャンセルしますが、たった今、部分キャンセルが可能だと言いましたね — どちらが正しいのですか？」言語とコードは強制的に一致させられます。
 
-## Pulled out on purpose
+## 意図的に切り出されている
 
-`domain-modeling` is the **single source of truth** for building the project's ubiquitous language, split out as its own model-invoked skill so any other skill can reach it. [grill-with-docs](https://aihero.dev/skills-grill-with-docs) leans on it to record terms and decisions as a grilling session runs, [triage](https://aihero.dev/skills-triage) uses it to keep tickets in the project's own words, and [improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) reaches for it while it works.
+`domain-modeling` はプロジェクトの ubiquitous language を構築するための**唯一の正典**であり、他のあらゆる skill から参照できるよう独立した model-invoked skill として切り出されています。[grill-with-docs](https://aihero.dev/skills-grill-with-docs) は grilling セッションの進行中に用語と決定を記録するためにこれに頼り、[triage](https://aihero.dev/skills-triage) はチケットをプロジェクト自身の言葉に保つためにこれを使い、[improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) は作業中にこれを参照します。
 
-Keeping it standalone means you can also reach for it directly — as a **reference** for how to sharpen a model — without committing to the steps any of those skills mandate. The language lives in one place, and everything that needs it points there.
+これを standalone に保つ意味は、それらの skill が定める手順にコミットすることなく、モデルを磨く方法についての**リファレンス**として直接参照できることです。言語は一箇所に存在し、それを必要とするすべてのものがそこを指します。
 
-## Where it fits
+## 全体の中での位置づけ (Where it fits)
 
-`domain-modeling` is a **reach-for-it-anytime standalone** that runs *underneath* other skills as often as at a fixed step. Its closest neighbour is [codebase-design](https://aihero.dev/skills-codebase-design), because a shared language is what lets you name a deep module and its seam precisely; downstream, a settled glossary is exactly what [to-prd](https://aihero.dev/skills-to-prd) synthesises into a spec written in the project's own words. When you're unsure which skill or flow fits, [ask-matt](https://aihero.dev/skills-ask-matt) routes you.
+`domain-modeling` はいつでも使える standalone であり、固定されたステップとしてよりも、他の skill の*下で*頻繁に動きます。最も近い隣人は [codebase-design](https://aihero.dev/skills-codebase-design) です。共有された言語こそが、deep module とその seam を正確に名付けることを可能にするからです。下流では、落ち着いた glossary こそが [to-prd](https://aihero.dev/skills-to-prd) がプロジェクト自身の言葉で書かれた仕様へと統合する材料になります。どの skill や flow が合うか迷ったときは、[ask-matt](https://aihero.dev/skills-ask-matt) が導いてくれます。

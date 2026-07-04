@@ -1,4 +1,4 @@
-Quickstart:
+クイックスタート (Quickstart):
 
 ```bash
 npx skills add mattpocock/skills --skill=to-prd
@@ -10,50 +10,50 @@ npx skills update to-prd
 
 [Source](https://github.com/mattpocock/skills/tree/main/skills/engineering/to-prd)
 
-## What it does
+## 何をするか (What it does)
 
-`to-prd` turns the current conversation and your codebase understanding into a product requirements document, then publishes it to your issue tracker.
+`to-prd` は現在の会話とあなたのコードベース理解を product requirements document に変換し、それをあなたの issue tracker に公開します。
 
-It does **not** interview you again. By the time you reach for it, the alignment work is done — `to-prd` synthesises what is already known rather than asking a fresh round of questions.
+これは**あなたに改めてインタビューすることはしません**。これを使う頃には、すり合わせの作業はすでに終わっています — `to-prd` は新たな質問を重ねるのではなく、すでに分かっていることを統合します。
 
-## When to reach for it
+## いつ使うか (When to reach for it)
 
-You invoke this by typing `/to-prd` — the agent won't reach for it on its own.
+これは `/to-prd` と入力して呼び出します — エージェントが自発的にこれを使うことはありません。
 
-Reach for it once a change has been talked through and the domain language is settled, and you want that shared understanding written down as a spec before any code is written. If you *haven't* aligned yet, grill first — for that, use [grill-with-docs](https://aihero.dev/skills-grill-with-docs). To split the finished PRD into tickets, use [to-issues](https://aihero.dev/skills-to-issues).
+変更について話し合いが済み、ドメイン言語が定まっていて、コードが一切書かれる前にその共有理解を仕様として書き留めたいときに使ってください。まだすり合わせが済んでいないなら、まず grill してください — そのためには [grill-with-docs](https://aihero.dev/skills-grill-with-docs) を使います。完成した PRD をチケットに分割するには [to-issues](https://aihero.dev/skills-to-issues) を使ってください。
 
-## Prerequisites
+## 前提条件 (Prerequisites)
 
-`to-prd` publishes into your issue tracker, so [setup-matt-pocock-skills](https://aihero.dev/skills-setup-matt-pocock-skills) must have configured the tracker and triage labels for this repo first. It applies the `ready-for-agent` label itself — no separate triage pass needed.
+`to-prd` はあなたの issue tracker に公開するので、まず [setup-matt-pocock-skills](https://aihero.dev/skills-setup-matt-pocock-skills) がこのリポジトリの tracker と triage ラベルを設定している必要があります。`ready-for-agent` ラベルを自身で適用するので、別途 triage パスは不要です。
 
-## What the PRD includes
+## PRD に含まれるもの
 
-- **Problem statement** — what is broken or missing, and why it's worth solving, in the project's own vocabulary.
-- **Solution** — the shape of the fix at a high level, before any implementation detail.
-- **User stories** — an extensive, numbered list of the concrete behaviours the change must support, each one independently checkable.
-- **Implementation decisions** — the choices already settled during the conversation, so they aren't relitigated later.
-- **Testing decisions** — the seams the feature will be tested at, and what "done" looks like.
-- **Out-of-scope items** — what this change deliberately does *not* cover, to keep the ticket bounded.
-- **Further notes** — anything else worth carrying forward that doesn't fit the sections above.
+- **Problem statement** — 何が壊れているか、あるいは欠けているか、そしてなぜそれを解決する価値があるのかを、プロジェクト自身の語彙で。
+- **Solution** — 実装の詳細に踏み込む前の、修正の大まかな形。
+- **User stories** — 変更がサポートしなければならない具体的な振る舞いの、詳細で番号付けされたリスト。それぞれが独立して確認可能。
+- **Implementation decisions** — 会話の中ですでに固まった選択事項。後で蒸し返さないため。
+- **Testing decisions** — その機能がテストされる seam と、「完了」がどう見えるか。
+- **Out-of-scope items** — この変更が意図的に*カバーしない*こと。チケットの範囲を限定するため。
+- **Further notes** — 上記のセクションに収まらないが、引き継ぐ価値のあるその他のこと。
 
-## Deep modules
+## Deep Module
 
-Before writing the PRD, `to-prd` sketches the **seams** at which the feature will be tested and looks for **deep module** opportunities — a lot of functionality hidden behind a small, stable interface. It prefers existing seams to new ones and the highest seam possible, ideally just one across the whole change.
+PRD を書く前に、`to-prd` はその機能がテストされる **seam** をスケッチし、**deep module** の機会 — 小さく安定したインターフェースの背後に隠された多くの機能 — を探します。新しい seam よりも既存の seam を、そして可能な限り最も高い seam を、理想的には変更全体を通じてたった1つだけを好みます。
 
-That matters for agentic development: a good interface gives tests something durable to target, so the code underneath can change without the tests moving.
+これはエージェントによる開発にとって重要です。良いインターフェースはテストに狙うべき安定した的を与え、下にあるコードはテストを動かすことなく変化できるからです。
 
-## It's working if
+## うまく機能しているかの目安 (It's working if)
 
-- It starts writing the PRD instead of asking you a fresh round of questions.
-- It checks the seams with you before writing, and proposes as few as possible.
-- The PRD comes back in your project's domain vocabulary, not generic boilerplate.
+- あなたに新たな質問を重ねるのではなく、PRD を書き始める。
+- 書く前に seam をあなたと確認し、できるだけ少ない数を提案する。
+- PRD は一般的な定型文ではなく、あなたのプロジェクトのドメイン語彙で返ってくる。
 
-## Where it fits
+## 全体の中での位置づけ (Where it fits)
 
-`to-prd` is a step in the main build chain:
+`to-prd` は main build chain の1ステップです。
 
 ```txt
 grill-with-docs → to-prd → to-issues → implement → code-review
 ```
 
-Reach for it after the plan and domain language are resolved, and before you break the work into implementation tickets. Its key neighbours are [grill-with-docs](https://aihero.dev/skills-grill-with-docs), which sharpens the context so the PRD is precise, and [to-issues](https://aihero.dev/skills-to-issues), which turns the PRD into independently-grabbable issues for [implement](https://aihero.dev/skills-implement) to build. When you're unsure which skill or flow fits, [ask-matt](https://aihero.dev/skills-ask-matt) routes you.
+計画とドメイン言語が確定した後、作業を実装チケットに分割する前に使ってください。主要な隣人は、コンテキストを研ぎ澄まし PRD を正確にする [grill-with-docs](https://aihero.dev/skills-grill-with-docs) と、PRD を [implement](https://aihero.dev/skills-implement) が構築する独立して着手可能な issue に変える [to-issues](https://aihero.dev/skills-to-issues) です。どの skill や flow が合うか迷ったときは、[ask-matt](https://aihero.dev/skills-ask-matt) が導いてくれます。

@@ -1,4 +1,4 @@
-Quickstart:
+クイックスタート (Quickstart):
 
 ```bash
 npx skills add mattpocock/skills --skill=code-review
@@ -10,38 +10,38 @@ npx skills update code-review
 
 [Source](https://github.com/mattpocock/skills/tree/main/skills/engineering/code-review)
 
-## What it does
+## 何をするか (What it does)
 
-`code-review` reviews the diff between `HEAD` and a fixed point you supply — a commit, branch, tag, or merge-base — along two separate axes: **Standards** (does the code follow this repo's documented conventions?) and **Spec** (does it implement what the originating issue or PRD asked for?). It runs each axis as its own parallel sub-agent and reports them side by side. It never merges or re-ranks the two sets of findings — keeping them separate is the whole point, because a change can pass one axis and fail the other, and a single blended verdict lets one mask the other.
+`code-review` は `HEAD` と指定した固定点（コミット、ブランチ、タグ、マージベース）との間の diff を、2つの独立した軸に沿ってレビューします — **Standards**（このリポジトリで文書化された規約にコードが従っているか）と **Spec**（元となった issue や PRD が求めたものを実装しているか）です。各軸は独立した並列 sub-agent として実行され、結果は並べて報告されます。2つの findings の集合を統合したり再ランク付けしたりすることは決してありません — それぞれを分離しておくことこそが本質であり、変更は一方の軸を通過しつつもう一方で失敗することがあるため、単一の統合された判定では一方がもう一方を覆い隠してしまうからです。
 
-## When to reach for it
+## いつ使うか (When to reach for it)
 
-Type `/code-review`, or the agent reaches for it automatically when you ask to review a branch, a PR, work-in-progress changes, or anything "since X".
+`/code-review` と入力するか、ブランチや PR、作業中の変更、あるいは「X 以降の」何かをレビューしてほしいと頼むとエージェントが自動的に使います。
 
-Reach for this when there is a diff to judge against a known-good point and you want the two questions — *is it built right?* and *is it the right thing?* — answered independently. It runs at the end of the build loop; for actually writing the code test-first, use [tdd](https://aihero.dev/skills-tdd), and for building a whole spec into code use [implement](https://aihero.dev/skills-implement), which runs its own `/code-review` pass before committing.
+既知の良好な状態と比較して判断すべき diff があり、*正しく作られているか？* と *正しいものが作られているか？* という2つの問いに独立して答えてほしいときに使ってください。これはビルドループの最後に実行されます。テストファーストでコードを実際に書くには [tdd](https://aihero.dev/skills-tdd) を、仕様全体をコードにするには [implement](https://aihero.dev/skills-implement) を使ってください — こちらはコミット前に独自の `/code-review` パスを実行します。
 
-## Prerequisites
+## 前提条件 (Prerequisites)
 
-The **Spec** axis needs somewhere to find the originating spec — an issue reference in the commit messages, a path you pass in, or a PRD under `docs/`/`specs/`. That issue-tracker wiring comes from [setup-matt-pocock-skills](https://aihero.dev/skills-setup-matt-pocock-skills); without a spec the Spec axis simply skips and says so. The **Standards** axis needs nothing set up — it always carries a built-in Fowler smell baseline even in a repo that documents no conventions.
+**Spec** 軸は、元となる仕様をどこかで見つける必要があります — コミットメッセージ内の issue 参照、渡されたパス、あるいは `docs/`/`specs/` 配下の PRD です。この issue tracker との連携は [setup-matt-pocock-skills](https://aihero.dev/skills-setup-matt-pocock-skills) から得られます。仕様がなければ Spec 軸は単にスキップし、その旨を報告します。**Standards** 軸は特に何も準備する必要はありません — 規約を文書化していないリポジトリであっても、常に組み込みの Fowler smell ベースラインを持っています。
 
-## Two axes, never merged
+## 2つの軸、決して統合しない
 
-The defining idea is the **two axes**. **Standards** asks whether the diff conforms to how this repo writes code — its `CODING_STANDARDS.md` or `CONTRIBUTING.md`, plus a fixed baseline of ~12 Fowler code smells (Mysterious Name, Duplicated Code, Feature Envy, Data Clumps, …). Two rules keep the baseline safe: a documented repo standard always overrides it, and every smell is a judgement call, never a hard violation. **Spec** asks the orthogonal question — does the code do what the issue or PRD actually asked, without missing requirements or smuggling in scope creep?
+本質となるアイデアは**2つの軸**です。**Standards** は、diff がこのリポジトリのコードの書き方 — `CODING_STANDARDS.md` や `CONTRIBUTING.md`、加えて約12個の固定された Fowler code smell（Mysterious Name、Duplicated Code、Feature Envy、Data Clumps、…）のベースライン — に沿っているかを問います。このベースラインを安全に保つルールが2つあります。文書化されたリポジトリの規約は常にこれより優先されること、そしてすべての smell は判断材料であって絶対的な違反ではないことです。**Spec** はこれとは直交する問いを立てます — コードは issue や PRD が実際に求めたことを、要件の見落としやスコープの忍び込みなしに行っているか、です。
 
-They run as parallel sub-agents so neither pollutes the other's context, and the final report presents them under separate `## Standards` and `## Spec` headings with a per-axis summary. There is deliberately no single winner across axes.
+これらは並列の sub-agent として実行されるため、互いのコンテキストを汚染することはなく、最終レポートは別々の `## Standards` と `## Spec` の見出しの下に、それぞれのサマリーとともに提示されます。軸をまたいだ単一の勝者は意図的に存在しません。
 
-## It's working if
+## うまく機能しているかの目安 (It's working if)
 
-- It pins and confirms the fixed point first (`git rev-parse`), failing fast on a bad ref or empty diff rather than inside the sub-agents.
-- Standards and Spec findings arrive in two distinct blocks, each citing its source — a repo standard or baseline smell for one, a quoted spec line for the other.
-- When no spec can be found, the Spec axis reports "no spec available" instead of inventing requirements.
+- 最初に固定点を確定し確認する（`git rev-parse`）。sub-agent の内部ではなく、この時点で不正な ref や空の diff に対して速やかに失敗する。
+- Standards と Spec の findings が2つの明確なブロックとして届き、それぞれが出典を明示している — 一方はリポジトリの規約やベースラインの smell、もう一方は引用された仕様の一文。
+- 仕様が見つからない場合、Spec 軸は要件をでっち上げるのではなく「no spec available」と報告する。
 
-## Where it fits
+## 全体の中での位置づけ (Where it fits)
 
-`code-review` is the review step at the tail of the main build chain:
+`code-review` は main build chain の末尾にあるレビューステップです。
 
 ```txt
 grill-with-docs → to-prd → to-issues → implement → code-review
 ```
 
-Its closest neighbour is [implement](https://aihero.dev/skills-implement), which drives the build and calls this as its own review pass before committing; upstream, the spec it checks against is produced by [to-prd](https://aihero.dev/skills-to-prd) and [to-issues](https://aihero.dev/skills-to-issues). When you're unsure which skill or flow fits, [ask-matt](https://aihero.dev/skills-ask-matt) routes you.
+最も近い隣人は [implement](https://aihero.dev/skills-implement) で、ビルドを駆動しコミット前の独自のレビューパスとしてこれを呼び出します。上流では、これが照合する仕様は [to-prd](https://aihero.dev/skills-to-prd) と [to-issues](https://aihero.dev/skills-to-issues) によって作られます。どの skill や flow が合うか迷ったときは、[ask-matt](https://aihero.dev/skills-ask-matt) が導いてくれます。

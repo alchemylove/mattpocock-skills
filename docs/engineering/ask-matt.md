@@ -1,4 +1,4 @@
-Quickstart:
+クイックスタート (Quickstart):
 
 ```bash
 npx skills add mattpocock/skills --skill=ask-matt
@@ -10,22 +10,22 @@ npx skills update ask-matt
 
 [Source](https://github.com/mattpocock/skills/tree/main/skills/engineering/ask-matt)
 
-## What it does
+## 何をするか (What it does)
 
-`ask-matt` is the router over the skills in this repo. You describe the situation you're in; it tells you which skill or flow fits and in what order to run them.
+`ask-matt` はこのリポジトリにある skill 群のルーターです。今どんな状況にあるかを説明すると、どの skill や flow が合っているか、どの順序で実行すべきかを教えてくれます。
 
-It **does no work itself**. It doesn't grill, write a PRD, or fix anything — it only orients. It exists for the **user-invoked** skills above all: nothing fires those for you, so *you* have to remember they exist, and `ask-matt` is the memory you offload that to. It also points at the model-invoked skills you'd reach for by name — `/tdd`, `/diagnosing-bugs`, `/prototype`, `/code-review`, and the two vocabulary references, `/domain-modeling` and `/codebase-design`. It answers "which one, and when", then hands you off to the skill that actually does the job.
+`ask-matt` は**それ自体では何の作業もしません**。grill もしないし、PRD も書かないし、何かを直すこともありません — ただ道案内をするだけです。これは何よりもまず**ユーザー起動 (User-invoked)** の skill のために存在します。それらはあなたの代わりに自動発火することはないので、*あなた自身*がその存在を覚えておく必要があり、`ask-matt` はその記憶を肩代わりする役割を担います。また、名前を挙げて呼び出すタイプの **モデル起動 (Model-invoked)** skill — `/tdd`、`/diagnosing-bugs`、`/prototype`、`/code-review`、そして語彙リファレンスである `/domain-modeling` と `/codebase-design` — も指し示します。「どれを、いつ」に答えたうえで、実際に作業をこなす skill へと引き渡します。
 
-## When to reach for it
+## いつ使うか (When to reach for it)
 
-You invoke this by typing `/ask-matt` — the agent won't reach for it on its own.
+これは `/ask-matt` と入力して呼び出します — エージェントが自発的にこれを使うことはありません。
 
-Reach for it whenever you're unsure which skill or flow a situation calls for: you have an idea and don't know where to start, a pile of bug reports and don't know if they're for `/triage`, or two skills that look interchangeable and you can't tell them apart. If you already know the skill you want, skip the router and invoke it directly.
+どの skill や flow が今の状況に合うか分からないときはいつでも使ってください。アイデアはあるがどこから手を付ければいいか分からない、バグ報告の山があって `/triage` 向けかどうか判断がつかない、似たような skill が2つあって区別がつかない、といった場合です。すでに使いたい skill が分かっているなら、ルーターを飛ばして直接それを呼び出してください。
 
-## Flows, not just skills
+## Skill だけでなく Flow も
 
-The idea `ask-matt` gives you to think with is the **flow** — a path *through* the skills rather than a single one. Most work runs along one **main flow** (idea → ship: grill → PRD → issues → implement → review), two **on-ramps** merge onto it (a triage lane for incoming bugs and requests; a codebase-health lane that generates ideas), and everything else is a **standalone** you reach for on its own. Ask a question and you get placed on the right flow, at the right step — not just handed a tool.
+`ask-matt` が与えてくれる考え方の軸は **flow** です — 単一の skill ではなく、skill 群を*通り抜ける*経路のことです。ほとんどの作業は1本の **main flow**（アイデア → 出荷: grill → PRD → issues → implement → review）に沿って進み、そこに2つの **on-ramp**（受信したバグや要望を扱う triage レーン、アイデアを生み出すコードベース健全性レーン）が合流し、それ以外はすべて単独で使う **standalone** です。質問をすれば、単にツールを渡されるのではなく、正しい flow の正しいステップに配置されます。
 
-## Where it fits
+## 全体の中での位置づけ (Where it fits)
 
-`ask-matt` is the **router** — the standalone map that sits over the whole set. It is the node every other docs page links back to as [ask-matt](https://aihero.dev/skills-ask-matt), so it never sits *in* a chain; it points *into* every chain. From here you'll most often land on [grill-with-docs](https://aihero.dev/skills-grill-with-docs), the head of the main flow, or [triage](https://aihero.dev/skills-triage), the on-ramp for work you didn't create. When even the router's own picture is stale, its [Source](https://github.com/mattpocock/skills/tree/main/skills/engineering/ask-matt) is the map of record.
+`ask-matt` は**ルーター** — 全体を見渡す standalone なマップです。他のすべての docs ページがここへ [ask-matt](https://aihero.dev/skills-ask-matt) として戻ってくるノードであり、それゆえ自分自身が chain の*中*に位置することはなく、あらゆる chain へと*入り口*を指し示します。ここから最も多く着地するのは main flow の先頭である [grill-with-docs](https://aihero.dev/skills-grill-with-docs)、あるいは自分が作ったのではない作業のための on-ramp である [triage](https://aihero.dev/skills-triage) です。ルーター自身の把握している全体像すら古くなっている場合は、[Source](https://github.com/mattpocock/skills/tree/main/skills/engineering/ask-matt) が正式なマップとなります。
