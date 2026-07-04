@@ -1,15 +1,16 @@
 ---
 name: writing-shape
-description: Take a markdown file of raw material and shape it into an article through a conversational session — drafting candidate openings, growing the piece paragraph by paragraph, arguing about format (lists, tables, callouts, quotes) at each step. Use when the user has a pile of notes, fragments, or a rough draft and wants help turning it into something publishable.
+description: Writing, exploit — shape raw material into an article, paragraph by paragraph.
+disable-model-invocation: true
 ---
 
 <what-to-do>
 
 ユーザーが raw material の markdown file を渡す (または渡す予定)。入力 pile として扱う — 整った fragment のリストから、構造化されていない長文、transcript まで何でもよい。フォーマットは問わない。何もする前に最初から最後まで読む。
 
-次に、別の article ドキュメントを生成する shaping session を実行する。raw material file は編集しない — この skill にとって read-only。
+Then run a shaping session that produces a separate article document. This is **exploit**: the exploring is done, the pile is fixed — commit to a structure and mine the pile to fill it. Do not edit the raw material file — it is read-only to this skill.
 
-記事の保存先をユーザーが指定していなければ、一度だけ確認し、path を記憶する。ユーザーはセッション中に article file を編集する; 書く前に常に再読み込みして編集を保持する。
+If the user did not say where to save the article, ask once and remember the path.
 
 </what-to-do>
 
@@ -17,11 +18,25 @@ description: Take a markdown file of raw material and shape it into an article t
 
 ## ループ (The loop)
 
-1. **pile を読む (Read the pile.)** 入力 file を最初から最後まで読む。内容の全体像を把握する。
-2. **2–3 個の候補 opening をドラフト (Draft 2–3 candidate openings.)** 各 opening は記事の異なる thesis や角度を示唆する。すべて見せる。ユーザーに選ばせるか hybrid を作らせる。選ばれた opening が記事の残りが果たすべきことを定義する。
-3. **段落ごとに育てる (Grow paragraph by paragraph.)** opening が固まったら、"given this opening, what does the reader need to hear next?" と問う。pile から material を引いて答える。次の beat が paragraph、list、table、callout、quote、code block か議論する。各フォーマット選択は意図的で説明可能であること。
-4. **進めながら article file に append (Append to the article file as you go.)** batch しない。合意した段落や block をすぐ書き、ユーザーが記事の形になっていくのを見られるようにする。
-5. **記事が終わるまで step 3 をループ (Loop step 3 until the article is done.)** 終わりはユーザーが決める。
+1. **Read the pile.** Read the input file in full. Form a sense of what's in it.
+2. **Establish the prerequisites.** Settle with the user what the reader knows walking in — the concepts that are **grounded** from the start. Everything else must be grounded by a block before a later block can lean on it. See [Grounding](#grounding).
+3. **Draft 2–3 candidate openings.** Each opening should imply a different thesis or angle for the article. Show all of them. Force the user to pick or compose a hybrid. The chosen opening defines what the rest of the article must do.
+4. **Grow paragraph by paragraph.** After the opening lands, ask "given this opening, what does the reader need to hear next?" Pull material from the pile to answer. The next block may only lean on grounded concepts, and grounds new ones as it lands. Argue about the form the next block takes — a paragraph, a list, a table, a callout, a quote, a code block. Each format choice should be deliberate and defensible.
+5. **Append to the article file as you go.** Don't batch. Write each agreed paragraph or block immediately so the user can see the article taking shape.
+6. **Loop step 4 until the article is done.** The user decides when it's done.
+
+## Grounding
+
+Every **concept** has to be **grounded** before a block can lean on it: the reader either walked in knowing it or met it in an earlier block. A block that reaches for an ungrounded concept loses the reader. The unit is the concept, not the word for it — a block can lean on an idea the reader lacks even with no jargon in sight. Where a concept has a name — a **term** — grounding it means landing the idea and the term together.
+
+A concept gets grounded one of two ways:
+
+- **Prerequisite** — grounded before the opening. The reader brings it. Fixed at the start.
+- **Introduced** — a block establishes it, and from then on it's grounded for the rest of the article.
+
+Keep a running list of what's grounded. When you ask "what does the reader need to hear next?", an ungrounded concept the next move needs is itself the answer: ground it first — here or in an earlier block — or you can't make the move. This is the gap-naming of [Pulling from the pile](#pulling-from-the-pile) one level up: there the pile is missing material; here the article is missing a foundation.
+
+The lever is what you make a prerequisite versus what you ground inside the article. Demand too much up front and you shut readers out; ground too much inside and the opening drowns in definitions. Settle it with the user when you establish prerequisites.
 
 ## 会話の雰囲気 (Conversational feel)
 
@@ -43,7 +58,7 @@ pile に記事が必要とするものがなければ、gap を明示: "We need 
 
 ## 実際に行うフォーマット議論 (Format arguments to actually have)
 
-beat の描画方法を選ぶとき、ユーザーと声に出して次の tradeoff を検討する (黙って決めない):
+When choosing how to render a block, weigh these tradeoffs out loud with the user, not silently:
 
 - **Prose vs. list.** Prose は argument を運ぶ; list は並列項目を運ぶ。項目が真に並列でなければ prose がよい。並列なら list の方が scan が速い。
 - **Inline vs. callout.** Tips、warnings、余談は callout (`> [!TIP]`、`> [!NOTE]`) — ただし inline だと本論を本当に derail する場合のみ。そうでなければ inline のまま。
@@ -57,8 +72,8 @@ beat の描画方法を選ぶとき、ユーザーと声に出して次の trade
 
 ## スコープ外 (Out of scope)
 
-- pile にない新しい fragment の採掘 (pile が入力 — 不完全なら gap を名指しし、ユーザーに埋めてもらうか section を切る)。
-- raw material file の編集。
-- 特定 platform 向けの publishing、formatting、ユーザーが求めていない frontmatter の追加。
+- Mining for new fragments that aren't in the pile (handle gaps as in "Pulling from the pile").
+- Editing the raw material file.
+- Publishing, formatting for a specific platform, or adding frontmatter the user didn't ask for.
 
 </supporting-info>

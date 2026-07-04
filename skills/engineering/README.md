@@ -6,20 +6,23 @@
 
 あなたがタイプした場合にのみ到達可能（`disable-model-invocation: true`）。
 
-- **[ask-matt](./ask-matt/SKILL.md)** — 状況に合う skill やフローを尋ねる。このリポジトリのユーザー起動 skills を束ねるルーター。
-- **[grill-with-docs](./grill-with-docs/SKILL.md)** — 計画や設計を洗練するための容赦ないインタビュー。進めながら docs（ADR と glossary）も作成する。
-- **[triage](./triage/SKILL.md)** — issue と外部 PR を、triage の役割からなる状態機械に通す — 分類し、検証し、必要なら grill し、エージェントがすぐ着手できる briefs を書く。
-- **[improve-codebase-architecture](./improve-codebase-architecture/SKILL.md)** — codebase をスキャンして deepening の機会を見つけ、視覚的な HTML レポートとして提示し、選んだ箇所について grilling を進める。
-- **[setup-matt-pocock-skills](./setup-matt-pocock-skills/SKILL.md)** — engineering skills 向けにこのリポジトリを設定する — issue tracker、triage ラベルの語彙、domain doc のレイアウトをセットアップする。他の engineering skills を初めて使う前に一度実行する。
-- **[to-issues](./to-issues/SKILL.md)** — plan、spec、または PRD を、tracer-bullet の vertical slice を使って、プロジェクトの issue tracker 上で独立して着手可能な issue に分解する。
-- **[to-prd](./to-prd/SKILL.md)** — 現在の会話を PRD に変換し、プロジェクトの issue tracker に公開する — インタビューはなく、すでに議論した内容をまとめるだけ。
-- **[prototype](./prototype/SKILL.md)** — 設計を具体化するための使い捨てプロトタイプを作る — 状態やビジネスロジックの検討用に動作するターミナルアプリ、または1つの route から切り替えられる、まったく異なる複数の UI バリエーション。
+- **[ask-matt](./ask-matt/SKILL.md)** — Ask which skill or flow fits your situation. A router over the user-invoked skills in this repo.
+- **[grill-with-docs](./grill-with-docs/SKILL.md)** — Grilling session that also builds your project's domain model, sharpening terminology and updating `CONTEXT.md` and ADRs inline.
+- **[triage](./triage/SKILL.md)** — Move issues through a state machine of triage roles.
+- **[improve-codebase-architecture](./improve-codebase-architecture/SKILL.md)** — Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.
+- **[setup-matt-pocock-skills](./setup-matt-pocock-skills/SKILL.md)** — Configure this repo for the engineering skills (issue tracker, triage labels, domain doc layout). Run once per repo.
+- **[to-issues](./to-issues/SKILL.md)** — Break any plan, spec, or PRD into independently-grabbable issues using vertical slices.
+- **[to-prd](./to-prd/SKILL.md)** — Turn the current conversation into a PRD and publish it to the issue tracker.
 
 ## モデル起動 (Model-invoked)
 
 モデルとユーザーの両方から到達可能（モデルが自動的に使えるよう豊富なトリガーフレーズを持つ）。
 
-- **[diagnosing-bugs](./diagnosing-bugs/SKILL.md)** — 難しいバグやパフォーマンス低下に対する、規律ある diagnosis loop: 再現 → 最小化 → 仮説 → 計測 → 修正 → 回帰テスト。
-- **[tdd](./tdd/SKILL.md)** — red-green-refactor loop による test-driven development。機能の構築やバグ修正を、vertical slice 単位で一つずつ進める。
-- **[domain-modeling](./domain-modeling/SKILL.md)** — プロジェクトの domain model を積極的に構築・洗練する — 用語を glossary に照らして検証し、edge-case シナリオでストレステストを行い、`CONTEXT.md` と ADR をその場で更新する。
-- **[codebase-design](./codebase-design/SKILL.md)** — 深いモジュールを設計するための共有の規律と語彙: 小さなインターフェースの後ろに多くの振る舞いを、クリーンな seam に配置し、そのインターフェースを通じてテスト可能にする。
+- **[prototype](./prototype/SKILL.md)** — Build a throwaway prototype to answer a design question: a runnable terminal app for state/logic, or several toggleable UI variations.
+
+- **[diagnosing-bugs](./diagnosing-bugs/SKILL.md)** — Disciplined diagnosis loop for hard bugs and performance regressions: reproduce → minimise → hypothesise → instrument → fix → regression-test.
+- **[research](./research/SKILL.md)** — Investigate a question against high-trust primary sources and capture the findings as a cited Markdown file in the repo, run as a background agent.
+- **[tdd](./tdd/SKILL.md)** — Test-driven development with a red-green-refactor loop. Builds features or fixes bugs one vertical slice at a time.
+- **[domain-modeling](./domain-modeling/SKILL.md)** — Actively build and sharpen a project's domain model — challenge terms, stress-test with scenarios, update `CONTEXT.md` and ADRs inline.
+- **[codebase-design](./codebase-design/SKILL.md)** — Shared discipline and vocabulary for designing deep modules: small interfaces, clean seams, testable through the interface.
+- **[code-review](./code-review/SKILL.md)** — Two-axis review of the diff since a fixed point: **Standards** (does it follow the repo's coding standards, plus a Fowler smell baseline?) and **Spec** (does it faithfully implement the originating issue/PRD?), run as parallel sub-agents.
