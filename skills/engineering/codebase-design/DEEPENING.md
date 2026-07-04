@@ -1,37 +1,37 @@
 # Deepening
 
-How to deepen a cluster of shallow modules safely, given its dependencies. Assumes the vocabulary in [SKILL.md](SKILL.md) — **module**, **interface**, **seam**, **adapter**.
+依存関係を踏まえて、shallow な module の cluster を安全に deepen する方法。[SKILL.md](SKILL.md) の vocabulary — **module**、**interface**、**seam**、**adapter** — を前提とする。
 
 ## Dependency categories
 
-When assessing a candidate for deepening, classify its dependencies. The category determines how the deepened module is tested across its seam.
+deepening の候補を評価するとき、その依存関係を分類する。この category が、深められた module がその seam を越えてどうテストされるかを決める。
 
 ### 1. In-process
 
-Pure computation, in-memory state, no I/O. Always deepenable — merge the modules and test through the new interface directly. No adapter needed.
+純粋な計算、in-memory な state、I/O 無し。常に deepen 可能 — module をマージし、新しい interface を通して直接テストする。adapter は不要。
 
 ### 2. Local-substitutable
 
-Dependencies that have local test stand-ins (PGLite for Postgres, in-memory filesystem). Deepenable if the stand-in exists. The deepened module is tested with the stand-in running in the test suite. The seam is internal; no port at the module's external interface.
+ローカルなテスト用代替物がある依存関係（Postgres に対する PGLite、in-memory filesystem）。代替物が存在すれば deepen 可能。深められた module は test suite の中で代替物を動かしてテストされる。seam は内部にあり、module の external interface に port は無い。
 
-### 3. Remote but owned (Ports & Adapters)
+### 3. Remote but owned（Ports & Adapters）
 
-Your own services across a network boundary (microservices, internal APIs). Define a **port** (interface) at the seam. The deep module owns the logic; the transport is injected as an **adapter**. Tests use an in-memory adapter. Production uses an HTTP/gRPC/queue adapter.
+network 境界を越えた自分自身の services（microservices、internal API）。seam に **port**（interface）を定義する。deep module が logic を所有し、transport は **adapter** として注入される。テストは in-memory な adapter を使う。production は HTTP/gRPC/queue な adapter を使う。
 
-Recommendation shape: *"Define a port at the seam, implement an HTTP adapter for production and an in-memory adapter for testing, so the logic sits in one deep module even though it's deployed across a network."*
+推奨の形: *"seam に port を定義し、production 用の HTTP adapter とテスト用の in-memory adapter を実装することで、network をまたいでデプロイされていても logic は 1 つの deep module に収まる。"*
 
-### 4. True external (Mock)
+### 4. True external（Mock）
 
-Third-party services (Stripe, Twilio, etc.) you don't control. The deepened module takes the external dependency as an injected port; tests provide a mock adapter.
+自分が制御できないサードパーティの services（Stripe、Twilio など）。深められた module は external な依存を注入された port として受け取り、テストは mock adapter を提供する。
 
 ## Seam discipline
 
-- **One adapter means a hypothetical seam. Two adapters means a real one.** Don't introduce a port unless at least two adapters are justified (typically production + test). A single-adapter seam is just indirection.
-- **Internal seams vs external seams.** A deep module can have internal seams (private to its implementation, used by its own tests) as well as the external seam at its interface. Don't expose internal seams through the interface just because tests use them.
+- **Adapter が 1 つなら hypothetical な seam。Adapter が 2 つなら本物の seam。** 少なくとも 2 つの adapter が正当化される（典型的には production + test）のでなければ、port を導入しない。単一 adapter の seam は単なる間接化に過ぎない。
+- **Internal seam と external seam。** deep module は、その interface における external seam に加えて、internal seam（その implementation に private で、自身のテストが使う）を持つこともある。テストがそれを使うからといって、internal seam を interface 経由で公開しない。
 
 ## Testing strategy: replace, don't layer
 
-- Old unit tests on shallow modules become waste once tests at the deepened module's interface exist — delete them.
-- Write new tests at the deepened module's interface. The **interface is the test surface**.
-- Tests assert on observable outcomes through the interface, not internal state.
-- Tests should survive internal refactors — they describe behaviour, not implementation. If a test has to change when the implementation changes, it's testing past the interface.
+- shallow な module に対する古い unit test は、深められた module の interface でのテストが存在するようになった時点で無駄になる — 削除する。
+- 深められた module の interface で新しいテストを書く。**interface がテストの表面である。**
+- テストは internal state ではなく、interface を通した観測可能な結果を assert する。
+- テストは internal な refactor を生き延びるべきである — behaviour を記述するのであり、implementation を記述するのではない。implementation が変わったときにテストも変えなければならないなら、それは interface を超えてテストしている。

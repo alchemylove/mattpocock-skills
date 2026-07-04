@@ -1,8 +1,8 @@
 # RESOURCES.md Format
 
-`RESOURCES.md` is the curated set of trusted sources for this topic. Knowledge for explainers should be drawn from here, not from parametric guesses. Wisdom comes from the communities listed here.
+`RESOURCES.md` は、このトピックについて厳選された信頼できる source の集合である。説明のための knowledge は parametric な当てずっぽうではなく、ここから引き出すべきである。wisdom は、ここに挙げられた community から得られる。
 
-## Structure
+## 構造 (Structure)
 
 ```md
 # {Topic} Resources
@@ -22,11 +22,11 @@
   Use for: real-time coaching feedback on lifts.
 ```
 
-## Rules
+## ルール (Rules)
 
-- **High-trust only.** Prefer primary sources, recognised experts, peer-reviewed work, and communities with strong moderation. If a resource is marketing dressed as education, leave it out.
-- **Annotate every entry.** A bare link is useless in three months. Add one line: what it covers and when to reach for it.
-- **Group by Knowledge / Wisdom.** Mirrors the philosophy in [SKILL.md](./SKILL.md). It is fine for a resource to appear in only one group.
-- **Surface gaps explicitly.** If no good resource exists for an area the mission needs, write a `## Gaps` section listing what is missing. This drives future search.
-- **Prune ruthlessly.** A resource that turned out to be wrong, shallow, or off-mission should be removed, not buried. Better five sharp sources than thirty mediocre ones.
-- **Record community preferences.** If the user has opted out of joining communities, note it here so future sessions don't keep proposing them.
+- **高信頼のものだけ。** primary source、著名な専門家、peer-reviewed な研究、しっかり moderate されている community を優先する。教育を装ったマーケティングであれば、含めない。
+- **すべてのエントリに注釈を付ける。** 裸のリンクは 3 か月後には役に立たなくなる。何をカバーしていて、いつ使うべきかを一行加える。
+- **Knowledge / Wisdom でグループ化する。** [SKILL.md](./SKILL.md) の哲学を反映している。ある resource が片方のグループにしか現れなくても構わない。
+- **gap を明示的に表に出す。** mission が必要とする領域に良い resource が存在しない場合は、`## Gaps` セクションを書いて欠けているものを列挙する。これが今後の調査を駆動する。
+- **容赦なく pruning する。** 間違っている、浅い、あるいは mission から外れていることが分かった resource は、埋もれさせるのではなく削除するべきである。平凡な resource が 30 個あるより、鋭い resource が 5 個ある方がよい。
+- **community に関する好みを記録する。** ユーザーが community への参加を望まないと表明した場合は、ここに書き留めておき、今後のセッションで繰り返し提案しないようにする。

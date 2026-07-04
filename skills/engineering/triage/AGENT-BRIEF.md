@@ -1,24 +1,24 @@
 # Writing Agent Briefs
 
-An agent brief is a structured comment posted on a GitHub issue or PR when it moves to `ready-for-agent`. It is the authoritative specification that an AFK agent will work from. The original body and discussion are context — the agent brief is the contract.
+agent brief とは、GitHub issue や PR が `ready-for-agent` に移るときに投稿される構造化された comment である。それは AFK agent が作業の拠り所とする権威ある specification である。元の本文と議論は context に過ぎない — agent brief こそが contract である。
 
-The brief states **what the agent should do**, which stretches to both surfaces: for an issue, that's building the change from nothing; for a PR, it's what's left to do *to the existing diff* — finish it, close gaps, address review points. Same principles either way; the PR example below shows the difference.
+brief は **agent が何をすべきか** を述べる。これは両方の surface に及ぶ: issue の場合はゼロから変更を build すること、PR の場合は *既存の diff に対して* 残っている作業 — 仕上げる、gap を埋める、review の指摘に対応する — である。原則はどちらも同じ。下記の PR の例がその違いを示す。
 
 ## Principles
 
 ### Durability over precision
 
-The issue may sit in `ready-for-agent` for days or weeks. The codebase will change in the meantime. Write the brief so it stays useful even as files are renamed, moved, or refactored.
+issue は `ready-for-agent` のまま数日から数週間座っていることがある。その間に codebase は変化する。ファイルが rename、移動、refactor されても brief が有用であり続けるように書く。
 
-- **Do** describe interfaces, types, and behavioral contracts
-- **Do** name specific types, function signatures, or config shapes that the agent should look for or modify
-- **Don't** reference file paths — they go stale
-- **Don't** reference line numbers
-- **Don't** assume the current implementation structure will remain the same
+- interface、型、behavioral contract を記述する**べき**
+- agent が探すべき、または変更すべき具体的な型、関数 signature、config の形に**言及する**べき
+- ファイルパスに**言及しない** — すぐに古くなる
+- 行番号に**言及しない**
+- 現在の implementation の構造がそのまま残ると**想定しない**
 
 ### Behavioral, not procedural
 
-Describe **what** the system should do, not **how** to implement it. The agent will explore the codebase fresh and make its own implementation decisions.
+システムが**何を**すべきかを記述し、それを**どう**実装するかは記述しない。agent は codebase をまっさらに探索し、自分自身で implementation の決定を行う。
 
 - **Good:** "The `SkillConfig` type should accept an optional `schedule` field of type `CronExpression`"
 - **Bad:** "Open src/types/skill.ts and add a schedule field on line 42"
@@ -27,14 +27,14 @@ Describe **what** the system should do, not **how** to implement it. The agent w
 
 ### Complete acceptance criteria
 
-The agent needs to know when it's done. Every agent brief must have concrete, testable acceptance criteria. Each criterion should be independently verifiable.
+agent はいつ完了したかを知る必要がある。すべての agent brief は具体的で testable な acceptance criteria を持たなければならない。各 criterion は独立して検証可能であるべきである。
 
 - **Good:** "Running `gh issue list --label needs-triage` returns issues that have been through initial classification"
 - **Bad:** "Triage should work correctly"
 
 ### Explicit scope boundaries
 
-State what is out of scope. This prevents the agent from gold-plating or making assumptions about adjacent features.
+何が対象外かを述べる。これにより agent が gold-plating したり、隣接する機能について勝手な想定をしたりするのを防ぐ。
 
 ## Template
 
@@ -69,7 +69,7 @@ Be specific about edge cases and error conditions.
 
 ## Examples
 
-### Good agent brief (bug)
+### 良い agent brief（bug）
 
 ```markdown
 ## Agent Brief
@@ -104,7 +104,7 @@ and append "..." to indicate truncation.
 - Multi-line description support
 ```
 
-### Good agent brief (enhancement)
+### 良い agent brief（enhancement）
 
 ```markdown
 ## Agent Brief
@@ -145,9 +145,9 @@ checked for matches.
 - Bug reports (only enhancement rejections go to `.out-of-scope/`)
 ```
 
-### Good agent brief (PR)
+### 良い agent brief（PR）
 
-For a PR, "Current behavior" describes the state of the diff, and the brief asks the agent to finish or fix it rather than build from scratch.
+PR の場合、"Current behavior" は diff の現在の状態を記述し、brief はゼロから build するのではなく、それを仕上げる、または修正するよう agent に求める。
 
 ```markdown
 ## Agent Brief
@@ -182,7 +182,7 @@ is untouched when the flag is absent.
 - Changing the JSON shape of the success payload the PR already defined
 ```
 
-### Bad agent brief
+### 悪い agent brief
 
 ```markdown
 ## Agent Brief
@@ -198,10 +198,10 @@ The function around line 150 has the issue.
 - src/types.ts (line 42)
 ```
 
-This is bad because:
-- No category
-- Vague description ("the triage thing is broken")
-- References file paths and line numbers that will go stale
-- No acceptance criteria
-- No scope boundaries
-- No description of current vs desired behavior
+これが悪い理由:
+- category が無い
+- 説明が曖昧（"the triage thing is broken"）
+- すぐに古くなるファイルパスや行番号を参照している
+- acceptance criteria が無い
+- scope の境界が無い
+- 現在の behavior と desired behavior の記述が無い

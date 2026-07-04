@@ -24,16 +24,16 @@ _Avoid_: Client, buyer, account
 
 ## Rules
 
-- **Be opinionated.** When multiple words exist for the same concept, pick the best one and list the others under `_Avoid_`.
-- **Keep definitions tight.** One or two sentences max. Define what it IS, not what it does.
-- **Only include terms specific to this project's context.** General programming concepts (timeouts, error types, utility patterns) don't belong even if the project uses them extensively. Before adding a term, ask: is this a concept unique to this context, or a general programming concept? Only the former belongs.
-- **Group terms under subheadings** when natural clusters emerge. If all terms belong to a single cohesive area, a flat list is fine.
+- **意見を持つ。** 同じ concept に複数の語が存在するなら、最良のものを選び、残りを `_Avoid_` の下に列挙する。
+- **定義を簡潔に保つ。** 最大でも 1〜2 文。それが何を「する」かではなく、何で「ある」かを定義する。
+- **このプロジェクトの context に固有の用語だけを含める。** 一般的なプログラミングの concept（timeout、error type、utility pattern）は、プロジェクトがそれらを頻繁に使っていても含まない。用語を追加する前に問う: これはこの context 固有の concept か、それとも一般的なプログラミングの concept か? 前者だけが含まれるべきである。
+- 自然な集まりが現れたら**サブ見出しの下に用語をグループ化する**。すべての用語が単一のまとまった領域に属するなら、flat なリストで構わない。
 
 ## Single vs multi-context repos
 
-**Single context (most repos):** One `CONTEXT.md` at the repo root.
+**Single context（ほとんどの repo）:** repo root に 1 つの `CONTEXT.md`。
 
-**Multiple contexts:** A `CONTEXT-MAP.md` at the repo root lists the contexts, where they live, and how they relate to each other:
+**Multiple contexts:** repo root の `CONTEXT-MAP.md` が contexts のリスト、それぞれの場所、互いの関係を示す:
 
 ```md
 # Context Map
@@ -51,10 +51,10 @@ _Avoid_: Client, buyer, account
 - **Ordering ↔ Billing**: Shared types for `CustomerId` and `Money`
 ```
 
-The skill infers which structure applies:
+skill はどちらの structure が該当するかを推測する:
 
-- If `CONTEXT-MAP.md` exists, read it to find contexts
-- If only a root `CONTEXT.md` exists, single context
-- If neither exists, create a root `CONTEXT.md` lazily when the first term is resolved
+- `CONTEXT-MAP.md` が存在すれば、それを読んで contexts を見つける
+- root の `CONTEXT.md` のみ存在すれば、single context
+- どちらも存在しなければ、最初の用語が解決したときに root の `CONTEXT.md` を遅延生成する
 
-When multiple contexts exist, infer which one the current topic relates to. If unclear, ask.
+複数の context が存在する場合、現在のトピックがどれに関連するか推測する。不明なら尋ねる。

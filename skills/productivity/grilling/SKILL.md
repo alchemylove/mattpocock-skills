@@ -1,12 +1,12 @@
 ---
 name: grilling
-description: Grill the user relentlessly about a plan or design. Use when the user wants to stress-test a plan before building, or uses any 'grill' trigger phrases.
+description: 計画や設計についてユーザーを容赦なく grill する。ユーザーが構築前に計画を stress-test したい、または「grill」のトリガーフレーズを使ったときに使う。
 ---
 
-Interview me relentlessly about every aspect of this plan until we reach a shared understanding. Walk down each branch of the design tree, resolving dependencies between decisions one-by-one. For each question, provide your recommended answer.
+この計画のあらゆる側面について、共通の理解に達するまで容赦なくインタビューする。design tree の各 branch を辿り、決定同士の依存関係を一つずつ解消していく。各質問については、推奨する答えを提示する。
 
-Ask the questions one at a time, waiting for feedback on each question before continuing. Asking multiple questions at once is bewildering.
+質問は一度に一つずつ行い、次に進む前に各質問へのフィードバックを待つ。複数の質問を一度に投げかけると混乱を招く。
 
-If a question can be answered by exploring the codebase, explore the codebase instead.
+コードベースを調べれば答えられる質問は、コードベースを調べる。
 
-Do not enact the plan until I confirm we have reached a shared understanding.
+共通の理解に達したことをユーザーが確認するまで、計画を実行しない。

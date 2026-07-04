@@ -1,18 +1,18 @@
 # Domain Docs
 
-How the engineering skills should consume this repo's domain documentation when exploring the codebase.
+engineering skills が codebase を探索する際、この repo の domain documentation をどう消費すべきか。
 
-## Before exploring, read these
+## 探索の前にこれらを読む
 
-- **`CONTEXT.md`** at the repo root, or
-- **`CONTEXT-MAP.md`** at the repo root if it exists — it points at one `CONTEXT.md` per context. Read each one relevant to the topic.
-- **`docs/adr/`** — read ADRs that touch the area you're about to work in. In multi-context repos, also check `src/<context>/docs/adr/` for context-scoped decisions.
+- repo root の **`CONTEXT.md`**、または
+- 存在すれば repo root の **`CONTEXT-MAP.md`** — context ごとの `CONTEXT.md` を指す。トピックに関連するものをそれぞれ読む。
+- **`docs/adr/`** — これから触れる領域に関わる ADR を読む。multi-context な repo では、context に限定された決定のために `src/<context>/docs/adr/` も確認する。
 
-If any of these files don't exist, **proceed silently**. Don't flag their absence; don't suggest creating them upfront. The `/domain-modeling` skill (reached via `/grill-with-docs` and `/improve-codebase-architecture`) creates them lazily when terms or decisions actually get resolved.
+これらのファイルのいずれかが存在しなくても、**黙って進める**。無いことを指摘したり、先回りして作成を提案したりしない。`/domain-modeling` skill（`/grill-with-docs` と `/improve-codebase-architecture` から到達する）が、用語や決定が実際に解決したときに遅延生成する。
 
 ## File structure
 
-Single-context repo (most repos):
+Single-context な repo（ほとんどの repo）:
 
 ```
 /
@@ -23,7 +23,7 @@ Single-context repo (most repos):
 └── src/
 ```
 
-Multi-context repo (presence of `CONTEXT-MAP.md` at the root):
+Multi-context な repo（root に `CONTEXT-MAP.md` が存在する）:
 
 ```
 /
@@ -38,14 +38,15 @@ Multi-context repo (presence of `CONTEXT-MAP.md` at the root):
         └── docs/adr/
 ```
 
-## Use the glossary's vocabulary
+## glossary の vocabulary を使う
 
-When your output names a domain concept (in an issue title, a refactor proposal, a hypothesis, a test name), use the term as defined in `CONTEXT.md`. Don't drift to synonyms the glossary explicitly avoids.
+出力が domain concept に言及するとき（issue のタイトル、refactor の提案、hypothesis、テスト名）、`CONTEXT.md` で定義された用語を使う。glossary が明示的に避けている同義語に流れない。
 
-If the concept you need isn't in the glossary yet, that's a signal — either you're inventing language the project doesn't use (reconsider) or there's a real gap (note it for `/domain-modeling`).
+必要な concept がまだ glossary に無ければ、それは signal である — プロジェクトが使わない言葉を発明しているか（考え直す）、あるいは本物の gap があるか（`/domain-modeling` のためにメモしておく）。
 
-## Flag ADR conflicts
+## ADR との衝突を flag する
 
-If your output contradicts an existing ADR, surface it explicitly rather than silently overriding:
+出力が既存の ADR と矛盾する場合、黙って上書きするのではなく明示的に表に出す:
 
 > _Contradicts ADR-0007 (event-sourced orders) — but worth reopening because…_
+> 「ADR-0007（event-sourced orders）と矛盾するが、〜という理由で再検討する価値がある」

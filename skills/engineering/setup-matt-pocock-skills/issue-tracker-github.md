@@ -1,45 +1,45 @@
 # Issue tracker: GitHub
 
-Issues and PRDs for this repo live as GitHub issues. Use the `gh` CLI for all operations.
+この repo の issue と PRD は GitHub issue として存在する。すべての操作に `gh` CLI を使う。
 
 ## Conventions
 
-- **Create an issue**: `gh issue create --title "..." --body "..."`. Use a heredoc for multi-line bodies.
-- **Read an issue**: `gh issue view <number> --comments`, filtering comments by `jq` and also fetching labels.
-- **List issues**: `gh issue list --state open --json number,title,body,labels,comments --jq '[.[] | {number, title, body, labels: [.labels[].name], comments: [.comments[].body]}]'` with appropriate `--label` and `--state` filters.
-- **Comment on an issue**: `gh issue comment <number> --body "..."`
-- **Apply / remove labels**: `gh issue edit <number> --add-label "..."` / `--remove-label "..."`
+- **issue を作成する**: `gh issue create --title "..." --body "..."`。複数行の body には heredoc を使う。
+- **issue を読む**: `gh issue view <number> --comments`、comment を `jq` でフィルタし、label も取得する。
+- **issue を一覧する**: `gh issue list --state open --json number,title,body,labels,comments --jq '[.[] | {number, title, body, labels: [.labels[].name], comments: [.comments[].body]}]'` に適切な `--label` と `--state` のフィルタを付ける。
+- **issue に comment する**: `gh issue comment <number> --body "..."`
+- **label を適用 / 除去する**: `gh issue edit <number> --add-label "..."` / `--remove-label "..."`
 - **Close**: `gh issue close <number> --comment "..."`
 
-Infer the repo from `git remote -v` — `gh` does this automatically when run inside a clone.
+`git remote -v` から repo を推測する — clone の中で実行すれば `gh` が自動でこれを行う。
 
-## Pull requests as a triage surface
+## Triage surface としての pull request
 
-**PRs as a request surface: no.** _(Set to `yes` if this repo treats external PRs as feature requests; `/triage` reads this flag.)_
+**PRs as a request surface: no。** _(この repo が external な PR を feature request として扱うなら `yes` に設定する。`/triage` はこの flag を読む。)_
 
-When set to `yes`, PRs run through the same labels and states as issues, using the `gh pr` equivalents:
+`yes` に設定すると、PR は issue と同じ label・state を通り、`gh pr` の対応するコマンドを使う:
 
-- **Read a PR**: `gh pr view <number> --comments` and `gh pr diff <number>` for the diff.
-- **List external PRs for triage**: `gh pr list --state open --json number,title,body,labels,author,authorAssociation,comments` then keep only `authorAssociation` of `CONTRIBUTOR`, `FIRST_TIME_CONTRIBUTOR`, or `NONE` (drop `OWNER`/`MEMBER`/`COLLABORATOR`).
-- **Comment / label / close**: `gh pr comment`, `gh pr edit --add-label`/`--remove-label`, `gh pr close`.
+- **PR を読む**: diff には `gh pr view <number> --comments` と `gh pr diff <number>`。
+- **triage 対象の external な PR を一覧する**: `gh pr list --state open --json number,title,body,labels,author,authorAssociation,comments` を実行し、`authorAssociation` が `CONTRIBUTOR`、`FIRST_TIME_CONTRIBUTOR`、`NONE` のものだけを残す（`OWNER`/`MEMBER`/`COLLABORATOR` は除外）。
+- **Comment / label / close**: `gh pr comment`、`gh pr edit --add-label`/`--remove-label`、`gh pr close`。
 
-GitHub shares one number space across issues and PRs, so a bare `#42` may be either — resolve with `gh pr view 42` and fall back to `gh issue view 42`.
+GitHub は issue と PR で番号空間を共有しているため、単なる `#42` はどちらの可能性もある — `gh pr view 42` で解決し、ダメなら `gh issue view 42` にフォールバックする。
 
-## When a skill says "publish to the issue tracker"
+## skill が "publish to the issue tracker" と言うとき
 
-Create a GitHub issue.
+GitHub issue を作成する。
 
-## When a skill says "fetch the relevant ticket"
+## skill が "fetch the relevant ticket" と言うとき
 
-Run `gh issue view <number> --comments`.
+`gh issue view <number> --comments` を実行する。
 
 ## Wayfinding operations
 
-Used by `/wayfinder`. The **map** is a single issue with **child** issues as tickets.
+`/wayfinder` が使用する。**map** はチケットとなる **child** issue を持つ単一の issue である。
 
-- **Map**: a single issue labelled `wayfinder:map`, holding the Notes / Decisions-so-far / Fog body. `gh issue create --label wayfinder:map`.
-- **Child ticket**: an issue linked to the map as a GitHub sub-issue (`gh api` on the sub-issues endpoint). Where sub-issues aren't enabled, add the child to a task list in the map body and put `Part of #<map>` at the top of the child body. Labels: `wayfinder:<type>` (`research`/`prototype`/`grilling`/`task`). Once claimed, the ticket is assigned to the driving dev.
-- **Blocking**: GitHub's **native issue dependencies** — the canonical, UI-visible representation. Add an edge with `gh api --method POST repos/<owner>/<repo>/issues/<child>/dependencies/blocked_by -F issue_id=<blocker-db-id>`, where `<blocker-db-id>` is the blocker's numeric **database id** (`gh api repos/<owner>/<repo>/issues/<n> --jq .id`, _not_ the `#number` or `node_id`). GitHub reports `issue_dependencies_summary.blocked_by` (open blockers only — the live gate). Where dependencies aren't available, fall back to a `Blocked by: #<n>, #<n>` line at the top of the child body. A ticket is unblocked when every blocker is closed.
-- **Frontier query**: list the map's open children (`gh issue list --state open`, scoped to the map's sub-issues / task list), drop any with an open blocker (`issue_dependencies_summary.blocked_by > 0`, or an open issue in the `Blocked by` line) or an assignee; first in map order wins.
-- **Claim**: `gh issue edit <n> --add-assignee @me` — the session's first write.
-- **Resolve**: `gh issue comment <n> --body "<answer>"`, then `gh issue close <n>`, then append a context pointer (gist + link) to the map's Decisions-so-far.
+- **Map**: `wayfinder:map` label が付いた単一の issue で、Notes / Decisions-so-far / Fog の本文を保持する。`gh issue create --label wayfinder:map`。
+- **Child ticket**: map に GitHub sub-issue としてリンクされた issue（sub-issues endpoint に対する `gh api`）。sub-issues が有効でない場合は、map の本文内の task list に child を追加し、child の本文冒頭に `Part of #<map>` を記載する。Labels: `wayfinder:<type>`（`research`/`prototype`/`grilling`/`task`）。claim されると、そのチケットは担当する開発者に assign される。
+- **Blocking**: GitHub の **native issue dependencies** — canonical で UI 上に見える表現。`gh api --method POST repos/<owner>/<repo>/issues/<child>/dependencies/blocked_by -F issue_id=<blocker-db-id>` で edge を追加する。`<blocker-db-id>` は blocker の数値の **database id**（`gh api repos/<owner>/<repo>/issues/<n> --jq .id`。`#number` や `node_id` では*ない*）。GitHub は `issue_dependencies_summary.blocked_by`（open な blocker のみ — live な gate）を報告する。dependencies が利用できない場合は、child の本文冒頭の `Blocked by: #<n>, #<n>` 行にフォールバックする。すべての blocker が close されたときチケットは unblocked になる。
+- **Frontier query**: map の open な child を一覧し（`gh issue list --state open` を map の sub-issues / task list に絞る）、open な blocker がある（`issue_dependencies_summary.blocked_by > 0`、または `Blocked by` 行に open な issue がある）か assignee があるものを除外する。map の順序で最初のものが勝つ。
+- **Claim**: `gh issue edit <n> --add-assignee @me` — セッションの最初の書き込み。
+- **Resolve**: `gh issue comment <n> --body "<answer>"`、次に `gh issue close <n>`、それから map の Decisions-so-far に context pointer（gist + link）を追記する。

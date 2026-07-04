@@ -1,9 +1,9 @@
 # Out-of-Scope Knowledge Base
 
-The `.out-of-scope/` directory in a repo stores persistent records of rejected feature requests. It serves two purposes:
+repo 内の `.out-of-scope/` ディレクトリは、却下された feature request の永続的な記録を保存する。これは 2 つの目的を果たす:
 
-1. **Institutional memory** — why a feature was rejected, so the reasoning isn't lost when the issue is closed
-2. **Deduplication** — when a new issue comes in that matches a prior rejection, the skill can surface the previous decision instead of re-litigating it
+1. **Institutional memory** — なぜ feature が却下されたか。issue が close されても理由が失われないように。
+2. **Deduplication** — 以前の却下に一致する新しい issue が来たとき、skill は再び論争する代わりに以前の決定を表に出せる。
 
 ## Directory structure
 
@@ -14,11 +14,11 @@ The `.out-of-scope/` directory in a repo stores persistent records of rejected f
 └── graphql-api.md
 ```
 
-One file per **concept**, not per issue. Multiple issues requesting the same thing are grouped under one file.
+issue ごとではなく、**concept** ごとに 1 ファイル。同じことを求める複数の issue は 1 つのファイルの下にまとめられる。
 
 ## File format
 
-The file should be written in a relaxed, readable style — more like a short design document than a database entry. Use paragraphs, code samples, and examples to make the reasoning clear and useful to someone encountering it for the first time.
+ファイルは、database の entry というより短い design document のような、肩の力の抜けた読みやすいスタイルで書くべきである。段落、code sample、例を使い、初めて出会う人にとって理由が明確で役立つものにする。
 
 ```markdown
 # Dark Mode
@@ -53,53 +53,53 @@ interface ThemeConfig {
 - #134 — "Dark theme option"
 ```
 
-### Naming the file
+### ファイルに名前を付ける
 
-Use a short, descriptive kebab-case name for the concept: `dark-mode.md`, `plugin-system.md`, `graphql-api.md`. The name should be recognizable enough that someone browsing the directory understands what was rejected without opening the file.
+concept に対して短く説明的な kebab-case の名前を使う: `dark-mode.md`、`plugin-system.md`、`graphql-api.md`。ディレクトリを見る人がファイルを開かなくても何が却下されたか分かるくらい、認識しやすい名前にする。
 
-### Writing the reason
+### 理由を書く
 
-The reason should be substantive — not "we don't want this" but why. Good reasons reference:
+理由は実質的であるべきだ — "we don't want this" ではなく、なぜかを書く。良い理由は以下を参照する:
 
-- Project scope or philosophy ("This project focuses on X; theming is a downstream concern")
-- Technical constraints ("Supporting this would require Y, which conflicts with our Z architecture")
-- Strategic decisions ("We chose to use A instead of B because...")
+- プロジェクトの scope や哲学（"This project focuses on X; theming is a downstream concern"）
+- 技術的な制約（"Supporting this would require Y, which conflicts with our Z architecture"）
+- 戦略的な決定（"We chose to use A instead of B because..."）
 
-The reason should be durable. Avoid referencing temporary circumstances ("we're too busy right now") — those aren't real rejections, they're deferrals.
+理由は durable であるべきだ。一時的な事情（"we're too busy right now"）への言及は避ける — それらは本物の却下ではなく、先送りに過ぎない。
 
-## When to check `.out-of-scope/`
+## `.out-of-scope/` を確認するタイミング
 
-During triage (Step 1: Gather context), read all files in `.out-of-scope/`. When evaluating a new issue:
+triage 中（手順 1: context を集める）に、`.out-of-scope/` 内のすべてのファイルを読む。新しい issue を評価する際:
 
-- Check if the request matches an existing out-of-scope concept
-- Matching is by concept similarity, not keyword — "night theme" matches `dark-mode.md`
-- If there's a match, surface it to the maintainer: "This is similar to `.out-of-scope/dark-mode.md` — we rejected this before because [reason]. Do you still feel the same way?"
+- request が既存の out-of-scope な concept に一致するか確認する
+- マッチングは keyword ではなく concept の類似性で行う — "night theme" は `dark-mode.md` に一致する
+- 一致するものがあれば、それを maintainer に表に出す: "これは `.out-of-scope/dark-mode.md` に似ています — 以前 [理由] で却下しました。今でも同じ考えですか?"
 
-The maintainer may:
+maintainer は以下を選べる:
 
-- **Confirm** — the new issue gets added to the existing file's "Prior requests" list, then closed
-- **Reconsider** — the out-of-scope file gets deleted or updated, and the issue proceeds through normal triage
-- **Disagree** — the issues are related but distinct, proceed with normal triage
+- **Confirm** — 新しい issue が既存ファイルの "Prior requests" リストに追加され、close される
+- **Reconsider** — out-of-scope ファイルが削除または更新され、issue は通常の triage を進む
+- **Disagree** — issue は関連しているが別物であり、通常の triage を進める
 
-## When to write to `.out-of-scope/`
+## `.out-of-scope/` に書くタイミング
 
-Only when an **enhancement** (not a bug) is *rejected* as `wontfix`. This applies to enhancement PRs exactly as it does to issues — a rejected PR is recorded here so the same request doesn't return as fresh code.
+**enhancement**（bug ではない）が `wontfix` として *rejected* されたときのみ。これは issue と全く同様に enhancement な PR にも適用される — 却下された PR はここに記録され、同じ request が新しいコードとして戻ってこないようにする。
 
-Do **not** write here when something is closed as `wontfix` because it's **already implemented**. That's a built feature, not a rejected one; recording it would poison the dedup checks with false rejections. Instead, the closing comment points to where the feature already lives.
+**すでに実装済み**であることを理由に何かが `wontfix` として close された場合はここに**書かない**。それは build された機能であり、却下されたものではない。記録すると、誤った却下で dedup チェックを汚染してしまう。代わりに、closing comment はその機能がすでにどこにあるかを指し示す。
 
-The flow:
+flow:
 
-1. Maintainer decides a feature request is out of scope
-2. Check if a matching `.out-of-scope/` file already exists
-3. If yes: append the new issue to the "Prior requests" list
-4. If no: create a new file with the concept name, decision, reason, and first prior request
-5. Post a comment on the issue explaining the decision and mentioning the `.out-of-scope/` file
-6. Close the issue with the `wontfix` label
+1. maintainer が feature request を対象外と決定する
+2. 一致する `.out-of-scope/` ファイルがすでに存在するか確認する
+3. あれば: 新しい issue を "Prior requests" リストに追記する
+4. 無ければ: concept 名、決定、理由、最初の prior request を持つ新しいファイルを作成する
+5. issue に決定を説明し `.out-of-scope/` ファイルに言及する comment を投稿する
+6. `wontfix` label を付けて issue を close する
 
-## Updating or removing out-of-scope files
+## out-of-scope ファイルの更新・削除
 
-If the maintainer changes their mind about a previously rejected concept:
+maintainer が以前に却下した concept について考えを変えた場合:
 
-- Delete the `.out-of-scope/` file
-- The skill does not need to reopen old issues — they're historical records
-- The new issue that triggered the reconsideration proceeds through normal triage
+- `.out-of-scope/` ファイルを削除する
+- skill は古い issue を再度開く必要はない — それらは historical record である
+- reconsideration を引き起こした新しい issue は通常の triage を進む

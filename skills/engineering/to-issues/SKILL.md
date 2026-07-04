@@ -6,66 +6,66 @@ disable-model-invocation: true
 
 # To Issues
 
-Break a plan into independently-grabbable issues using vertical slices (tracer bullets).
+vertical slices（tracer bullets）を使って、plan を独立して着手可能な issue に分解する。
 
-The issue tracker and triage label vocabulary should have been provided to you — run `/setup-matt-pocock-skills` if not.
+issue tracker と triage label の vocabulary はすでにあなたに提供されているはずである — なければ `/setup-matt-pocock-skills` を実行する。
 
 ## Process
 
-### 1. Gather context
+### 1. context を集める
 
-Work from whatever is already in the conversation context. If the user passes an issue reference (issue number, URL, or path) as an argument, fetch it from the issue tracker and read its full body and comments.
+すでに会話の context にあるものから作業する。ユーザーが issue の参照（issue 番号、URL、パス）を引数として渡した場合、issue tracker から取得し、その本文と comment を全文読む。
 
-### 2. Explore the codebase (optional)
+### 2. codebase を探索する（任意）
 
-If you have not already explored the codebase, do so to understand the current state of the code. Issue titles and descriptions should use the project's domain glossary vocabulary, and respect ADRs in the area you're touching.
+まだ codebase を探索していなければ、コードの現在の状態を理解するために探索する。issue のタイトルと description はプロジェクトの domain glossary の vocabulary を使い、触れる領域の ADR を尊重する。
 
-Look for opportunities to prefactor the code to make the implementation easier. "Make the change easy, then make the easy change."
+implementation を容易にするための prefactor の機会を探す。「変更を簡単にし、それから簡単な変更をする」。
 
-### 3. Draft vertical slices
+### 3. vertical slices を下書きする
 
-Break the plan into **tracer bullet** issues. Each issue is a thin vertical slice that cuts through ALL integration layers end-to-end, NOT a horizontal slice of one layer.
+plan を **tracer bullet** issue に分解する。各 issue は 1 つの layer の水平な slice ではなく、すべての integration layer をエンドツーエンドで貫く薄い vertical slice である。
 
 <vertical-slice-rules>
 
-- Each slice delivers a narrow but COMPLETE path through every layer (schema, API, UI, tests)
-- A completed slice is demoable or verifiable on its own
-- Any prefactoring should be done first
+- 各 slice は狭いが、すべての layer（schema、API、UI、テスト）を貫く COMPLETE な経路を届ける
+- 完了した slice は単体で demo 可能または検証可能である
+- prefactoring はすべて先に行う
 
 </vertical-slice-rules>
 
-### 4. Quiz the user
+### 4. ユーザーに問う
 
-Present the proposed breakdown as a numbered list. For each slice, show:
+提案した分解を番号付きリストとして提示する。各 slice について以下を示す:
 
-- **Title**: short descriptive name
-- **Blocked by**: which other slices (if any) must complete first
-- **User stories covered**: which user stories this addresses (if the source material has them)
+- **Title**: 短く説明的な名前
+- **Blocked by**: 先に完了しなければならない他の slice（あれば）
+- **User stories covered**: この slice が対応する user story（元の資料にあれば）
 
-Ask the user:
+ユーザーに尋ねる:
 
-- Does the granularity feel right? (too coarse / too fine)
-- Are the dependency relationships correct?
-- Should any slices be merged or split further?
+- 粒度は適切に感じるか?（粗すぎる / 細かすぎる）
+- 依存関係は正しいか?
+- いずれかの slice をマージまたはさらに分割すべきか?
 
-Iterate until the user approves the breakdown.
+ユーザーが分解を承認するまで繰り返す。
 
-### 5. Publish the issues to the issue tracker
+### 5. issue を issue tracker に公開する
 
-For each approved slice, publish a new issue to the issue tracker. Use the issue body template below. These issues are considered ready for AFK agents, so publish them with the correct triage label unless instructed otherwise.
+承認された各 slice について、issue tracker に新しい issue を公開する。下記の issue body template を使う。これらの issue は AFK agent 向けに準備が整っているとみなされるため、指示がない限り正しい triage label を付けて公開する。
 
-Publish issues in dependency order (blockers first) so you can reference real issue identifiers in the "Blocked by" field.
+依存関係の順（blocker を先に）で issue を公開し、「Blocked by」欄で実際の issue identifier を参照できるようにする。
 
 <issue-template>
 ## Parent
 
-A reference to the parent issue on the issue tracker (if the source was an existing issue, otherwise omit this section).
+issue tracker 上の parent issue への参照（元が既存の issue だった場合。そうでなければこのセクションは省略する）。
 
 ## What to build
 
-A concise description of this vertical slice. Describe the end-to-end behavior, not layer-by-layer implementation.
+この vertical slice の簡潔な description。layer ごとの implementation ではなく、end-to-end の behavior を記述する。
 
-Avoid specific file paths or code snippets — they go stale fast. Exception: if a prototype produced a snippet that encodes a decision more precisely than prose can (state machine, reducer, schema, type shape), inline it here and note briefly that it came from a prototype. Trim to the decision-rich parts — not a working demo, just the important bits.
+具体的なファイルパスやコードスニペットは避ける — すぐに古くなる。例外: prototype が prose よりも正確に決定事項をエンコードするスニペット（state machine、reducer、schema、type shape）を生み出した場合、ここに inline し、prototype 由来であることを簡潔に記す。決定事項が詰まった部分だけに削る — 動く demo ではなく、重要な部分だけ。
 
 ## Acceptance criteria
 
@@ -75,10 +75,10 @@ Avoid specific file paths or code snippets — they go stale fast. Exception: if
 
 ## Blocked by
 
-- A reference to the blocking ticket (if any)
+- blocking ticket への参照（あれば）
 
-Or "None - can start immediately" if no blockers.
+blocker が無ければ "None - can start immediately" とする。
 
 </issue-template>
 
-Do NOT close or modify any parent issue.
+parent issue を close したり変更したりしない。
