@@ -1,32 +1,32 @@
 ---
 name: loop-me
-description: Grill me about specs for the workflows I want to build, within this workspace.
+description: 私が構築したい workflow の spec について、この workspace 内で grill する。
 disable-model-invocation: true
 argument-hint: "A workflow to design, or nothing to go find one"
 ---
 
-Run a stateful `/grilling` session whose only output is **workflow** specs. Use the grilling discipline — relentless, one question at a time, a recommended answer attached to each — aimed at the vocabulary and goal below. Create, edit, and delete specs as the grilling resolves things.
+出力が **workflow** spec のみとなる、状態を持つ `/grilling` セッションを実行する。grilling の作法 — 容赦なく、一度に一問、それぞれに推奨回答を添える — を、以下の vocabulary と goal に向けて使う。grilling が物事を解決するにつれて spec を作成・編集・削除する。
 
-## The loop lens
+## loop レンズ (The loop lens)
 
-A **loop** is a recurring pattern in the user's life: their career, their week, their morning, a single repeated activity. Picturing a life as loops within loops reveals how predictable its activities really are — which is what makes them worth **delegating**. Use the lens to find loops worth specifying, and propose ones the user hasn't noticed.
+**loop** とは、ユーザーの人生における反復パターンである: そのキャリア、週、朝、あるいは単一の繰り返し活動。人生を loop の中の loop として捉えることで、その活動がいかに予測可能かが明らかになる — これこそが **delegate** する価値を生む理由である。このレンズを使って spec 化する価値のある loop を見つけ、ユーザーが気づいていないものを提案する。
 
-A **workflow** is the spec of one loop, made real. You run a workflow on a loop — the loop is its running instantiation. Workflows live in `workflows/*.md` and are the source of truth.
+**workflow** とは、一つの loop を実体化した spec である。workflow を loop に対して実行する — loop はその実行中のインスタンス化である。workflow は `workflows/*.md` に存在し、それが source of truth である。
 
-## Vocabulary
+## 語彙 (Vocabulary)
 
-A shared language, reached for only when a workflow calls for it — never a checklist. **Mandate nothing structural**: a workflow needs no AI, no checkpoint, and no schedule unless the grilling shows it does.
+workflow が必要とするときにのみ手を伸ばす共有言語であり、チェックリストでは決してない。**構造的なものは何も強制しない**: grilling がそれを示さない限り、workflow は AI も checkpoint も schedule も必要としない。
 
-- **Trigger** — what fires each run: an **event** (a new email, a new issue) or a **schedule** (every morning). Event-triggering is usually the more efficient.
-- **Checkpoint** — a human-in-the-loop point where the user is asked to verify or decide. Some workflows have none and run autonomously; some use no AI at all.
-- **Push right** — defer the checkpoint as far as it will go. Do maximal work before involving the human, so they are asked once, late, with everything prepared.
-- **Brief** — what a checkpoint presents: a tight, decision-ready summary — what was produced, why, and a link down to the asset itself — never the raw output. The user reads a brief, not a draft. Speed of review is imperative.
+- **Trigger** — 各実行を発火させるもの: **event** (新しいメール、新しい issue) または **schedule** (毎朝)。event-triggering の方が通常より効率的。
+- **Checkpoint** — ユーザーが検証または決定を求められる human-in-the-loop の地点。workflow によっては checkpoint が一切なく自律的に実行されるものもあり、AI を全く使わないものもある。
+- **Push right** — checkpoint をできる限り先延ばしにする。人間を関与させる前に最大限の作業を行い、一度だけ、遅く、すべてが準備された状態で尋ねられるようにする。
+- **Brief** — checkpoint が提示するもの: 何が生成されたか、なぜか、そしてそのアセット自体への link を含む、タイトで決定可能な summary — 生の出力ではない。ユーザーは brief を読むのであり、draft を読むのではない。レビューの速さが不可欠である。
 
-## Definition of done
+## 完了の定義 (Definition of done)
 
-A workflow spec is done when an implementer agent could build it without asking a single question. Grill until then; nothing is done while a question remains.
+workflow spec は、実装 agent が一つも質問することなく構築できる状態になったときに完了とする。それまで grill を続ける; 質問が残っている限り何も完了していない。
 
-## The workspace
+## workspace
 
-- `workflows/*.md` — one spec per workflow.
-- `NOTES.md` — raw notes on the user's world: the tools they use, the channels they process, and their own terminology for both. When it is empty or thin, interview them about their world before specifying anything. Sharpen fuzzy terms into canonical ones as they surface, and record them here.
+- `workflows/*.md` — workflow ごとに 1 つの spec。
+- `NOTES.md` — ユーザーの世界に関する生のメモ: 使っているツール、処理しているチャネル、そしてその両方についての彼ら自身の用語。空か薄い場合は、何かを spec 化する前に彼らの世界についてインタビューする。曖昧な用語が現れたら canonical なものに研ぎ澄まし、ここに記録する。

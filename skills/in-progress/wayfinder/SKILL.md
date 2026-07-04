@@ -1,25 +1,25 @@
 ---
 name: wayfinder
-description: Plan a huge chunk of work — more than one agent session can hold — as a shared map of investigation tickets on your issue tracker, and resolve them one at a time until the way to the goal is clear.
+description: 一つの agent セッションでは収まらない巨大な作業のかたまりを、issue tracker 上の調査 ticket からなる共有 map として計画し、goal への道筋がはっきりするまで一つずつ解決していく。
 ---
 
-A loose idea has arrived — too big for one agent session, and wrapped in fog: the route from here to a plan isn't visible yet. This skill charts it as a **shared map** on the repo's issue tracker, then works its tickets one at a time. The map is domain-agnostic — engineering work, course content, whatever fits the shape.
+漠然としたアイデアが到着した — 一つの agent セッションには大きすぎ、fog に包まれている: ここから plan までの route がまだ見えない。この skill はそれを repo の issue tracker 上の **共有 map** としてチャート化し、その ticket を一つずつ処理していく。この map は domain に依存しない — engineering work、course content、形に合うものなら何でもよい。
 
-## Refer by name
+## 名前で参照する (Refer by name)
 
-Every map and ticket is an issue, so it has a **name** — its title. In everything the human reads — narration, the map's Decisions-so-far — refer to it by that name, never by a bare id, number, or slug. A wall of `#42, #43, #44` is illegible; names read at a glance. The id and URL don't vanish — a name wraps its link — but they ride *inside* the name, never stand in for it.
+すべての map と ticket は issue なので、**name** — そのタイトル — を持つ。人間が読むものすべて — narration、map の Decisions-so-far — において、それを裸の id、番号、slug ではなく、その name で参照する。`#42, #43, #44` の羅列は読みにくい; name は一目で読める。id と URL が消えるわけではない — name はその link を包む — が、それらは name の *内側* に乗るのであり、name の代わりにはならない。
 
-## The Map
+## Map
 
-The map is a single issue on this repo's issue tracker, labelled `wayfinder:map` — the canonical artifact. Its tickets are child issues of the map.
+Map は、この repo の issue tracker 上の単一の issue であり、`wayfinder:map` というラベルが付く — canonical artifact である。その ticket は map の child issue である。
 
-The map is an **index**, not a store. It lists the decisions made and points at the tickets that hold their detail; a decision lives in exactly one place — its ticket — so the map never restates it, only gists it and links.
+Map は **index** であり、store ではない。下された決定を列挙し、その詳細を保持する ticket を指し示す; 決定はちょうど一箇所 — その ticket — にのみ存在するので、map はそれを再掲することは決してなく、要約と link のみを行う。
 
-**Where the map, its child tickets, blocking, and frontier queries physically live is tracker-specific.** Consult `docs/agents/issue-tracker.md` (the "Wayfinding operations" section) for how _this_ repo expresses them. If that doc is absent, default to the local-markdown tracker.
+**map、その child ticket、blocking、frontier query が物理的にどこに存在するかは tracker 固有である。** _この_ repo がそれらをどう表現するかは `docs/agents/issue-tracker.md` (「Wayfinding operations」セクション) を参照する。そのドキュメントが存在しない場合は、ローカルの markdown tracker をデフォルトとする。
 
-### The map body
+### Map の本文 (The map body)
 
-The whole map at low resolution, loaded once per session. Open tickets are **not** listed — they are open child issues, found by query.
+Map 全体を低解像度で表したもので、セッションごとに一度だけ読み込む。open な ticket は **列挙しない** — それらは query で見つかる open な child issue である。
 
 ```markdown
 ## Notes
@@ -37,9 +37,9 @@ The whole map at low resolution, loaded once per session. Open tickets are **not
 <!-- see "Fog of war" for what belongs here -->
 ```
 
-### Tickets
+### Ticket
 
-Each ticket is a **child issue** of the map; the tracker's issue id is its identity. Its body is the question, sized to one 100K token agent session:
+各 ticket は map の **child issue** であり、tracker の issue id がその identity である。その本文は question であり、一つの 100K token agent セッションに収まるサイズにする:
 
 ```markdown
 ## Question
@@ -47,55 +47,55 @@ Each ticket is a **child issue** of the map; the tracker's issue id is its ident
 <the decision or investigation this ticket resolves>
 ```
 
-Each ticket carries a `wayfinder:<type>` label — one of `research`, `prototype`, `grilling`, `task` (see [Ticket Types](#ticket-types)).
+各 ticket には `wayfinder:<type>` ラベルが付く — `research`、`prototype`、`grilling`、`task` のいずれか ([Ticket Types](#ticket-types) を参照)。
 
-A session **claims** a ticket by assigning it to the dev driving the map, **first**, before any work, so concurrent sessions skip it. That assignee _is_ the claim: an open, unassigned ticket is unclaimed.
+セッションは、作業を始める **前** に map を進めている dev に assign することで ticket を **claim** する — こうすることで並行セッションがそれをスキップできる。その assignee 自体が claim である: open で unassigned な ticket は unclaimed である。
 
-Blocking uses the tracker's **native** dependency relationship — essential because it renders the frontier _visually_ in the tracker's own UI, so the human sees what's takeable without opening the map. Only a tracker that lacks native blocking falls back to a body convention. A ticket is **unblocked** when every ticket blocking it is closed; the **frontier** is the open, unblocked, unclaimed children — the edge of the known.
+Blocking には tracker の **native** な dependency relationship を使う — これは tracker 自身の UI で frontier を _視覚的に_ 描画するために不可欠であり、人間は map を開かなくても何が着手可能かを見られる。native な blocking を持たない tracker のみ、本文での慣例にフォールバックする。ticket をブロックしているすべての ticket が close されたとき、その ticket は **unblocked** である; **frontier** とは open で unblocked かつ unclaimed な child のことであり、既知の領域の縁である。
 
-The answer isn't part of the body — it's recorded on resolution (see [Work through the map](#work-through-the-map)). Assets created while resolving a ticket are linked from the issue, not pasted in.
+答えは本文の一部ではない — 解決時に記録される ([Work through the map](#work-through-the-map) を参照)。ticket の解決中に作成されたアセットは issue から link され、貼り付けられることはない。
 
-## Ticket Types
+## Ticket の種類 (Ticket Types)
 
-- **Research**: Reading documentation, third-party APIs, or local resources like knowledge bases. Creates a markdown summary as a linked asset. Use when knowledge outside the current working directory is required.
-- **Prototype**: Raise the fidelity of the discussion by making a cheap, rough, concrete artifact to react to — an outline, a rough take, a stub, or UI/logic code via the /prototype skill. Links the prototype as an asset. Use when "how should it look" or "how should it behave" is the key question.
-- **Grilling**: Conversation with the agent. Uses the /grilling and /domain-modeling skills. Asks one question at a time. The default case.
-- **Task**: Literal manual work that must be done before the discussion can move forward — nothing to decide, prototype, or research. Moving data, signing up for a service, provisioning access. The agent automates it where it can; otherwise it hands the human a precise checklist. Resolved when the work is done; the answer records what was done and any resulting facts (credentials location, new URLs, row counts) later tickets depend on.
+- **Research**: ドキュメント、third-party API、または knowledge base のようなローカルリソースを読むこと。markdown の summary を linked asset として作成する。現在の working directory 外の知識が必要なときに使う。
+- **Prototype**: 安価で粗く具体的な artifact — outline、rough take、stub、または /prototype skill 経由の UI/logic code — を作って議論の fidelity を上げる。prototype を asset として link する。「どう見えるべきか」「どう振る舞うべきか」が鍵となる question のときに使う。
+- **Grilling**: agent との会話。/grilling と /domain-modeling skill を使う。一度に一つの question を尋ねる。デフォルトのケース。
+- **Task**: 議論を先に進める前に済ませなければならない、文字通りの手作業 — 決めること、prototype すること、research することは何もない。データの移動、サービスへのサインアップ、アクセスの provisioning。agent は可能な範囲でそれを自動化し、できなければ人間に正確なチェックリストを渡す。作業が終わったときに解決とみなす; 答えには何が行われたか、そして後続の ticket が依存する結果としての事実 (認証情報の場所、新しい URL、行数) を記録する。
 
 ## Fog of war
 
-The map is _deliberately_ incomplete: don't chart what you can't yet see. Beyond the tickets lies fog — the dim view of decisions and investigations you can tell are coming but can't yet pin down, because they hang on questions still open. Resolving a ticket clears the fog ahead of it, graduating whatever's now specifiable into fresh tickets — one at a time, until the way to the goal is clear and no tickets remain.
+Map は _意図的に_ 不完全である: まだ見えていないものをチャート化してはならない。ticket の先には fog が広がる — 来ることは分かるがまだ確定できない決定や調査についての、ぼんやりとした眺めであり、まだ open な question に依存しているために起こる。ticket を解決すると、その先の fog が晴れ、今や specify 可能になったものが新しい ticket へと昇格する — 一度に一つずつ、goal への道筋がはっきりし、ticket が残らなくなるまで。
 
-The map's **Fog** section is where that dim view is written down: the suspected question, the area to revisit later, the risk you're deferring. Write as loosely or as fully as the view allows; it doubles as a signpost for collaborators reading where the effort is headed.
+Map の **Fog** セクションは、そのぼんやりとした眺めを書き留める場所である: 疑われる question、後で見直すべき領域、先送りしているリスク。眺めが許す限り緩くも詳細にも書いてよい; これは、この取り組みがどこに向かっているかを読む共同作業者にとっての道標も兼ねる。
 
-**Fog or ticket?** The test is whether you can state the question precisely now — _not_ whether you can answer it now.
+**Fog か ticket か?** 判定基準は、その question を _今_ 正確に述べられるかどうかであり — 今それに答えられるかどうか _ではない_。
 
-- **Ticket when** the question is already sharp — even if it's blocked and you can't act on it yet.
-- **Fog when** you can't yet phrase it that sharply. Don't pre-slice fog into ticket-sized pieces: it's coarser than a ticket, and one patch may graduate into several tickets, or none, once the frontier reaches it.
+- **Ticket にするのは** question がすでに鋭いとき — たとえそれが blocked でまだ着手できなくても。
+- **Fog にするのは** まだそこまで鋭く言い表せないとき。fog を ticket サイズにあらかじめ細切れにしない: fog は ticket より粗く、一つの patch が frontier に達したときに複数の ticket に昇格することもあれば、何も生まれないこともある。
 
-Fog excludes only what's already decided (that's Decisions so far) and what's already a ticket.
+Fog は、すでに決定されたもの (それは Decisions so far) と、すでに ticket になっているものだけを除外する。
 
-## Invocation
+## 呼び出し (Invocation)
 
-Two modes. Either way, **never resolve more than one ticket per session.**
+2 つのモードがある。どちらの場合も **一つのセッションで複数の ticket を解決してはならない。**
 
-### Chart the map
+### Map をチャート化する (Chart the map)
 
-User invokes with a loose idea.
+ユーザーが漠然としたアイデアで呼び出す。
 
-1. Run a `/grilling` and `/domain-modeling` session to surface the open decisions.
-2. **Create the map** (label `wayfinder:map`): Notes filled in, Decisions-so-far empty, Fog sketched.
-3. **Create the tickets you can specify now** as child issues of the map — then wire blocking edges in a **second pass** (issues need ids before they can reference each other). Wiring sorts them into the frontier and the blocked; everything you can't yet specify stays in the Fog.
-4. Stop — charting the map is one session's work; do not also resolve tickets.
+1. `/grilling` と `/domain-modeling` セッションを実行し、open な決定を洗い出す。
+2. **Map を作成する** (ラベル `wayfinder:map`): Notes を埋め、Decisions-so-far は空のまま、Fog をスケッチする。
+3. **今 specify できる ticket を作成する** map の child issue として — その後 **第二段階** で blocking edge を配線する (issue は互いを参照する前に id を必要とする)。配線によって frontier と blocked に振り分けられる; まだ specify できないものはすべて Fog に留まる。
+4. 止まる — map をチャート化するのは一つのセッションの仕事であり、ticket の解決を同時に行ってはならない。
 
-### Work through the map
+### Map を進める (Work through the map)
 
-User invokes with a map (URL or number). A ticket is **optional** — without one, you pick the next decision, not the user.
+ユーザーが map (URL または番号) で呼び出す。ticket は **省略可能** — 指定がなければ、次の決定を選ぶのはユーザーではなくあなたである。
 
-1. Load the **map** — the low-res view, not every ticket body.
-2. Choose the ticket. If the user named one, use it. Otherwise take the first frontier ticket in order. **Claim it**: assign it to yourself before any work.
-3. Resolve it — **zoom as needed**: fetch the full body of any related or closed ticket on demand; invoke the skills the `## Notes` block names. If in doubt, use `/grilling` and `/domain-modeling`.
-4. Record the resolution: post the answer as a **resolution comment**, **close** the issue, and **append a context pointer** to the map's Decisions-so-far.
-5. Add newly-surfaced tickets (create-then-wire); graduate any fog the answer has made specifiable, clearing each graduated patch from the Fog so it lives only as its new ticket. If the decision invalidates other parts of the map, update or delete those tickets.
+1. **map** を読み込む — 低解像度のビューであり、すべての ticket 本文ではない。
+2. ticket を選ぶ。ユーザーが一つ指定していればそれを使う。そうでなければ frontier の先頭の ticket を順に取る。**claim する**: 作業前に自分自身に assign する。
+3. それを解決する — **必要に応じてズームする**: 関連する、または close された ticket の完全な本文をオンデマンドで取得する; `## Notes` ブロックに名前のある skill を呼び出す。迷ったら `/grilling` と `/domain-modeling` を使う。
+4. 解決を記録する: **resolution comment** として答えを投稿し、issue を **close** し、map の Decisions-so-far に **context pointer を追記** する。
+5. 新たに浮上した ticket を追加する (create してから wire する); 答えによって specify 可能になった fog を昇格させ、昇格した各 patch を Fog から消して、それが新しい ticket としてのみ存在するようにする。決定が map の他の部分を無効にする場合は、それらの ticket を更新または削除する。
 
-The user may run unblocked tickets in parallel, so expect other sessions to be editing the tracker concurrently.
+ユーザーは unblocked な ticket を並行して実行することがあるので、他のセッションが同時に tracker を編集していることを想定する。

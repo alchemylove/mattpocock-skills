@@ -1,6 +1,6 @@
 ---
 name: writing-shape
-description: Writing, exploit — shape raw material into an article, paragraph by paragraph.
+description: Writing、exploit — raw material を段落ごとに article へと形作る。
 disable-model-invocation: true
 ---
 
@@ -8,9 +8,9 @@ disable-model-invocation: true
 
 ユーザーが raw material の markdown file を渡す (または渡す予定)。入力 pile として扱う — 整った fragment のリストから、構造化されていない長文、transcript まで何でもよい。フォーマットは問わない。何もする前に最初から最後まで読む。
 
-Then run a shaping session that produces a separate article document. This is **exploit**: the exploring is done, the pile is fixed — commit to a structure and mine the pile to fill it. Do not edit the raw material file — it is read-only to this skill.
+そして、独立した article document を生み出す shaping セッションを実行する。これは **exploit** である: exploring はすでに終わっており、pile は固定されている — structure にコミットし、pile を掘ってそれを埋める。raw material file は編集しない — この skill にとって read-only である。
 
-If the user did not say where to save the article, ask once and remember the path.
+ユーザーが記事の保存先を言っていなければ、一度だけ確認し、path を記憶する。
 
 </what-to-do>
 
@@ -18,25 +18,25 @@ If the user did not say where to save the article, ask once and remember the pat
 
 ## ループ (The loop)
 
-1. **Read the pile.** Read the input file in full. Form a sense of what's in it.
-2. **Establish the prerequisites.** Settle with the user what the reader knows walking in — the concepts that are **grounded** from the start. Everything else must be grounded by a block before a later block can lean on it. See [Grounding](#grounding).
-3. **Draft 2–3 candidate openings.** Each opening should imply a different thesis or angle for the article. Show all of them. Force the user to pick or compose a hybrid. The chosen opening defines what the rest of the article must do.
-4. **Grow paragraph by paragraph.** After the opening lands, ask "given this opening, what does the reader need to hear next?" Pull material from the pile to answer. The next block may only lean on grounded concepts, and grounds new ones as it lands. Argue about the form the next block takes — a paragraph, a list, a table, a callout, a quote, a code block. Each format choice should be deliberate and defensible.
-5. **Append to the article file as you go.** Don't batch. Write each agreed paragraph or block immediately so the user can see the article taking shape.
-6. **Loop step 4 until the article is done.** The user decides when it's done.
+1. **pile を読む。** 入力 file を最初から最後まで読む。中身の感覚を掴む。
+2. **前提を確立する。** 読者がすでに知って入ってくることは何か — 最初から **grounded** な concept は何か — をユーザーと決める。それ以外のすべては、後の block が寄りかかる前に、ある block によって grounded にされなければならない。[Grounding](#grounding) を参照。
+3. **2–3 の候補となる opening を draft する。** 各 opening は記事にとって異なる thesis や角度を示唆すべきである。すべてを示す。ユーザーに一つを選ばせるか、hybrid を組ませる。選ばれた opening が、記事の残りが何をすべきかを規定する。
+4. **段落ごとに育てる。** opening が着地したら、「この opening を踏まえて、読者は次に何を聞く必要があるか?」と問う。pile から material を引き出して答える。次の block は grounded な concept にのみ寄りかかってよく、着地する際に新しい concept を grounds する。次の block がどの形を取るか — 段落、list、table、callout、quote、code block — を議論する。各 format の選択は意図的かつ弁護可能であるべき。
+5. **進めながら article file に追記する。** batch しない。合意した段落や block をすぐに書き、ユーザーが記事の形になっていく様子を見られるようにする。
+6. **記事が完成するまでステップ 4 をループする。** いつ完成かはユーザーが決める。
 
 ## Grounding
 
-Every **concept** has to be **grounded** before a block can lean on it: the reader either walked in knowing it or met it in an earlier block. A block that reaches for an ungrounded concept loses the reader. The unit is the concept, not the word for it — a block can lean on an idea the reader lacks even with no jargon in sight. Where a concept has a name — a **term** — grounding it means landing the idea and the term together.
+すべての **concept** は、block がそれに寄りかかる前に **grounded** されていなければならない: 読者がそれを知って入ってきたか、それより前の block でそれに出会ったかのいずれかである。grounded されていない concept に手を伸ばす block は読者を失う。単位は concept であり、それを表す語ではない — jargon が一つも見当たらなくても、block は読者が持っていない idea に寄りかかることがありうる。concept に名前 — **term** — がある場合、それを grounding するとは idea と term を一緒に着地させることを意味する。
 
-A concept gets grounded one of two ways:
+concept は次の 2 通りのいずれかで grounded になる:
 
-- **Prerequisite** — grounded before the opening. The reader brings it. Fixed at the start.
-- **Introduced** — a block establishes it, and from then on it's grounded for the rest of the article.
+- **Prerequisite** — opening より前に grounded にされる。読者がそれを持ち込む。最初に固定される。
+- **Introduced** — ある block がそれを確立し、それ以降記事の残り全体にとって grounded になる。
 
-Keep a running list of what's grounded. When you ask "what does the reader need to hear next?", an ungrounded concept the next move needs is itself the answer: ground it first — here or in an earlier block — or you can't make the move. This is the gap-naming of [Pulling from the pile](#pulling-from-the-pile) one level up: there the pile is missing material; here the article is missing a foundation.
+grounded になったものの running list を保つ。「読者は次に何を聞く必要があるか?」と問うとき、次の一手が必要とする grounded でない concept こそがその答えである: まずそれを grounding する — ここで、あるいはそれより前の block で — さもなければその一手を打てない。これは一段階上の [Pulling from the pile](#pulling-from-the-pile) における gap-naming と同じである: そこでは pile に material が欠けていた; ここでは記事に foundation が欠けている。
 
-The lever is what you make a prerequisite versus what you ground inside the article. Demand too much up front and you shut readers out; ground too much inside and the opening drowns in definitions. Settle it with the user when you establish prerequisites.
+レバーは、何を prerequisite にし、何を記事の内部で grounding するかである。前もって要求しすぎると読者を締め出す; 内部で grounding しすぎると opening が定義まみれになる。prerequisite を確立するときにこれをユーザーと決める。
 
 ## 会話の雰囲気 (Conversational feel)
 
@@ -58,7 +58,7 @@ pile に記事が必要とするものがなければ、gap を明示: "We need 
 
 ## 実際に行うフォーマット議論 (Format arguments to actually have)
 
-When choosing how to render a block, weigh these tradeoffs out loud with the user, not silently:
+block をどう描画するかを選ぶとき、これらの tradeoff を黙ってではなくユーザーと声に出して検討する:
 
 - **Prose vs. list.** Prose は argument を運ぶ; list は並列項目を運ぶ。項目が真に並列でなければ prose がよい。並列なら list の方が scan が速い。
 - **Inline vs. callout.** Tips、warnings、余談は callout (`> [!TIP]`、`> [!NOTE]`) — ただし inline だと本論を本当に derail する場合のみ。そうでなければ inline のまま。
@@ -72,8 +72,8 @@ When choosing how to render a block, weigh these tradeoffs out loud with the use
 
 ## スコープ外 (Out of scope)
 
-- Mining for new fragments that aren't in the pile (handle gaps as in "Pulling from the pile").
-- Editing the raw material file.
-- Publishing, formatting for a specific platform, or adding frontmatter the user didn't ask for.
+- pile にない新しい fragment を掘ること ("Pulling from the pile" と同様に gap として扱う)。
+- raw material file を編集すること。
+- 公開すること、特定プラットフォーム向けの整形をすること、ユーザーが求めていない frontmatter を追加すること。
 
 </supporting-info>

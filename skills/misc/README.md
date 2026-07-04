@@ -1,6 +1,6 @@
 # その他 (Misc)
 
-Tools I keep around but rarely use — not promoted in the plugin.
+残してはいるがほとんど使わない tools — plugin では promote しない。
 
 - **[git-guardrails-claude-code](./git-guardrails-claude-code/SKILL.md)** — 危険な git コマンド（push、reset --hard、clean など）を実行前にブロックする Claude Code hooks を設定する。
 - **[migrate-to-shoehorn](./migrate-to-shoehorn/SKILL.md)** — test ファイルを `as` type assertion から @total-typescript/shoehorn へ移行する。
