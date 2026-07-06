@@ -39,7 +39,7 @@ https://claude.ai/code/artifact/020e3f72-1574-409c-8568-7097c651c01a
 2. **`build_html.py`** — `rows.json` を読み、各セルの Markdown（`[label](url)` リンク、`` `code` ``、既存の `<br>`）を HTML に変換しつつ `records.json` を生成。カテゴリ（`種別`）を `mattpocock`/`built-in`/`plugin` + サブカテゴリ（バケット名等）にパース。
 3. **`render_html.py`** — `records.json` から最終的な `skills-overview.html` を生成。CSS トークン（ライト/ダークテーマ両対応）、検索ボックス + 種別フィルタボタンの JS、`<table>` ベースのレイアウト（720px 以下でカードにフォールバック）を含む。
 
-**再生成する場合は3つとも順番に実行する**（`python3 parse_table.py && python3 build_html.py && python3 render_html.py`）。ただし各スクリプト内のパスは元のセッションの scratchpad パス（`C:/Users/alfas/AppData/Local/Temp/claude/.../scratchpad/`）を指しているものが混在しているため、**新セッションで実行する前にパスをこのフォルダ（`.claude/scratch/skills-overview-html/`）基準に書き換える必要がある**。
+**再生成する場合は3つとも順番に実行する**（`python3 parse_table.py && python3 build_html.py && python3 render_html.py`）。ただし各スクリプト内のパスは元のセッションの scratchpad パス（`C:/Users/alfas/AppData/Local/Temp/claude/.../scratchpad/`）を指しているものが混在しているため、**新セッションで実行する前にパスをこのフォルダ（`skills-reference-html/`）基準に書き換える必要がある**。
 
 ### 既知の設計判断（引き継ぎ用メモ）
 - ビルトイン/プラグイン skill の「起動」は frontmatter を直接確認できないため `U?`/`M?`（推定）表記。判定根拠は `docs/skills-overview.ja.md` 冒頭に明記。
@@ -48,5 +48,5 @@ https://claude.ai/code/artifact/020e3f72-1574-409c-8568-7097c651c01a
 
 ## 次のセッションでまずやること
 1. ユーザーから HTML Artifact の具体的な不具合（スクリーンショット等）を聞く
-2. このフォルダ（`.claude/scratch/skills-overview-html/`）のスクリプトとファイルを確認し、パスを新セッションの scratchpad または任意の作業ディレクトリに合わせて調整
+2. このフォルダ（`skills-reference-html/`）のスクリプトとファイルを確認し、パスを新セッションの scratchpad または任意の作業ディレクトリに合わせて調整
 3. 不具合を修正し、`render_html.py` を再実行して `Artifact` ツールで同じ URL に再公開
