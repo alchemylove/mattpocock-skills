@@ -2,7 +2,7 @@
 
 このプロジェクト（`mattpocock-skills` リポジトリを開いた Claude Code セッション）で使える skill の一覧を1つの表にまとめている。**種別**列で mattpocock リポジトリの skill（バケット別）・ビルトイン公式 skill・プラグイン skill を区別する。
 
-> 作成時点: upstream `mattpocock/skills` の `272f99b`（`main`）に同期し、全 skill を日本語へ翻訳し直した直後の状態。
+> 作成時点: upstream `mattpocock/skills` の `66f92b6`（`main`）に同期し、全 skill を日本語へ翻訳し直した直後の状態。
 
 ## 前提・判定根拠
 
@@ -51,7 +51,7 @@
 | [obsidian-vault](../skills/personal/obsidian-vault/SKILL.md) | M | Obsidian vault のノート管理 | wikilink と index note を使って Obsidian vault 内のノートを検索・作成・管理する。ユーザーが Obsidian でノートを見つけたい、作成したい、整理したいときに使う。 | mattpocock（personal） | Search, create, and manage notes in the Obsidian vault with wikilinks and index notes. Use when user wants to find, create, or organize notes in Obsidian. |
 | [claude-handoff](../skills/in-progress/claude-handoff/SKILL.md)（新規） | U | バックグラウンド agent への handoff | 現在の会話を、作業をすぐに引き継ぐ新しいバックグラウンド agent へ hand off する。 | mattpocock（in-progress） | Hand the current conversation off to a fresh background agent that picks up the work immediately. |
 | [loop-me](../skills/in-progress/loop-me/SKILL.md) | U | workflow 仕様の grilling | このワークスペース内で構築したい workflow の仕様について私に grill してもらう。 | mattpocock（in-progress） | Grill me about specs for the workflows I want to build, within this workspace. |
-| [wayfinder](../skills/in-progress/wayfinder/SKILL.md)（`decision-mapping` から改名） | M | 大規模作業の map 化と逐次解決 | 1つの agent セッションでは抱えきれない大きな作業のかたまりを、issue tracker 上の investigation ticket の共有マップとして計画し、ゴールへの道筋が見えるまで一つずつ解決していく。 | mattpocock（in-progress） | Plan a huge chunk of work — more than one agent session can hold — as a shared map of investigation tickets on your issue tracker, and resolve them one at a time until the way to the goal is clear. |
+| [wayfinder](../skills/in-progress/wayfinder/SKILL.md)（`decision-mapping` から改名） | M | 大規模作業の map 化と逐次解決 | 1つの agent セッションでは抱えきれない大きな作業のかたまりを、issue tracker 上の investigation ticket の共有マップとして計画し、destination への道筋が見えるまで一つずつ解決していく。 | mattpocock（in-progress） | Plan a huge chunk of work — more than one agent session can hold — as a shared map of investigation tickets on your issue tracker, and resolve them one at a time until the way to the destination is clear. |
 | [wizard](../skills/in-progress/wizard/SKILL.md) | U | 対話的セットアップ wizard 生成 | 手動手順（third-party のセットアップ、一回限りの移行、A→B の状態遷移など）を人間に案内する、対話的な bash wizard を生成する — URL を開き、値を取得し、各ステップを確認し、.env ファイルや GitHub Actions secrets を書き込む。 | mattpocock（in-progress） | Generate an interactive bash wizard that walks a human through a manual procedure — third-party setup, a one-off migration, an A→B state transition — opening URLs, capturing values, confirming each step, and writing .env files and GitHub Actions secrets. |
 | [writing-beats](../skills/in-progress/writing-beats/SKILL.md) | U | beat 構成への組み立て | Writing, exploit — 素材を beat の journey に組み立て、各用語を beat が使う前に地固めする。 | mattpocock（in-progress） | Writing, exploit — assemble raw material into a journey of beats, grounding each term before a beat leans on it. |
 | [writing-fragments](../skills/in-progress/writing-fragments/SKILL.md) | U | 生素材の掘り出し | Writing, explore — 構造のない生の素材を掘り出す。 | mattpocock（in-progress） | Writing, explore — mine raw fragments, no structure yet. |

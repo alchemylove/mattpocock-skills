@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import json, html
 
-RECORDS_PATH = r"C:/Users/alfas/Documents/git1/mattpocock-skills/.claude/scratch/skills-overview-html/records.json"
-OUT_PATH = r"C:/Users/alfas/Documents/git1/mattpocock-skills/.claude/scratch/skills-overview-html/skills-overview.html"
+RECORDS_PATH = r"C:/Users/alfas/Documents/git1/mattpocock-skills/skills-reference-html/records.json"
+OUT_PATH = r"C:/Users/alfas/Documents/git1/mattpocock-skills/skills-reference-html/skills-overview.html"
 
 records = json.load(open(RECORDS_PATH, encoding='utf-8'))
 
@@ -461,7 +461,7 @@ HTML_TEMPLATE = r"""<title>Skills 一覧 — mattpocock-skills</title>
 
   <footer class="note">
     全 __TOTAL__ 件（mattpocock __MATTPOCOCK_COUNT__ 件 / built-in __BUILTIN_COUNT__ 件 / plugin __PLUGIN_COUNT__ 件）。
-    upstream <code>mattpocock/skills</code> の <code>272f99b</code>（main）に同期し、全 skill を日本語へ翻訳し直した直後の状態。
+    upstream <code>mattpocock/skills</code> の <code>66f92b6</code>（main）に同期し、全 skill を日本語へ翻訳し直した直後の状態。
   </footer>
 </div>
 

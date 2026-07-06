@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import json, re, html
 
-ROWS_PATH = r"C:/Users/alfas/AppData/Local/Temp/claude/C--Users-alfas-Documents-git1-mattpocock-skills/e679f719-93f4-4bf9-b294-3a7af8074a0a/scratchpad/rows.json"
-OUT_PATH = r"C:/Users/alfas/AppData/Local/Temp/claude/C--Users-alfas-Documents-git1-mattpocock-skills/e679f719-93f4-4bf9-b294-3a7af8074a0a/scratchpad/skills-overview.html"
+ROWS_PATH = r"C:/Users/alfas/Documents/git1/mattpocock-skills/skills-reference-html/rows.json"
+OUT_PATH = r"C:/Users/alfas/Documents/git1/mattpocock-skills/skills-reference-html/records.json"
 
 rows = json.load(open(ROWS_PATH, encoding='utf-8'))
 
@@ -85,6 +85,6 @@ from collections import Counter
 main_counts = Counter(r['main_cat'] for r in records)
 print(main_counts)
 
-with open(r"C:/Users/alfas/AppData/Local/Temp/claude/C--Users-alfas-Documents-git1-mattpocock-skills/e679f719-93f4-4bf9-b294-3a7af8074a0a/scratchpad/records.json", 'w', encoding='utf-8') as f:
+with open(OUT_PATH, 'w', encoding='utf-8') as f:
     json.dump(records, f, ensure_ascii=False, indent=1)
 print("wrote records.json")

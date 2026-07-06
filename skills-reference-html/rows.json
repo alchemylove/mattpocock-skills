@@ -235,9 +235,9 @@
   "[wayfinder](../skills/in-progress/wayfinder/SKILL.md)（`decision-mapping` から改名）",
   "M",
   "大規模作業の map 化と逐次解決",
-  "1つの agent セッションでは抱えきれない大きな作業のかたまりを、issue tracker 上の investigation ticket の共有マップとして計画し、ゴールへの道筋が見えるまで一つずつ解決していく。",
+  "1つの agent セッションでは抱えきれない大きな作業のかたまりを、issue tracker 上の investigation ticket の共有マップとして計画し、destination への道筋が見えるまで一つずつ解決していく。",
   "mattpocock（in-progress）",
-  "Plan a huge chunk of work — more than one agent session can hold — as a shared map of investigation tickets on your issue tracker, and resolve them one at a time until the way to the goal is clear."
+  "Plan a huge chunk of work — more than one agent session can hold — as a shared map of investigation tickets on your issue tracker, and resolve them one at a time until the way to the destination is clear."
  ],
  [
   "[wizard](../skills/in-progress/wizard/SKILL.md)",

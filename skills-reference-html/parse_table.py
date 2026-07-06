@@ -30,7 +30,7 @@ while i < len(lines) and lines[i].strip().startswith('|'):
     i += 1
 
 print(f"parsed {len(rows)} rows")
-out_path = r"C:/Users/alfas/AppData/Local/Temp/claude/C--Users-alfas-Documents-git1-mattpocock-skills/e679f719-93f4-4bf9-b294-3a7af8074a0a/scratchpad/rows.json"
+out_path = r"C:/Users/alfas/Documents/git1/mattpocock-skills/skills-reference-html/rows.json"
 with open(out_path, 'w', encoding='utf-8') as f:
     json.dump(rows, f, ensure_ascii=False, indent=1)
 print("wrote", out_path)

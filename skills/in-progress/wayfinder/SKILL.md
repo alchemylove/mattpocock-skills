@@ -1,27 +1,27 @@
 ---
 name: wayfinder
-description: Plan a huge chunk of work — more than one agent session can hold — as a shared map of investigation tickets on your issue tracker, and resolve them one at a time until the way to the destination is clear.
+description: 一つの agent セッションでは収まらない巨大な作業のかたまりを、issue tracker 上の調査 ticket からなる共有 map として計画し、destination への道筋がはっきりするまで一つずつ解決していく。
 ---
 
-A loose idea has arrived — too big for one agent session, and wrapped in fog: the way from here to the **destination** isn't visible yet. Wayfinding is about finding that way, not charging at the destination. This skill charts the way as a **shared map** on the repo's issue tracker, then works its tickets one at a time until the route is clear.
+漠然としたアイデアが到着した — 一つの agent セッションには大きすぎ、fog に包まれている: ここから **destination** までの道筋がまだ見えない。Wayfinding とは、その道を見つけることであり、destination へ一直線に向かうことではない。この skill はその道筋を repo の issue tracker 上の **共有 map** としてチャート化し、route がはっきりするまでその ticket を一つずつ処理していく。
 
-The destination varies per effort, and naming it is the first act of charting — it shapes every ticket. It might be a spec to hand off and iterate on, a decision to lock before planning starts, or a change made in place like a data-structure migration. The map is domain-agnostic — engineering work, course content, whatever fits the shape.
+destination は取り組みごとに異なり、それに名前を付けることがチャート化の最初の行為である — それがすべての ticket の形を決める。引き渡して iterate していく spec のこともあれば、planning が始まる前に固定しておくべき決定のこともあり、data-structure migration のようにその場で行う変更のこともある。この map は domain に依存しない — engineering work、course content、形に合うものなら何でもよい。
 
-## Refer by name
+## 名前で参照する (Refer by name)
 
-Every map and ticket is an issue, so it has a **name** — its title. In everything the human reads — narration, the map's Decisions-so-far — refer to it by that name, never by a bare id, number, or slug. A wall of `#42, #43, #44` is illegible; names read at a glance. The id and URL don't vanish — a name wraps its link — but they ride *inside* the name, never stand in for it.
+すべての map と ticket は issue なので、**name** — そのタイトル — を持つ。人間が読むものすべて — narration、map の Decisions-so-far — において、それを裸の id、番号、slug ではなく、その name で参照する。`#42, #43, #44` の羅列は読みにくい; name は一目で読める。id と URL が消えるわけではない — name はその link を包む — が、それらは name の *内側* に乗るのであり、name の代わりにはならない。
 
-## The Map
+## Map
 
-The map is a single issue on this repo's issue tracker, labelled `wayfinder:map` — the canonical artifact. Its tickets are child issues of the map.
+Map は、この repo の issue tracker 上の単一の issue であり、`wayfinder:map` というラベルが付く — canonical artifact である。その ticket は map の child issue である。
 
-The map is an **index**, not a store. It lists the decisions made and points at the tickets that hold their detail; a decision lives in exactly one place — its ticket — so the map never restates it, only gists it and links.
+Map は **index** であり、store ではない。下された決定を列挙し、その詳細を保持する ticket を指し示す; 決定はちょうど一箇所 — その ticket — にのみ存在するので、map はそれを再掲することは決してなく、要約と link のみを行う。
 
-**Where the map, its child tickets, blocking, and frontier queries physically live is tracker-specific.** Consult `docs/agents/issue-tracker.md` (the "Wayfinding operations" section) for how _this_ repo expresses them. If that doc is absent, default to the local-markdown tracker.
+**map、その child ticket、blocking、frontier query が物理的にどこに存在するかは tracker 固有である。** _この_ repo がそれらをどう表現するかは `docs/agents/issue-tracker.md` (「Wayfinding operations」セクション) を参照する。そのドキュメントが存在しない場合は、ローカルの markdown tracker をデフォルトとする。
 
-### The map body
+### Map の本文 (The map body)
 
-The whole map at low resolution, loaded once per session. Open tickets are **not** listed — they are open child issues, found by query.
+Map 全体を低解像度で表したもので、セッションごとに一度だけ読み込む。open な ticket は **列挙しない** — それらは query で見つかる open な child issue である。
 
 ```markdown
 ## Destination
@@ -47,9 +47,9 @@ The whole map at low resolution, loaded once per session. Open tickets are **not
 <!-- see "Out of scope": work ruled beyond the destination; closed, never graduates -->
 ```
 
-### Tickets
+### Ticket
 
-Each ticket is a **child issue** of the map; the tracker's issue id is its identity. Its body is the question, sized to one 100K token agent session:
+各 ticket は map の **child issue** であり、tracker の issue id がその identity である。その本文は question であり、一つの 100K token agent セッションに収まるサイズにする:
 
 ```markdown
 ## Question
@@ -57,64 +57,64 @@ Each ticket is a **child issue** of the map; the tracker's issue id is its ident
 <the decision or investigation this ticket resolves>
 ```
 
-Each ticket carries a `wayfinder:<type>` label — one of `research`, `prototype`, `grilling`, `task` (see [Ticket Types](#ticket-types)).
+各 ticket には `wayfinder:<type>` ラベルが付く — `research`、`prototype`、`grilling`、`task` のいずれか ([Ticket Types](#ticket-types) を参照)。
 
-A session **claims** a ticket by assigning it to the dev driving the map, **first**, before any work, so concurrent sessions skip it. That assignee _is_ the claim: an open, unassigned ticket is unclaimed.
+セッションは、作業を始める **前** に map を進めている dev に assign することで ticket を **claim** する — こうすることで並行セッションがそれをスキップできる。その assignee 自体が claim である: open で unassigned な ticket は unclaimed である。
 
-Blocking uses the tracker's **native** dependency relationship — essential because it renders the frontier _visually_ in the tracker's own UI, so the human sees what's takeable without opening the map. Only a tracker that lacks native blocking falls back to a body convention. A ticket is **unblocked** when every ticket blocking it is closed; the **frontier** is the open, unblocked, unclaimed children — the edge of the known.
+Blocking には tracker の **native** な dependency relationship を使う — これは tracker 自身の UI で frontier を _視覚的に_ 描画するために不可欠であり、人間は map を開かなくても何が着手可能かを見られる。native な blocking を持たない tracker のみ、本文での慣例にフォールバックする。ticket をブロックしているすべての ticket が close されたとき、その ticket は **unblocked** である; **frontier** とは open で unblocked かつ unclaimed な child のことであり、既知の領域の縁である。
 
-The answer isn't part of the body — it's recorded on resolution (see [Work through the map](#work-through-the-map)). Assets created while resolving a ticket are linked from the issue, not pasted in.
+答えは本文の一部ではない — 解決時に記録される ([Work through the map](#work-through-the-map) を参照)。ticket の解決中に作成されたアセットは issue から link され、貼り付けられることはない。
 
-## Ticket Types
+## Ticket の種類 (Ticket Types)
 
-- **Research**: Reading documentation, third-party APIs, or local resources like knowledge bases. Creates a markdown summary as a linked asset. Use when knowledge outside the current working directory is required.
-- **Prototype**: Raise the fidelity of the discussion by making a cheap, rough, concrete artifact to react to — an outline, a rough take, a stub, or UI/logic code via the /prototype skill. Links the prototype as an asset. Use when "how should it look" or "how should it behave" is the key question.
-- **Grilling**: Conversation with the agent. Uses the /grilling and /domain-modeling skills. Asks one question at a time. The default case.
-- **Task**: Literal manual work that must be done before the discussion can move forward — nothing to decide, prototype, or research. Moving data, signing up for a service, provisioning access. The agent automates it where it can; otherwise it hands the human a precise checklist. Resolved when the work is done; the answer records what was done and any resulting facts (credentials location, new URLs, row counts) later tickets depend on.
+- **Research**: ドキュメント、third-party API、または knowledge base のようなローカルリソースを読むこと。markdown の summary を linked asset として作成する。現在の working directory 外の知識が必要なときに使う。
+- **Prototype**: 安価で粗く具体的な artifact — outline、rough take、stub、または /prototype skill 経由の UI/logic code — を作って議論の fidelity を上げる。prototype を asset として link する。「どう見えるべきか」「どう振る舞うべきか」が鍵となる question のときに使う。
+- **Grilling**: agent との会話。/grilling と /domain-modeling skill を使う。一度に一つの question を尋ねる。デフォルトのケース。
+- **Task**: 議論を先に進める前に済ませなければならない、文字通りの手作業 — 決めること、prototype すること、research することは何もない。データの移動、サービスへのサインアップ、アクセスの provisioning。agent は可能な範囲でそれを自動化し、できなければ人間に正確なチェックリストを渡す。作業が終わったときに解決とみなす; 答えには何が行われたか、そして後続の ticket が依存する結果としての事実 (認証情報の場所、新しい URL、行数) を記録する。
 
 ## Fog of war
 
-The map is _deliberately_ incomplete: don't chart what you can't yet see. Beyond the live tickets lies the **fog of war** — the dim view of decisions and investigations you can tell are coming but can't yet pin down, because they hang on questions still open. Resolving a ticket clears the fog ahead of it, graduating whatever's now specifiable into fresh tickets — one at a time, until the way to the destination is clear and no tickets remain.
+Map は _意図的に_ 不完全である: まだ見えていないものをチャート化してはならない。生きている ticket の先には **fog of war** が広がる — 来ることは分かるがまだ確定できない決定や調査についての、ぼんやりとした眺めであり、まだ open な question に依存しているために起こる。ticket を解決すると、その先の fog が晴れ、今や specify 可能になったものが新しい ticket へと昇格する — 一度に一つずつ、destination への道筋がはっきりし、ticket が残らなくなるまで。
 
-The map's **Not yet specified** section is where that dim view is written down: the suspected question, the area to revisit later. It's the undiscovered frontier _toward_ the destination — everything here is in scope, just not sharp enough to ticket. Write as loosely or as fully as the view allows; it doubles as a signpost for collaborators reading where the effort is headed.
+Map の **Not yet specified** セクションは、そのぼんやりとした眺めを書き留める場所である: 疑われる question、後で見直すべき領域。これは destination に _向かう_ 未発見の frontier である — ここにあるものはすべて in scope だが、まだ ticket にできるほど鋭くないだけだ。眺めが許す限り緩くも詳細にも書いてよい; これは、この取り組みがどこに向かっているかを読む共同作業者にとっての道標も兼ねる。
 
-**Fog or ticket?** The test is whether you can state the question precisely now — _not_ whether you can answer it now.
+**Fog か ticket か?** 判定基準は、その question を _今_ 正確に述べられるかどうかであり — 今それに答えられるかどうか _ではない_。
 
-- **Ticket when** the question is already sharp — even if it's blocked and you can't act on it yet.
-- **Not yet specified when** you can't yet phrase it that sharply. Don't pre-slice the fog into ticket-sized pieces: it's coarser than a ticket, and one patch may graduate into several tickets, or none, once the frontier reaches it.
+- **Ticket にするのは** question がすでに鋭いとき — たとえそれが blocked でまだ着手できなくても。
+- **Not yet specified にするのは** まだそこまで鋭く言い表せないとき。fog を ticket サイズにあらかじめ細切れにしない: fog は ticket より粗く、一つの patch が frontier に達したときに複数の ticket に昇格することもあれば、何も生まれないこともある。
 
-**Not yet specified** excludes what's already decided (Decisions so far), what's already a live ticket, and what's out of scope (the next section).
+**Not yet specified** は、すでに決定されたもの (Decisions so far)、すでに生きている ticket になっているもの、そして out of scope なもの (次のセクション) を除外する。
 
 ## Out of scope
 
-Fog only ever gathers _toward_ the destination. The destination fixes the scope, so work beyond it is **out of scope** — it isn't fog, and it doesn't belong in **Not yet specified**. It gets its own **Out of scope** section on the map: work you've consciously ruled out of _this_ effort. Scope, not sharpness, lands it here.
+Fog は常に destination に _向かって_ のみ集まる。destination が scope を定めるので、それを超えた作業は **out of scope** である — それは fog ではなく、**Not yet specified** にも属さない。それは map 上に専用の **Out of scope** セクションを持つ: _この_ 取り組みから意識的に除外した作業である。ここに置かれるかどうかを決めるのは sharpness ではなく scope である。
 
-Out-of-scope work never graduates — the frontier stops at the destination — so it returns only if the destination is redrawn, and then as a fresh effort, not a resumption.
+Out-of-scope な作業は決して昇格しない — frontier は destination で止まる — そのため、それが戻ってくるのは destination が引き直されたときだけであり、そのときは resumption ではなく新しい取り組みとしてである。
 
-Ruling something out of scope is a scoping act, not a step on the route. When a ticket that already exists turns out to sit past the destination — mis-scoped in while charting, or exposed by a resolution — **close it** (a closed ticket is unambiguously off the frontier) and leave one line in the **Out of scope** section: the gist plus why it's out of scope, linking the closed ticket. It stays out of **Decisions so far**, which records the route actually walked — a scope boundary isn't a step on it.
+何かを out of scope と判定することは scoping の行為であり、route 上の一歩ではない。すでに存在する ticket が destination を超えた場所にあると判明した場合 — チャート化の時点で scope を見誤っていた、または解決によって明らかになった — その ticket を **close する** (close された ticket は frontier から外れていることが明確である) とともに、**Out of scope** セクションに一行残す: gist と、なぜそれが out of scope なのかを、close した ticket への link とともに。それは実際に歩んだ route を記録する **Decisions so far** には含まれない — scope の境界は route 上の一歩ではないからである。
 
-## Invocation
+## 呼び出し (Invocation)
 
-Two modes. Either way, **never resolve more than one ticket per session.**
+2 つのモードがある。どちらの場合も **一つのセッションで複数の ticket を解決してはならない。**
 
-### Chart the map
+### Map をチャート化する (Chart the map)
 
-User invokes with a loose idea.
+ユーザーが漠然としたアイデアで呼び出す。
 
-1. **Name the destination.** Run a `/grilling` and `/domain-modeling` session to pin down what this map is finding its way to — the spec, decision, or change. The destination fixes the scope, so it's settled first.
-2. **Map the frontier.** Grill again, **breadth-first** this time: fan out across the whole space rather than deep on any one thread, surfacing the open decisions and the first steps takeable now.
-3. **Create the map** (label `wayfinder:map`): Destination and Notes filled in, Decisions-so-far empty, the fog sketched into **Not yet specified**.
-4. **Create the tickets you can specify now** as child issues of the map — then wire blocking edges in a **second pass** (issues need ids before they can reference each other). Wiring sorts them into the frontier and the blocked; everything you can't yet specify stays in the fog — the **Not yet specified** section.
-5. Stop — charting the map is one session's work; do not also resolve tickets.
+1. **destination に名前を付ける。** `/grilling` と `/domain-modeling` セッションを実行し、この map が向かっている先 — spec、決定、あるいは変更 — を突き止める。destination が scope を定めるので、これを最初に確定する。
+2. **frontier を map する。** 再び grill するが、今度は **breadth-first** で行う: 一つの thread を深掘りするのではなく空間全体に fan out し、open な決定と今すぐ着手できる最初の一歩を洗い出す。
+3. **Map を作成する** (ラベル `wayfinder:map`): Destination と Notes を埋め、Decisions-so-far は空のまま、fog を **Not yet specified** にスケッチする。
+4. **今 specify できる ticket を作成する** map の child issue として — その後 **第二段階** で blocking edge を配線する (issue は互いを参照する前に id を必要とする)。配線によって frontier と blocked に振り分けられる; まだ specify できないものはすべて fog — **Not yet specified** セクション — に留まる。
+5. 止まる — map をチャート化するのは一つのセッションの仕事であり、ticket の解決を同時に行ってはならない。
 
-### Work through the map
+### Map を進める (Work through the map)
 
-User invokes with a map (URL or number). A ticket is **optional** — without one, you pick the next decision, not the user.
+ユーザーが map (URL または番号) で呼び出す。ticket は **省略可能** — 指定がなければ、次の決定を選ぶのはユーザーではなくあなたである。
 
-1. Load the **map** — the low-res view, not every ticket body.
-2. Choose the ticket. If the user named one, use it. Otherwise take the first frontier ticket in order. **Claim it**: assign it to yourself before any work.
-3. Resolve it — **zoom as needed**: fetch the full body of any related or closed ticket on demand; invoke the skills the `## Notes` block names. If in doubt, use `/grilling` and `/domain-modeling`.
-4. Record the resolution: post the answer as a **resolution comment**, **close** the issue, and **append a context pointer** to the map's Decisions-so-far.
-5. Add newly-surfaced tickets (create-then-wire); graduate any fog the answer has made specifiable, clearing each graduated patch from **Not yet specified** so it lives only as its new ticket. If the answer reveals a ticket — this one or another — sits beyond the destination, **rule it out of scope** rather than resolving it on the route. If the decision invalidates other parts of the map, update or delete those tickets.
+1. **map** を読み込む — 低解像度のビューであり、すべての ticket 本文ではない。
+2. ticket を選ぶ。ユーザーが一つ指定していればそれを使う。そうでなければ frontier の先頭の ticket を順に取る。**claim する**: 作業前に自分自身に assign する。
+3. それを解決する — **必要に応じてズームする**: 関連する、または close された ticket の完全な本文をオンデマンドで取得する; `## Notes` ブロックに名前のある skill を呼び出す。迷ったら `/grilling` と `/domain-modeling` を使う。
+4. 解決を記録する: **resolution comment** として答えを投稿し、issue を **close** し、map の Decisions-so-far に **context pointer を追記** する。
+5. 新たに浮上した ticket を追加する (create してから wire する); 答えによって specify 可能になった fog を昇格させ、昇格した各 patch を **Not yet specified** から消して、それが新しい ticket としてのみ存在するようにする。答えによって、ある ticket — この ticket か別の ticket か — が destination を超えていることが判明した場合、それを route 上で解決するのではなく **out of scope と判定する**。決定が map の他の部分を無効にする場合は、それらの ticket を更新または削除する。
 
-The user may run unblocked tickets in parallel, so expect other sessions to be editing the tracker concurrently.
+ユーザーは unblocked な ticket を並行して実行することがあるので、他のセッションが同時に tracker を編集していることを想定する。
