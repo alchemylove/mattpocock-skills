@@ -72,7 +72,7 @@
   "Build a throwaway prototype to answer a design question. Use when the user wants to sanity-check whether a state model or logic feels right, or explore what a UI should look like."
  ],
  [
-  "[research](../skills/engineering/research/SKILL.md)（新規）",
+  "[research](../skills/engineering/research/SKILL.md)",
   "M",
   "一次情報源の調査・記録",
   "信頼度の高い一次情報源に基づいて疑問を調査し、結果をリポジトリ内の Markdown ファイルとして記録する。ユーザーがトピックの調査、ドキュメントや API の事実確認、または調べものをバックグラウンドの agent に任せたいときに使う。",
@@ -216,7 +216,7 @@
   "Search, create, and manage notes in the Obsidian vault with wikilinks and index notes. Use when user wants to find, create, or organize notes in Obsidian."
  ],
  [
-  "[claude-handoff](../skills/in-progress/claude-handoff/SKILL.md)（新規）",
+  "[claude-handoff](../skills/in-progress/claude-handoff/SKILL.md)",
   "U",
   "バックグラウンド agent への handoff",
   "現在の会話を、作業をすぐに引き継ぐ新しいバックグラウンド agent へ hand off する。",

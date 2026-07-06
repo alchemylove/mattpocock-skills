@@ -117,8 +117,8 @@
   "sub_cat": "engineering"
  },
  {
-  "skill_html": "<a href=\"../skills/engineering/research/SKILL.md\" target=\"_blank\" rel=\"noopener\">research</a>（新規）",
-  "skill_text": "research（新規）",
+  "skill_html": "<a href=\"../skills/engineering/research/SKILL.md\" target=\"_blank\" rel=\"noopener\">research</a>",
+  "skill_text": "research",
   "inv_code": "M",
   "summary_html": "一次情報源の調査・記録",
   "summary_text": "一次情報源の調査・記録",
@@ -351,8 +351,8 @@
   "sub_cat": "personal"
  },
  {
-  "skill_html": "<a href=\"../skills/in-progress/claude-handoff/SKILL.md\" target=\"_blank\" rel=\"noopener\">claude-handoff</a>（新規）",
-  "skill_text": "claude-handoff（新規）",
+  "skill_html": "<a href=\"../skills/in-progress/claude-handoff/SKILL.md\" target=\"_blank\" rel=\"noopener\">claude-handoff</a>",
+  "skill_text": "claude-handoff",
   "inv_code": "U",
   "summary_html": "バックグラウンド agent への handoff",
   "summary_text": "バックグラウンド agent への handoff",
