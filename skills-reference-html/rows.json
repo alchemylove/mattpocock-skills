@@ -470,5 +470,189 @@
   "ループを手動で disarm する。`armed: false` にし、以後 Stop hook は素通しになる。",
   "plugin（loop@loop）",
   "(元々日本語)"
+ ],
+ [
+  "`superpowers:using-superpowers`",
+  "M",
+  "全 skill の起動を強制する導入 skill",
+  "会話開始時に使用。skill の見つけ方・使い方を確立し、確認の質問を含むあらゆる応答の前に skill 呼び出しを要求する。",
+  "plugin（superpowers）",
+  "Use when starting any conversation - establishes how to find and use skills, requiring skill invocation before ANY response including clarifying questions"
+ ],
+ [
+  "`superpowers:brainstorming`",
+  "M",
+  "創作作業前のアイデア→設計変換",
+  "機能作成・コンポーネント構築・機能追加・振る舞いの変更など、あらゆる創作作業の前に必ず使用すること。実装前にユーザーの意図・要件・設計を探る。",
+  "plugin（superpowers）",
+  "You MUST use this before any creative work - creating features, building components, adding functionality, or modifying behavior. Explores user intent, requirements and design before implementation."
+ ],
+ [
+  "`superpowers:writing-plans`",
+  "M",
+  "多段タスクの計画作成",
+  "多段タスクの spec や要件がある場合、コードに触れる前に使用する。",
+  "plugin（superpowers）",
+  "Use when you have a spec or requirements for a multi-step task, before touching code"
+ ],
+ [
+  "`superpowers:executing-plans`",
+  "M",
+  "別セッションでの計画実行",
+  "レビューのチェックポイントを設けながら、別セッションで記述済みの実装計画を実行する場合に使用する。",
+  "plugin（superpowers）",
+  "Use when you have a written implementation plan to execute in a separate session with review checkpoints"
+ ],
+ [
+  "`superpowers:subagent-driven-development`",
+  "M",
+  "独立タスクの現セッション内実行",
+  "独立したタスクを持つ実装計画を、現在のセッション内で実行する場合に使用する。",
+  "plugin（superpowers）",
+  "Use when executing implementation plans with independent tasks in the current session"
+ ],
+ [
+  "`superpowers:dispatching-parallel-agents`",
+  "M",
+  "独立タスクの並列 agent 実行",
+  "共有 state や順序依存のない独立タスクが2つ以上ある場合に使用する。",
+  "plugin（superpowers）",
+  "Use when facing 2+ independent tasks that can be worked on without shared state or sequential dependencies"
+ ],
+ [
+  "`superpowers:test-driven-development`",
+  "M",
+  "テスト駆動開発 (TDD)",
+  "機能構築やバグ修正を実装する際、実装コードを書く前に使用する。",
+  "plugin（superpowers）",
+  "Use when implementing any feature or bugfix, before writing implementation code"
+ ],
+ [
+  "`superpowers:systematic-debugging`",
+  "M",
+  "体系的デバッグ",
+  "バグ・テスト失敗・予期しない挙動に遭遇した際、修正を提案する前に使用する。",
+  "plugin（superpowers）",
+  "Use when encountering any bug, test failure, or unexpected behavior, before proposing fixes"
+ ],
+ [
+  "`superpowers:requesting-code-review`",
+  "M",
+  "完了作業のレビュー依頼",
+  "タスク完了時、主要機能実装後、またはマージ前に、成果物が要件を満たしているか検証するために使用する。",
+  "plugin（superpowers）",
+  "Use when completing tasks, implementing major features, or before merging to verify work meets requirements"
+ ],
+ [
+  "`superpowers:receiving-code-review`",
+  "M",
+  "レビュー指摘の技術的検証",
+  "コードレビューの指摘を受け取った際、実装前に使用する。特に指摘が不明瞭または技術的に疑わしい場合、盲目的な同意や実装ではなく技術的な厳密さと検証を要求する。",
+  "plugin（superpowers）",
+  "Use when receiving code review feedback, before implementing suggestions, especially if feedback seems unclear or technically questionable - requires technical rigor and verification, not performative agreement or blind implementation"
+ ],
+ [
+  "`superpowers:verification-before-completion`",
+  "M",
+  "完了主張前の検証実行",
+  "作業が完了・修正済み・合格したと主張しようとする前、コミットや PR 作成の前に使用する。成功を主張する前に検証コマンドを実行し出力を確認することを要求する — 何よりも先に evidence。",
+  "plugin（superpowers）",
+  "Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming output before making any success claims; evidence before assertions always"
+ ],
+ [
+  "`superpowers:using-git-worktrees`",
+  "M",
+  "隔離ワークスペースの用意",
+  "現在の作業スペースからの隔離が必要な機能作業を開始する際、または実装計画を実行する前に使用する。ネイティブツールまたは git worktree のフォールバックで隔離されたワークスペースを確保する。",
+  "plugin（superpowers）",
+  "Use when starting feature work that needs isolation from current workspace or before executing implementation plans - ensures an isolated workspace exists via native tools or git worktree fallback"
+ ],
+ [
+  "`superpowers:finishing-a-development-branch`",
+  "M",
+  "完了作業の統合方法選択",
+  "実装が完了し全テストが合格した後、作業をどう統合するか決める際に使用する。merge・PR・cleanup の構造化された選択肢を提示して作業の完了を導く。",
+  "plugin（superpowers）",
+  "Use when implementation is complete, all tests pass, and you need to decide how to integrate the work - guides completion of development work by presenting structured options for merge, PR, or cleanup"
+ ],
+ [
+  "`superpowers:writing-skills`",
+  "M",
+  "skill の執筆・検証",
+  "新しい skill を作成する、既存の skill を編集する、またはデプロイ前に skill が機能することを検証する場合に使用する。",
+  "plugin（superpowers）",
+  "Use when creating new skills, editing existing skills, or verifying skills work before deployment"
+ ],
+ [
+  "`frontend-design:frontend-design`",
+  "M",
+  "意図的なビジュアルデザイン指針",
+  "新しい UI を構築する、または既存の UI を作り直す際の、際立った意図的なビジュアルデザインの指針。美的方向性・タイポグラフィ、そしてテンプレート的なデフォルトに見えない選択を助ける。",
+  "plugin（frontend-design）",
+  "Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one. Helps with aesthetic direction, typography, and making choices that don't read as templated defaults."
+ ],
+ [
+  "`pr-review-toolkit:review-pr`",
+  "U",
+  "専門 agent 群による PR レビュー",
+  "専門化された agent 群を使った包括的な PR レビュー（付随 agent: code-reviewer / code-simplifier / comment-analyzer / pr-test-analyzer / silent-failure-hunter / type-design-analyzer）。",
+  "plugin（pr-review-toolkit）",
+  "Comprehensive PR review using specialized agents"
+ ],
+ [
+  "`feature-dev:feature-dev`",
+  "U",
+  "アーキ理解に基づくガイド付き機能開発",
+  "codebase の理解とアーキテクチャ重視のガイド付き機能開発（付随 agent: code-explorer / code-architect / code-reviewer）。",
+  "plugin（feature-dev）",
+  "Guided feature development with codebase understanding and architecture focus"
+ ],
+ [
+  "`code-review:code-review`",
+  "U",
+  "PR のコードレビュー",
+  "pull request のコードレビューを行う。",
+  "plugin（code-review）",
+  "Code review a pull request"
+ ],
+ [
+  "`ralph-loop:ralph-loop`",
+  "U",
+  "Ralph Loop の開始",
+  "現在のセッションで Ralph Loop を開始する。",
+  "plugin（ralph-loop）",
+  "Start Ralph Loop in current session"
+ ],
+ [
+  "`ralph-loop:cancel-ralph`",
+  "U",
+  "Ralph Loop のキャンセル",
+  "稼働中の Ralph Loop をキャンセルする。",
+  "plugin（ralph-loop）",
+  "Cancel active Ralph Loop"
+ ],
+ [
+  "`ralph-loop:help`",
+  "U",
+  "Ralph Loop plugin の説明",
+  "Ralph Loop plugin と利用可能なコマンドを説明する。",
+  "plugin（ralph-loop）",
+  "Explain Ralph Loop plugin and available commands"
+ ],
+ [
+  "`claude-md-improver` ※2",
+  "M",
+  "CLAUDE.md の監査・改善",
+  "リポジトリ内の CLAUDE.md ファイルを監査・改善する。ユーザーが CLAUDE.md ファイルの確認・監査・更新・改善・修正を求めたときに使う。すべての CLAUDE.md ファイルをスキャンし、テンプレートに照らして品質を評価し、品質レポートを出力した上で、的を絞った更新を行う。ユーザーが「CLAUDE.md maintenance」や「project memory optimization」に言及したときにも使う。",
+  "plugin（claude-md-management）",
+  "Audit and improve CLAUDE.md files in repositories. Use when user asks to check, audit, update, improve, or fix CLAUDE.md files. Scans for all CLAUDE.md files, evaluates quality against templates, outputs quality report, then makes targeted updates. Also use when the user mentions \"CLAUDE.md maintenance\" or \"project memory optimization\"."
+ ],
+ [
+  "`claude-automation-recommender` ※2",
+  "M",
+  "Claude Code 自動化の推奨",
+  "codebase を分析し、Claude Code の自動化（hooks・subagent・skill・plugin・MCP server）を推奨する。ユーザーが自動化の推奨を求めた、Claude Code のセットアップを最適化したい、Claude Code のワークフロー改善に言及した、プロジェクト向けの Claude Code の最初のセットアップ方法を尋ねた、またはどの Claude Code 機能を使うべきか知りたいときに使う。",
+  "plugin（claude-code-setup）",
+  "Analyze a codebase and recommend Claude Code automations (hooks, subagents, skills, plugins, MCP servers). Use when user asks for automation recommendations, wants to optimize their Claude Code setup, mentions improving Claude Code workflows, asks how to first set up Claude Code for a project, or wants to know what Claude Code features they should use."
  ]
 ]

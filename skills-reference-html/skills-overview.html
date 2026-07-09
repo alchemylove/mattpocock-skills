@@ -381,9 +381,9 @@
     <div class="filters" id="filterGroup">
       <button class="filter-btn" data-cat="mattpocock" aria-pressed="false" type="button">mattpocock (38)</button>
       <button class="filter-btn" data-cat="built-in" aria-pressed="false" type="button">built-in (16)</button>
-      <button class="filter-btn" data-cat="plugin" aria-pressed="false" type="button">plugin (5)</button>
+      <button class="filter-btn" data-cat="plugin" aria-pressed="false" type="button">plugin (28)</button>
     </div>
-    <span class="count" id="countLabel">59 / 59 件</span>
+    <span class="count" id="countLabel">82 / 82 件</span>
   </div>
 
   <div class="table-scroll">
@@ -932,13 +932,220 @@
         <td data-label="日本語訳"><div class="cell-ja">ループを手動で disarm する。<code>armed: false</code> にし、以後 Stop hook は素通しになる。</div></td>
         <td data-label="種別"><span class="chip chip-plugin">plugin</span><span class="cat-sub">loop@loop</span></td>
         <td data-label="英語訳"><div class="cell-en">(元々日本語)</div></td>
+      </tr>
+
+      <tr class="row" data-cat="plugin" data-search="superpowers:using-superpowers 全 skill の起動を強制する導入 skill 会話開始時に使用。skill の見つけ方・使い方を確立し、確認の質問を含むあらゆる応答の前に skill 呼び出しを要求する。 use when starting any conversation - establishes how to find and use skills, requiring skill invocation before any response including clarifying questions plugin superpowers">
+        <td data-label="skill"><div class="cell-skill"><code>superpowers:using-superpowers</code></div></td>
+        <td data-label="起動"><span class="badge badge-M" title="モデル起動">M</span></td>
+        <td data-label="概要"><div class="cell-summary">全 skill の起動を強制する導入 skill</div></td>
+        <td data-label="日本語訳"><div class="cell-ja">会話開始時に使用。skill の見つけ方・使い方を確立し、確認の質問を含むあらゆる応答の前に skill 呼び出しを要求する。</div></td>
+        <td data-label="種別"><span class="chip chip-plugin">plugin</span><span class="cat-sub">superpowers</span></td>
+        <td data-label="英語訳"><div class="cell-en">Use when starting any conversation - establishes how to find and use skills, requiring skill invocation before ANY response including clarifying questions</div></td>
+      </tr>
+
+      <tr class="row" data-cat="plugin" data-search="superpowers:brainstorming 創作作業前のアイデア→設計変換 機能作成・コンポーネント構築・機能追加・振る舞いの変更など、あらゆる創作作業の前に必ず使用すること。実装前にユーザーの意図・要件・設計を探る。 you must use this before any creative work - creating features, building components, adding functionality, or modifying behavior. explores user intent, requirements and design before implementation. plugin superpowers">
+        <td data-label="skill"><div class="cell-skill"><code>superpowers:brainstorming</code></div></td>
+        <td data-label="起動"><span class="badge badge-M" title="モデル起動">M</span></td>
+        <td data-label="概要"><div class="cell-summary">創作作業前のアイデア→設計変換</div></td>
+        <td data-label="日本語訳"><div class="cell-ja">機能作成・コンポーネント構築・機能追加・振る舞いの変更など、あらゆる創作作業の前に必ず使用すること。実装前にユーザーの意図・要件・設計を探る。</div></td>
+        <td data-label="種別"><span class="chip chip-plugin">plugin</span><span class="cat-sub">superpowers</span></td>
+        <td data-label="英語訳"><div class="cell-en">You MUST use this before any creative work - creating features, building components, adding functionality, or modifying behavior. Explores user intent, requirements and design before implementation.</div></td>
+      </tr>
+
+      <tr class="row" data-cat="plugin" data-search="superpowers:writing-plans 多段タスクの計画作成 多段タスクの spec や要件がある場合、コードに触れる前に使用する。 use when you have a spec or requirements for a multi-step task, before touching code plugin superpowers">
+        <td data-label="skill"><div class="cell-skill"><code>superpowers:writing-plans</code></div></td>
+        <td data-label="起動"><span class="badge badge-M" title="モデル起動">M</span></td>
+        <td data-label="概要"><div class="cell-summary">多段タスクの計画作成</div></td>
+        <td data-label="日本語訳"><div class="cell-ja">多段タスクの spec や要件がある場合、コードに触れる前に使用する。</div></td>
+        <td data-label="種別"><span class="chip chip-plugin">plugin</span><span class="cat-sub">superpowers</span></td>
+        <td data-label="英語訳"><div class="cell-en">Use when you have a spec or requirements for a multi-step task, before touching code</div></td>
+      </tr>
+
+      <tr class="row" data-cat="plugin" data-search="superpowers:executing-plans 別セッションでの計画実行 レビューのチェックポイントを設けながら、別セッションで記述済みの実装計画を実行する場合に使用する。 use when you have a written implementation plan to execute in a separate session with review checkpoints plugin superpowers">
+        <td data-label="skill"><div class="cell-skill"><code>superpowers:executing-plans</code></div></td>
+        <td data-label="起動"><span class="badge badge-M" title="モデル起動">M</span></td>
+        <td data-label="概要"><div class="cell-summary">別セッションでの計画実行</div></td>
+        <td data-label="日本語訳"><div class="cell-ja">レビューのチェックポイントを設けながら、別セッションで記述済みの実装計画を実行する場合に使用する。</div></td>
+        <td data-label="種別"><span class="chip chip-plugin">plugin</span><span class="cat-sub">superpowers</span></td>
+        <td data-label="英語訳"><div class="cell-en">Use when you have a written implementation plan to execute in a separate session with review checkpoints</div></td>
+      </tr>
+
+      <tr class="row" data-cat="plugin" data-search="superpowers:subagent-driven-development 独立タスクの現セッション内実行 独立したタスクを持つ実装計画を、現在のセッション内で実行する場合に使用する。 use when executing implementation plans with independent tasks in the current session plugin superpowers">
+        <td data-label="skill"><div class="cell-skill"><code>superpowers:subagent-driven-development</code></div></td>
+        <td data-label="起動"><span class="badge badge-M" title="モデル起動">M</span></td>
+        <td data-label="概要"><div class="cell-summary">独立タスクの現セッション内実行</div></td>
+        <td data-label="日本語訳"><div class="cell-ja">独立したタスクを持つ実装計画を、現在のセッション内で実行する場合に使用する。</div></td>
+        <td data-label="種別"><span class="chip chip-plugin">plugin</span><span class="cat-sub">superpowers</span></td>
+        <td data-label="英語訳"><div class="cell-en">Use when executing implementation plans with independent tasks in the current session</div></td>
+      </tr>
+
+      <tr class="row" data-cat="plugin" data-search="superpowers:dispatching-parallel-agents 独立タスクの並列 agent 実行 共有 state や順序依存のない独立タスクが2つ以上ある場合に使用する。 use when facing 2+ independent tasks that can be worked on without shared state or sequential dependencies plugin superpowers">
+        <td data-label="skill"><div class="cell-skill"><code>superpowers:dispatching-parallel-agents</code></div></td>
+        <td data-label="起動"><span class="badge badge-M" title="モデル起動">M</span></td>
+        <td data-label="概要"><div class="cell-summary">独立タスクの並列 agent 実行</div></td>
+        <td data-label="日本語訳"><div class="cell-ja">共有 state や順序依存のない独立タスクが2つ以上ある場合に使用する。</div></td>
+        <td data-label="種別"><span class="chip chip-plugin">plugin</span><span class="cat-sub">superpowers</span></td>
+        <td data-label="英語訳"><div class="cell-en">Use when facing 2+ independent tasks that can be worked on without shared state or sequential dependencies</div></td>
+      </tr>
+
+      <tr class="row" data-cat="plugin" data-search="superpowers:test-driven-development テスト駆動開発 (tdd) 機能構築やバグ修正を実装する際、実装コードを書く前に使用する。 use when implementing any feature or bugfix, before writing implementation code plugin superpowers">
+        <td data-label="skill"><div class="cell-skill"><code>superpowers:test-driven-development</code></div></td>
+        <td data-label="起動"><span class="badge badge-M" title="モデル起動">M</span></td>
+        <td data-label="概要"><div class="cell-summary">テスト駆動開発 (TDD)</div></td>
+        <td data-label="日本語訳"><div class="cell-ja">機能構築やバグ修正を実装する際、実装コードを書く前に使用する。</div></td>
+        <td data-label="種別"><span class="chip chip-plugin">plugin</span><span class="cat-sub">superpowers</span></td>
+        <td data-label="英語訳"><div class="cell-en">Use when implementing any feature or bugfix, before writing implementation code</div></td>
+      </tr>
+
+      <tr class="row" data-cat="plugin" data-search="superpowers:systematic-debugging 体系的デバッグ バグ・テスト失敗・予期しない挙動に遭遇した際、修正を提案する前に使用する。 use when encountering any bug, test failure, or unexpected behavior, before proposing fixes plugin superpowers">
+        <td data-label="skill"><div class="cell-skill"><code>superpowers:systematic-debugging</code></div></td>
+        <td data-label="起動"><span class="badge badge-M" title="モデル起動">M</span></td>
+        <td data-label="概要"><div class="cell-summary">体系的デバッグ</div></td>
+        <td data-label="日本語訳"><div class="cell-ja">バグ・テスト失敗・予期しない挙動に遭遇した際、修正を提案する前に使用する。</div></td>
+        <td data-label="種別"><span class="chip chip-plugin">plugin</span><span class="cat-sub">superpowers</span></td>
+        <td data-label="英語訳"><div class="cell-en">Use when encountering any bug, test failure, or unexpected behavior, before proposing fixes</div></td>
+      </tr>
+
+      <tr class="row" data-cat="plugin" data-search="superpowers:requesting-code-review 完了作業のレビュー依頼 タスク完了時、主要機能実装後、またはマージ前に、成果物が要件を満たしているか検証するために使用する。 use when completing tasks, implementing major features, or before merging to verify work meets requirements plugin superpowers">
+        <td data-label="skill"><div class="cell-skill"><code>superpowers:requesting-code-review</code></div></td>
+        <td data-label="起動"><span class="badge badge-M" title="モデル起動">M</span></td>
+        <td data-label="概要"><div class="cell-summary">完了作業のレビュー依頼</div></td>
+        <td data-label="日本語訳"><div class="cell-ja">タスク完了時、主要機能実装後、またはマージ前に、成果物が要件を満たしているか検証するために使用する。</div></td>
+        <td data-label="種別"><span class="chip chip-plugin">plugin</span><span class="cat-sub">superpowers</span></td>
+        <td data-label="英語訳"><div class="cell-en">Use when completing tasks, implementing major features, or before merging to verify work meets requirements</div></td>
+      </tr>
+
+      <tr class="row" data-cat="plugin" data-search="superpowers:receiving-code-review レビュー指摘の技術的検証 コードレビューの指摘を受け取った際、実装前に使用する。特に指摘が不明瞭または技術的に疑わしい場合、盲目的な同意や実装ではなく技術的な厳密さと検証を要求する。 use when receiving code review feedback, before implementing suggestions, especially if feedback seems unclear or technically questionable - requires technical rigor and verification, not performative agreement or blind implementation plugin superpowers">
+        <td data-label="skill"><div class="cell-skill"><code>superpowers:receiving-code-review</code></div></td>
+        <td data-label="起動"><span class="badge badge-M" title="モデル起動">M</span></td>
+        <td data-label="概要"><div class="cell-summary">レビュー指摘の技術的検証</div></td>
+        <td data-label="日本語訳"><div class="cell-ja">コードレビューの指摘を受け取った際、実装前に使用する。特に指摘が不明瞭または技術的に疑わしい場合、盲目的な同意や実装ではなく技術的な厳密さと検証を要求する。</div></td>
+        <td data-label="種別"><span class="chip chip-plugin">plugin</span><span class="cat-sub">superpowers</span></td>
+        <td data-label="英語訳"><div class="cell-en">Use when receiving code review feedback, before implementing suggestions, especially if feedback seems unclear or technically questionable - requires technical rigor and verification, not performative agreement or blind implementation</div></td>
+      </tr>
+
+      <tr class="row" data-cat="plugin" data-search="superpowers:verification-before-completion 完了主張前の検証実行 作業が完了・修正済み・合格したと主張しようとする前、コミットや pr 作成の前に使用する。成功を主張する前に検証コマンドを実行し出力を確認することを要求する — 何よりも先に evidence。 use when about to claim work is complete, fixed, or passing, before committing or creating prs - requires running verification commands and confirming output before making any success claims; evidence before assertions always plugin superpowers">
+        <td data-label="skill"><div class="cell-skill"><code>superpowers:verification-before-completion</code></div></td>
+        <td data-label="起動"><span class="badge badge-M" title="モデル起動">M</span></td>
+        <td data-label="概要"><div class="cell-summary">完了主張前の検証実行</div></td>
+        <td data-label="日本語訳"><div class="cell-ja">作業が完了・修正済み・合格したと主張しようとする前、コミットや PR 作成の前に使用する。成功を主張する前に検証コマンドを実行し出力を確認することを要求する — 何よりも先に evidence。</div></td>
+        <td data-label="種別"><span class="chip chip-plugin">plugin</span><span class="cat-sub">superpowers</span></td>
+        <td data-label="英語訳"><div class="cell-en">Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming output before making any success claims; evidence before assertions always</div></td>
+      </tr>
+
+      <tr class="row" data-cat="plugin" data-search="superpowers:using-git-worktrees 隔離ワークスペースの用意 現在の作業スペースからの隔離が必要な機能作業を開始する際、または実装計画を実行する前に使用する。ネイティブツールまたは git worktree のフォールバックで隔離されたワークスペースを確保する。 use when starting feature work that needs isolation from current workspace or before executing implementation plans - ensures an isolated workspace exists via native tools or git worktree fallback plugin superpowers">
+        <td data-label="skill"><div class="cell-skill"><code>superpowers:using-git-worktrees</code></div></td>
+        <td data-label="起動"><span class="badge badge-M" title="モデル起動">M</span></td>
+        <td data-label="概要"><div class="cell-summary">隔離ワークスペースの用意</div></td>
+        <td data-label="日本語訳"><div class="cell-ja">現在の作業スペースからの隔離が必要な機能作業を開始する際、または実装計画を実行する前に使用する。ネイティブツールまたは git worktree のフォールバックで隔離されたワークスペースを確保する。</div></td>
+        <td data-label="種別"><span class="chip chip-plugin">plugin</span><span class="cat-sub">superpowers</span></td>
+        <td data-label="英語訳"><div class="cell-en">Use when starting feature work that needs isolation from current workspace or before executing implementation plans - ensures an isolated workspace exists via native tools or git worktree fallback</div></td>
+      </tr>
+
+      <tr class="row" data-cat="plugin" data-search="superpowers:finishing-a-development-branch 完了作業の統合方法選択 実装が完了し全テストが合格した後、作業をどう統合するか決める際に使用する。merge・pr・cleanup の構造化された選択肢を提示して作業の完了を導く。 use when implementation is complete, all tests pass, and you need to decide how to integrate the work - guides completion of development work by presenting structured options for merge, pr, or cleanup plugin superpowers">
+        <td data-label="skill"><div class="cell-skill"><code>superpowers:finishing-a-development-branch</code></div></td>
+        <td data-label="起動"><span class="badge badge-M" title="モデル起動">M</span></td>
+        <td data-label="概要"><div class="cell-summary">完了作業の統合方法選択</div></td>
+        <td data-label="日本語訳"><div class="cell-ja">実装が完了し全テストが合格した後、作業をどう統合するか決める際に使用する。merge・PR・cleanup の構造化された選択肢を提示して作業の完了を導く。</div></td>
+        <td data-label="種別"><span class="chip chip-plugin">plugin</span><span class="cat-sub">superpowers</span></td>
+        <td data-label="英語訳"><div class="cell-en">Use when implementation is complete, all tests pass, and you need to decide how to integrate the work - guides completion of development work by presenting structured options for merge, PR, or cleanup</div></td>
+      </tr>
+
+      <tr class="row" data-cat="plugin" data-search="superpowers:writing-skills skill の執筆・検証 新しい skill を作成する、既存の skill を編集する、またはデプロイ前に skill が機能することを検証する場合に使用する。 use when creating new skills, editing existing skills, or verifying skills work before deployment plugin superpowers">
+        <td data-label="skill"><div class="cell-skill"><code>superpowers:writing-skills</code></div></td>
+        <td data-label="起動"><span class="badge badge-M" title="モデル起動">M</span></td>
+        <td data-label="概要"><div class="cell-summary">skill の執筆・検証</div></td>
+        <td data-label="日本語訳"><div class="cell-ja">新しい skill を作成する、既存の skill を編集する、またはデプロイ前に skill が機能することを検証する場合に使用する。</div></td>
+        <td data-label="種別"><span class="chip chip-plugin">plugin</span><span class="cat-sub">superpowers</span></td>
+        <td data-label="英語訳"><div class="cell-en">Use when creating new skills, editing existing skills, or verifying skills work before deployment</div></td>
+      </tr>
+
+      <tr class="row" data-cat="plugin" data-search="frontend-design:frontend-design 意図的なビジュアルデザイン指針 新しい ui を構築する、または既存の ui を作り直す際の、際立った意図的なビジュアルデザインの指針。美的方向性・タイポグラフィ、そしてテンプレート的なデフォルトに見えない選択を助ける。 guidance for distinctive, intentional visual design when building new ui or reshaping an existing one. helps with aesthetic direction, typography, and making choices that don&#x27;t read as templated defaults. plugin frontend-design">
+        <td data-label="skill"><div class="cell-skill"><code>frontend-design:frontend-design</code></div></td>
+        <td data-label="起動"><span class="badge badge-M" title="モデル起動">M</span></td>
+        <td data-label="概要"><div class="cell-summary">意図的なビジュアルデザイン指針</div></td>
+        <td data-label="日本語訳"><div class="cell-ja">新しい UI を構築する、または既存の UI を作り直す際の、際立った意図的なビジュアルデザインの指針。美的方向性・タイポグラフィ、そしてテンプレート的なデフォルトに見えない選択を助ける。</div></td>
+        <td data-label="種別"><span class="chip chip-plugin">plugin</span><span class="cat-sub">frontend-design</span></td>
+        <td data-label="英語訳"><div class="cell-en">Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one. Helps with aesthetic direction, typography, and making choices that don't read as templated defaults.</div></td>
+      </tr>
+
+      <tr class="row" data-cat="plugin" data-search="pr-review-toolkit:review-pr 専門 agent 群による pr レビュー 専門化された agent 群を使った包括的な pr レビュー（付随 agent: code-reviewer / code-simplifier / comment-analyzer / pr-test-analyzer / silent-failure-hunter / type-design-analyzer）。 comprehensive pr review using specialized agents plugin pr-review-toolkit">
+        <td data-label="skill"><div class="cell-skill"><code>pr-review-toolkit:review-pr</code></div></td>
+        <td data-label="起動"><span class="badge badge-U" title="ユーザー起動">U</span></td>
+        <td data-label="概要"><div class="cell-summary">専門 agent 群による PR レビュー</div></td>
+        <td data-label="日本語訳"><div class="cell-ja">専門化された agent 群を使った包括的な PR レビュー（付随 agent: code-reviewer / code-simplifier / comment-analyzer / pr-test-analyzer / silent-failure-hunter / type-design-analyzer）。</div></td>
+        <td data-label="種別"><span class="chip chip-plugin">plugin</span><span class="cat-sub">pr-review-toolkit</span></td>
+        <td data-label="英語訳"><div class="cell-en">Comprehensive PR review using specialized agents</div></td>
+      </tr>
+
+      <tr class="row" data-cat="plugin" data-search="feature-dev:feature-dev アーキ理解に基づくガイド付き機能開発 codebase の理解とアーキテクチャ重視のガイド付き機能開発（付随 agent: code-explorer / code-architect / code-reviewer）。 guided feature development with codebase understanding and architecture focus plugin feature-dev">
+        <td data-label="skill"><div class="cell-skill"><code>feature-dev:feature-dev</code></div></td>
+        <td data-label="起動"><span class="badge badge-U" title="ユーザー起動">U</span></td>
+        <td data-label="概要"><div class="cell-summary">アーキ理解に基づくガイド付き機能開発</div></td>
+        <td data-label="日本語訳"><div class="cell-ja">codebase の理解とアーキテクチャ重視のガイド付き機能開発（付随 agent: code-explorer / code-architect / code-reviewer）。</div></td>
+        <td data-label="種別"><span class="chip chip-plugin">plugin</span><span class="cat-sub">feature-dev</span></td>
+        <td data-label="英語訳"><div class="cell-en">Guided feature development with codebase understanding and architecture focus</div></td>
+      </tr>
+
+      <tr class="row" data-cat="plugin" data-search="code-review:code-review pr のコードレビュー pull request のコードレビューを行う。 code review a pull request plugin code-review">
+        <td data-label="skill"><div class="cell-skill"><code>code-review:code-review</code></div></td>
+        <td data-label="起動"><span class="badge badge-U" title="ユーザー起動">U</span></td>
+        <td data-label="概要"><div class="cell-summary">PR のコードレビュー</div></td>
+        <td data-label="日本語訳"><div class="cell-ja">pull request のコードレビューを行う。</div></td>
+        <td data-label="種別"><span class="chip chip-plugin">plugin</span><span class="cat-sub">code-review</span></td>
+        <td data-label="英語訳"><div class="cell-en">Code review a pull request</div></td>
+      </tr>
+
+      <tr class="row" data-cat="plugin" data-search="ralph-loop:ralph-loop ralph loop の開始 現在のセッションで ralph loop を開始する。 start ralph loop in current session plugin ralph-loop">
+        <td data-label="skill"><div class="cell-skill"><code>ralph-loop:ralph-loop</code></div></td>
+        <td data-label="起動"><span class="badge badge-U" title="ユーザー起動">U</span></td>
+        <td data-label="概要"><div class="cell-summary">Ralph Loop の開始</div></td>
+        <td data-label="日本語訳"><div class="cell-ja">現在のセッションで Ralph Loop を開始する。</div></td>
+        <td data-label="種別"><span class="chip chip-plugin">plugin</span><span class="cat-sub">ralph-loop</span></td>
+        <td data-label="英語訳"><div class="cell-en">Start Ralph Loop in current session</div></td>
+      </tr>
+
+      <tr class="row" data-cat="plugin" data-search="ralph-loop:cancel-ralph ralph loop のキャンセル 稼働中の ralph loop をキャンセルする。 cancel active ralph loop plugin ralph-loop">
+        <td data-label="skill"><div class="cell-skill"><code>ralph-loop:cancel-ralph</code></div></td>
+        <td data-label="起動"><span class="badge badge-U" title="ユーザー起動">U</span></td>
+        <td data-label="概要"><div class="cell-summary">Ralph Loop のキャンセル</div></td>
+        <td data-label="日本語訳"><div class="cell-ja">稼働中の Ralph Loop をキャンセルする。</div></td>
+        <td data-label="種別"><span class="chip chip-plugin">plugin</span><span class="cat-sub">ralph-loop</span></td>
+        <td data-label="英語訳"><div class="cell-en">Cancel active Ralph Loop</div></td>
+      </tr>
+
+      <tr class="row" data-cat="plugin" data-search="ralph-loop:help ralph loop plugin の説明 ralph loop plugin と利用可能なコマンドを説明する。 explain ralph loop plugin and available commands plugin ralph-loop">
+        <td data-label="skill"><div class="cell-skill"><code>ralph-loop:help</code></div></td>
+        <td data-label="起動"><span class="badge badge-U" title="ユーザー起動">U</span></td>
+        <td data-label="概要"><div class="cell-summary">Ralph Loop plugin の説明</div></td>
+        <td data-label="日本語訳"><div class="cell-ja">Ralph Loop plugin と利用可能なコマンドを説明する。</div></td>
+        <td data-label="種別"><span class="chip chip-plugin">plugin</span><span class="cat-sub">ralph-loop</span></td>
+        <td data-label="英語訳"><div class="cell-en">Explain Ralph Loop plugin and available commands</div></td>
+      </tr>
+
+      <tr class="row" data-cat="plugin" data-search="claude-md-improver ※2 claude.md の監査・改善 リポジトリ内の claude.md ファイルを監査・改善する。ユーザーが claude.md ファイルの確認・監査・更新・改善・修正を求めたときに使う。すべての claude.md ファイルをスキャンし、テンプレートに照らして品質を評価し、品質レポートを出力した上で、的を絞った更新を行う。ユーザーが「claude.md maintenance」や「project memory optimization」に言及したときにも使う。 audit and improve claude.md files in repositories. use when user asks to check, audit, update, improve, or fix claude.md files. scans for all claude.md files, evaluates quality against templates, outputs quality report, then makes targeted updates. also use when the user mentions &quot;claude.md maintenance&quot; or &quot;project memory optimization&quot;. plugin claude-md-management">
+        <td data-label="skill"><div class="cell-skill"><code>claude-md-improver</code> ※2</div></td>
+        <td data-label="起動"><span class="badge badge-M" title="モデル起動">M</span></td>
+        <td data-label="概要"><div class="cell-summary">CLAUDE.md の監査・改善</div></td>
+        <td data-label="日本語訳"><div class="cell-ja">リポジトリ内の CLAUDE.md ファイルを監査・改善する。ユーザーが CLAUDE.md ファイルの確認・監査・更新・改善・修正を求めたときに使う。すべての CLAUDE.md ファイルをスキャンし、テンプレートに照らして品質を評価し、品質レポートを出力した上で、的を絞った更新を行う。ユーザーが「CLAUDE.md maintenance」や「project memory optimization」に言及したときにも使う。</div></td>
+        <td data-label="種別"><span class="chip chip-plugin">plugin</span><span class="cat-sub">claude-md-management</span></td>
+        <td data-label="英語訳"><div class="cell-en">Audit and improve CLAUDE.md files in repositories. Use when user asks to check, audit, update, improve, or fix CLAUDE.md files. Scans for all CLAUDE.md files, evaluates quality against templates, outputs quality report, then makes targeted updates. Also use when the user mentions "CLAUDE.md maintenance" or "project memory optimization".</div></td>
+      </tr>
+
+      <tr class="row" data-cat="plugin" data-search="claude-automation-recommender ※2 claude code 自動化の推奨 codebase を分析し、claude code の自動化（hooks・subagent・skill・plugin・mcp server）を推奨する。ユーザーが自動化の推奨を求めた、claude code のセットアップを最適化したい、claude code のワークフロー改善に言及した、プロジェクト向けの claude code の最初のセットアップ方法を尋ねた、またはどの claude code 機能を使うべきか知りたいときに使う。 analyze a codebase and recommend claude code automations (hooks, subagents, skills, plugins, mcp servers). use when user asks for automation recommendations, wants to optimize their claude code setup, mentions improving claude code workflows, asks how to first set up claude code for a project, or wants to know what claude code features they should use. plugin claude-code-setup">
+        <td data-label="skill"><div class="cell-skill"><code>claude-automation-recommender</code> ※2</div></td>
+        <td data-label="起動"><span class="badge badge-M" title="モデル起動">M</span></td>
+        <td data-label="概要"><div class="cell-summary">Claude Code 自動化の推奨</div></td>
+        <td data-label="日本語訳"><div class="cell-ja">codebase を分析し、Claude Code の自動化（hooks・subagent・skill・plugin・MCP server）を推奨する。ユーザーが自動化の推奨を求めた、Claude Code のセットアップを最適化したい、Claude Code のワークフロー改善に言及した、プロジェクト向けの Claude Code の最初のセットアップ方法を尋ねた、またはどの Claude Code 機能を使うべきか知りたいときに使う。</div></td>
+        <td data-label="種別"><span class="chip chip-plugin">plugin</span><span class="cat-sub">claude-code-setup</span></td>
+        <td data-label="英語訳"><div class="cell-en">Analyze a codebase and recommend Claude Code automations (hooks, subagents, skills, plugins, MCP servers). Use when user asks for automation recommendations, wants to optimize their Claude Code setup, mentions improving Claude Code workflows, asks how to first set up Claude Code for a project, or wants to know what Claude Code features they should use.</div></td>
       </tr></tbody>
     </table>
     <div class="empty-state" id="emptyState">条件に一致する skill がありません。</div>
   </div>
 
   <footer class="note">
-    全 59 件（mattpocock 38 件 / built-in 16 件 / plugin 5 件）。
+    全 82 件（mattpocock 38 件 / built-in 16 件 / plugin 28 件）。
     upstream <code>mattpocock/skills</code> の <code>66f92b6</code>（main）に同期し、全 skill を日本語へ翻訳し直した直後の状態。
   </footer>
 </div>

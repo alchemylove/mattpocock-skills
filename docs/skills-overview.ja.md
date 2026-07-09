@@ -9,12 +9,12 @@
 - `/skills` コマンドを直接実行して確認したものではなく、以下から間接的に判定している:
   - **mattpocock skill**: `~/.claude/skills` と `~/.agents/skills` を確認したところ、このリポジトリの skill はシンボリックリンクされていない（`scripts/link-skills.sh` 未実行）。かつ、このセッション開始時に提示された「利用可能な skill 一覧」にも mattpocock 由来の skill 名は含まれていなかった。したがって mattpocock 系は**全件 off（未リンク）** と判定。`scripts/link-skills.sh` を実行すると `user` スコープで on になる。
   - **ビルトイン公式 skill**: セッション開始時の「利用可能な skill 一覧」に列挙されていたため **on**。
-  - **プラグインの skill**: `~/.claude/settings.json` の `enabledPlugins` で `true` になっているプラグイン（`loop@loop`、`security-guidance@claude-plugins-official`）に属する skill を **on**、`false` のプラグイン（`claude-md-management`、`claude-code-setup`）は **off** と判定。
-- **起動**: `U` = ユーザー起動 (User-invoked)、`M` = モデル起動 (Model-invoked)、`?` = 推定（frontmatter を直接確認できないビルトイン/プラグイン skill について、description の文言から推定した参考値）。mattpocock skill は `SKILL.md` frontmatter の `disable-model-invocation: true` の有無で確定（`true` → `U`）。
+  - **プラグインの skill**: `~/.claude/plugins/installed_plugins.json` を確認したところ、現在有効なプラグインは 9 件（`security-guidance`・`superpowers`・`feature-dev`・`frontend-design`・`code-review`・`pr-review-toolkit`・`ralph-loop`・`claude-md-management`・`claude-code-setup`）。このうち `security-guidance` は hooks のみで skill/command を持たない。`claude-md-management`（`claude-md-improver`）と `claude-code-setup`（`claude-automation-recommender`）は user スコープでインストール済みだが、本プロジェクトのセッション開始時に提示される「利用可能な skill 一覧」には現れていない（※user 注記付きで参考掲載）。以前表に載っていた `loop@loop`（`loop:define`/`loop:start`/`loop:status`/`loop:stop`）は現時点では未インストール（marketplace のカタログには残っている）だが、履歴として表にはそのまま残す。
+- **起動**: `U` = ユーザー起動 (User-invoked)、`M` = モデル起動 (Model-invoked)、`?` = 推定（frontmatter を直接確認できないビルトイン/プラグイン skill について、description の文言から推定した参考値）。mattpocock skill は `SKILL.md` frontmatter の `disable-model-invocation: true` の有無で確定（`true` → `U`）。`superpowers`・`frontend-design` の skill は frontmatter を直接確認でき `disable-model-invocation` が無いため `M`（推定ではなく確定）。`pr-review-toolkit`・`feature-dev`・`code-review`・`ralph-loop` は SKILL.md ではなく slash command なので `U`（確定）。
 - **概要**: 一言でその skill が何をするかを表す短いタグ。
 - **日本語訳**: description 全文の日本語訳。技術用語（grilling, red-green-refactor, vertical slice, domain model, issue tracker, DDD, ubiquitous language 等）は英語のまま、それ以外を日本語化。翻訳ルールは repo メモリ `feedback_translation_rules.md` に準拠。
 - **英語訳**列は要約や意訳ではなく、frontmatter / skill 定義に書かれている description の**原文そのまま**（省略なし）。もともと日本語で書かれている description は「(元々日本語)」と記載。
-- **名前の衝突に注意**: mattpocock リポジトリの `engineering/code-review` skill と、ビルトイン公式の `code-review`（`/code-review`）は**別物**。前者はこのリポジトリ用にカスタマイズされた「Standards / Spec 2軸レビュー」、後者は Claude Code 組み込みの汎用コードレビュー skill。
+- **名前の衝突に注意**: `code-review` という名前は3種類ある。(1) mattpocock リポジトリの `engineering/code-review` skill — このリポジトリ用にカスタマイズされた「Standards / Spec 2軸レビュー」。(2) ビルトイン公式の `code-review`（`/code-review`）— Claude Code 組み込みの汎用コードレビュー skill。(3) プラグイン `code-review`（`code-review:code-review`）— confidence ベースのスコアリングで複数専門 agent を使う PR 自動レビュー command。三者は別物。
 
 ---
 
@@ -81,13 +81,39 @@
 | `loop:start` | U? | ループの開始 | 凍結済みの受け入れテストを前提に、ループを開始（`armed: true`）し、builder エージェントの最初のイテレーションを起動する。 | plugin（loop@loop） | (元々日本語) |
 | `loop:status` | U? | ループ状態の確認 | ループの現在状態を実行時に確認し、決定的な brief（完了/進行中/停滞/手動停止のいずれか）を提示する。 | plugin（loop@loop） | (元々日本語) |
 | `loop:stop` | U? | ループの手動停止 | ループを手動で disarm する。`armed: false` にし、以後 Stop hook は素通しになる。 | plugin（loop@loop） | (元々日本語) |
+| `superpowers:using-superpowers` | M | 全 skill の起動を強制する導入 skill | 会話開始時に使用。skill の見つけ方・使い方を確立し、確認の質問を含むあらゆる応答の前に skill 呼び出しを要求する。 | plugin（superpowers） | Use when starting any conversation - establishes how to find and use skills, requiring skill invocation before ANY response including clarifying questions |
+| `superpowers:brainstorming` | M | 創作作業前のアイデア→設計変換 | 機能作成・コンポーネント構築・機能追加・振る舞いの変更など、あらゆる創作作業の前に必ず使用すること。実装前にユーザーの意図・要件・設計を探る。 | plugin（superpowers） | You MUST use this before any creative work - creating features, building components, adding functionality, or modifying behavior. Explores user intent, requirements and design before implementation. |
+| `superpowers:writing-plans` | M | 多段タスクの計画作成 | 多段タスクの spec や要件がある場合、コードに触れる前に使用する。 | plugin（superpowers） | Use when you have a spec or requirements for a multi-step task, before touching code |
+| `superpowers:executing-plans` | M | 別セッションでの計画実行 | レビューのチェックポイントを設けながら、別セッションで記述済みの実装計画を実行する場合に使用する。 | plugin（superpowers） | Use when you have a written implementation plan to execute in a separate session with review checkpoints |
+| `superpowers:subagent-driven-development` | M | 独立タスクの現セッション内実行 | 独立したタスクを持つ実装計画を、現在のセッション内で実行する場合に使用する。 | plugin（superpowers） | Use when executing implementation plans with independent tasks in the current session |
+| `superpowers:dispatching-parallel-agents` | M | 独立タスクの並列 agent 実行 | 共有 state や順序依存のない独立タスクが2つ以上ある場合に使用する。 | plugin（superpowers） | Use when facing 2+ independent tasks that can be worked on without shared state or sequential dependencies |
+| `superpowers:test-driven-development` | M | テスト駆動開発 (TDD) | 機能構築やバグ修正を実装する際、実装コードを書く前に使用する。 | plugin（superpowers） | Use when implementing any feature or bugfix, before writing implementation code |
+| `superpowers:systematic-debugging` | M | 体系的デバッグ | バグ・テスト失敗・予期しない挙動に遭遇した際、修正を提案する前に使用する。 | plugin（superpowers） | Use when encountering any bug, test failure, or unexpected behavior, before proposing fixes |
+| `superpowers:requesting-code-review` | M | 完了作業のレビュー依頼 | タスク完了時、主要機能実装後、またはマージ前に、成果物が要件を満たしているか検証するために使用する。 | plugin（superpowers） | Use when completing tasks, implementing major features, or before merging to verify work meets requirements |
+| `superpowers:receiving-code-review` | M | レビュー指摘の技術的検証 | コードレビューの指摘を受け取った際、実装前に使用する。特に指摘が不明瞭または技術的に疑わしい場合、盲目的な同意や実装ではなく技術的な厳密さと検証を要求する。 | plugin（superpowers） | Use when receiving code review feedback, before implementing suggestions, especially if feedback seems unclear or technically questionable - requires technical rigor and verification, not performative agreement or blind implementation |
+| `superpowers:verification-before-completion` | M | 完了主張前の検証実行 | 作業が完了・修正済み・合格したと主張しようとする前、コミットや PR 作成の前に使用する。成功を主張する前に検証コマンドを実行し出力を確認することを要求する — 何よりも先に evidence。 | plugin（superpowers） | Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming output before making any success claims; evidence before assertions always |
+| `superpowers:using-git-worktrees` | M | 隔離ワークスペースの用意 | 現在の作業スペースからの隔離が必要な機能作業を開始する際、または実装計画を実行する前に使用する。ネイティブツールまたは git worktree のフォールバックで隔離されたワークスペースを確保する。 | plugin（superpowers） | Use when starting feature work that needs isolation from current workspace or before executing implementation plans - ensures an isolated workspace exists via native tools or git worktree fallback |
+| `superpowers:finishing-a-development-branch` | M | 完了作業の統合方法選択 | 実装が完了し全テストが合格した後、作業をどう統合するか決める際に使用する。merge・PR・cleanup の構造化された選択肢を提示して作業の完了を導く。 | plugin（superpowers） | Use when implementation is complete, all tests pass, and you need to decide how to integrate the work - guides completion of development work by presenting structured options for merge, PR, or cleanup |
+| `superpowers:writing-skills` | M | skill の執筆・検証 | 新しい skill を作成する、既存の skill を編集する、またはデプロイ前に skill が機能することを検証する場合に使用する。 | plugin（superpowers） | Use when creating new skills, editing existing skills, or verifying skills work before deployment |
+| `frontend-design:frontend-design` | M | 意図的なビジュアルデザイン指針 | 新しい UI を構築する、または既存の UI を作り直す際の、際立った意図的なビジュアルデザインの指針。美的方向性・タイポグラフィ、そしてテンプレート的なデフォルトに見えない選択を助ける。 | plugin（frontend-design） | Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one. Helps with aesthetic direction, typography, and making choices that don't read as templated defaults. |
+| `pr-review-toolkit:review-pr` | U | 専門 agent 群による PR レビュー | 専門化された agent 群を使った包括的な PR レビュー（付随 agent: code-reviewer / code-simplifier / comment-analyzer / pr-test-analyzer / silent-failure-hunter / type-design-analyzer）。 | plugin（pr-review-toolkit） | Comprehensive PR review using specialized agents |
+| `feature-dev:feature-dev` | U | アーキ理解に基づくガイド付き機能開発 | codebase の理解とアーキテクチャ重視のガイド付き機能開発（付随 agent: code-explorer / code-architect / code-reviewer）。 | plugin（feature-dev） | Guided feature development with codebase understanding and architecture focus |
+| `code-review:code-review` | U | PR のコードレビュー | pull request のコードレビューを行う。 | plugin（code-review） | Code review a pull request |
+| `ralph-loop:ralph-loop` | U | Ralph Loop の開始 | 現在のセッションで Ralph Loop を開始する。 | plugin（ralph-loop） | Start Ralph Loop in current session |
+| `ralph-loop:cancel-ralph` | U | Ralph Loop のキャンセル | 稼働中の Ralph Loop をキャンセルする。 | plugin（ralph-loop） | Cancel active Ralph Loop |
+| `ralph-loop:help` | U | Ralph Loop plugin の説明 | Ralph Loop plugin と利用可能なコマンドを説明する。 | plugin（ralph-loop） | Explain Ralph Loop plugin and available commands |
+| `claude-md-improver` ※2 | M | CLAUDE.md の監査・改善 | リポジトリ内の CLAUDE.md ファイルを監査・改善する。ユーザーが CLAUDE.md ファイルの確認・監査・更新・改善・修正を求めたときに使う。すべての CLAUDE.md ファイルをスキャンし、テンプレートに照らして品質を評価し、品質レポートを出力した上で、的を絞った更新を行う。ユーザーが「CLAUDE.md maintenance」や「project memory optimization」に言及したときにも使う。 | plugin（claude-md-management） | Audit and improve CLAUDE.md files in repositories. Use when user asks to check, audit, update, improve, or fix CLAUDE.md files. Scans for all CLAUDE.md files, evaluates quality against templates, outputs quality report, then makes targeted updates. Also use when the user mentions "CLAUDE.md maintenance" or "project memory optimization". |
+| `claude-automation-recommender` ※2 | M | Claude Code 自動化の推奨 | codebase を分析し、Claude Code の自動化（hooks・subagent・skill・plugin・MCP server）を推奨する。ユーザーが自動化の推奨を求めた、Claude Code のセットアップを最適化したい、Claude Code のワークフロー改善に言及した、プロジェクト向けの Claude Code の最初のセットアップ方法を尋ねた、またはどの Claude Code 機能を使うべきか知りたいときに使う。 | plugin（claude-code-setup） | Analyze a codebase and recommend Claude Code automations (hooks, subagents, skills, plugins, MCP servers). Use when user asks for automation recommendations, wants to optimize their Claude Code setup, mentions improving Claude Code workflows, asks how to first set up Claude Code for a project, or wants to know what Claude Code features they should use. |
 
 ※1 `resolving-merge-conflicts` は `skills/engineering/` に存在するが、`README.md`・`skills/engineering/README.md`・`.claude-plugin/plugin.json` のいずれにも未登録（upstream 側の登録漏れの可能性。今回のリポジトリ構成ルールでは engineering の skill は両方への登録が必須）。
+
+※2 user スコープでインストール済みだが、本プロジェクトのセッション開始時に提示される「利用可能な skill 一覧」には現れていない（参考掲載）。
 
 ---
 
 ## 集計
 
 - mattpocock/skills リポジトリ skill: **38 件**（engineering 16、productivity 5、misc 4、personal 2、in-progress 7、deprecated 4）— 全件 off（未リンク）
-- ビルトイン公式 skill: **17 件** — 全件 on
-- プラグイン skill（on のみ集計）: `loop@loop` 4 件、`security-guidance` 推定1件
+- ビルトイン公式 skill: **16 件** — 全件 on
+- プラグイン skill: **28 件** — `superpowers` 14 件、`frontend-design` 1 件、`pr-review-toolkit` 1 件、`feature-dev` 1 件、`code-review` 1 件、`ralph-loop` 3 件、`security-guidance` 1 件、`claude-md-management` 1 件※2、`claude-code-setup` 1 件※2、`loop@loop` 4 件※現在は未インストール（marketplace のカタログには残っている）
+- 合計: **82 件**
